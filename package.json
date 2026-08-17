@@ -1,0 +1,22 @@
+{
+  "name": "sgp-catolica",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SGP Catolica - Sistema de Geracao de Provas. Monorepo com aplicacao web (React), aplicativo mobile do professor (React Native) e pacotes compartilhados.",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "npm run dev --workspace @sgp/web",
+    "web:build": "npm run build --workspace @sgp/web",
+    "web:preview": "npm run preview --workspace @sgp/web",
+    "mobile": "npm run start --workspace @sgp/mobile",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

@@ -1,0 +1,76 @@
+import type { Questao } from '@sgp/shared-types';
+
+export const questoesMock: Questao[] = [
+  {
+    id: 'q-1',
+    teacherId: 'prof-1',
+    type: 'objetiva',
+    statement: 'Qual camada da arquitetura em camadas concentra as regras de negocio?',
+    tags: ['arquitetura', 'camadas'],
+    alternatives: [
+      { id: 'q-1-a', text: 'Rota' },
+      { id: 'q-1-b', text: 'Controle' },
+      { id: 'q-1-c', text: 'Servico' },
+      { id: 'q-1-d', text: 'Repositorio' },
+    ],
+    correctAlternativeId: 'q-1-c',
+  },
+  {
+    id: 'q-2',
+    teacherId: 'prof-1',
+    type: 'objetiva',
+    statement: 'Em um relacionamento 1:N, onde fica a chave estrangeira?',
+    tags: ['banco-de-dados', 'modelagem'],
+    alternatives: [
+      { id: 'q-2-a', text: 'Na tabela do lado 1' },
+      { id: 'q-2-b', text: 'Na tabela do lado N' },
+      { id: 'q-2-c', text: 'Em uma tabela associativa obrigatoria' },
+      { id: 'q-2-d', text: 'Nao ha chave estrangeira nesse caso' },
+    ],
+    correctAlternativeId: 'q-2-b',
+  },
+  {
+    id: 'q-3',
+    teacherId: 'prof-1',
+    type: 'objetiva',
+    statement: 'O que caracteriza um requisito nao funcional?',
+    tags: ['requisitos'],
+    alternatives: [
+      { id: 'q-3-a', text: 'Uma acao que o usuario aciona diretamente' },
+      { id: 'q-3-b', text: 'Uma restricao ou qualidade do sistema' },
+      { id: 'q-3-c', text: 'Um caso de uso do sistema' },
+      { id: 'q-3-d', text: 'Uma regra de negocio do dominio' },
+    ],
+    correctAlternativeId: 'q-3-b',
+  },
+  {
+    id: 'q-4',
+    teacherId: 'prof-1',
+    type: 'objetiva',
+    statement: 'Qual o objetivo de um ADR (Architecture Decision Record)?',
+    tags: ['arquitetura', 'documentacao'],
+    alternatives: [
+      { id: 'q-4-a', text: 'Registrar uma decisao tecnica, seu contexto e consequencias' },
+      { id: 'q-4-b', text: 'Substituir o diagrama de classes' },
+      { id: 'q-4-c', text: 'Documentar os endpoints da API' },
+      { id: 'q-4-d', text: 'Listar as tarefas da sprint' },
+    ],
+    correctAlternativeId: 'q-4-a',
+  },
+  {
+    id: 'q-5',
+    teacherId: 'prof-1',
+    type: 'discursiva',
+    statement: 'Explique a diferenca entre uma Prova e uma Aplicacao no dominio do SGP.',
+    tags: ['dominio', 'modelagem'],
+    maxScore: 2,
+  },
+  {
+    id: 'q-6',
+    teacherId: 'prof-1',
+    type: 'discursiva',
+    statement: 'Descreva como a fila local de correcoes evita nota duplicada na sincronizacao.',
+    tags: ['offline', 'sincronizacao'],
+    maxScore: 3,
+  },
+];

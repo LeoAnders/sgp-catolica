@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-familia);
+  font-size: var(--fonte-md);
+  color: var(--cor-texto);
+  background: var(--cor-fundo-alternativo);
+}
+
+a {
+  color: var(--cor-marca);
+}
