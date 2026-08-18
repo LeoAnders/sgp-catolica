@@ -2,7 +2,7 @@
 
 ## Vale
 
-- Telas navegaveis na web (React) e no aplicativo do professor (React Native).
+- Telas navegaveis na web e no aplicativo do professor.
 - Componentes de interface e tokens de design compartilhados.
 - Dados estaticos vindos de `packages/mocks`.
 - Fluxos de navegacao completos o suficiente para demonstrar o produto ao cliente.
@@ -18,3 +18,6 @@
 Quando uma tela precisar de um comportamento que pertence a uma fase futura,
 represente o estado com dado estatico e deixe o ponto de integracao explicito no
 codigo, sem criar a implementacao real.
+
+A web usa Vite + Vue, conforme a especificacao v1.10 e o alinhamento confirmado em
+2026-08-17. A migracao do scaffold foi concluida; nao reintroduza React na web.
