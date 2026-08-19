@@ -35,6 +35,18 @@ packages/shared-types   tipos do dominio, derivados da especificacao
 docs                    documentacao oficial do projeto
 ```
 
+## Documentacao
+
+A documentacao oficial esta em `docs/`, indexada por [`docs/README.md`](docs/README.md):
+requisitos funcionais com criterios de aceite, requisitos nao funcionais, dicionario de
+entidades e pendencias em aberto. Comece por la.
+
+Este repositorio e a unica raiz esperada para o desenvolvimento. A documentacao
+versionada deve ser suficiente para o trabalho cotidiano e manter rastreabilidade aos
+documentos originais fornecidos ou a aprovacoes formalmente registradas. Anotacoes
+pessoais externas nao sao fonte de requisitos nem contexto esperado e nao devem ser
+citadas por caminho ou copiadas para ca.
+
 ## Como trabalhar aqui
 
 - Tipos de dominio ficam em `packages/shared-types` e sao a referencia unica; eles
