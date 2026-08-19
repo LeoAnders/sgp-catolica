@@ -10,3 +10,4 @@ export * from './turmas';
 export * from './questoes';
 export * from './provas';
 export * from './correcoes';
+export * from './fila';

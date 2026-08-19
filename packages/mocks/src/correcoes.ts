@@ -2,6 +2,23 @@ import type { Correcao, NotaDoEstudante } from '@sgp/shared-types';
 
 export const correcoesMock: Correcao[] = [
   {
+    id: 'cor-0',
+    examVersionId: 'versao-0',
+    studentId: 'est-1',
+    objectiveResults: [
+      { questionId: 'q-1', correct: true, score: 3 },
+      { questionId: 'q-2', correct: true, score: 3 },
+      { questionId: 'q-3', correct: false, score: 0 },
+    ],
+    discursiveScores: [],
+    totalScore: 6,
+    confirmedAt: '2026-03-11T15:40:00.000Z',
+    correctedBy: 'prof-1',
+    isAutomaticallyAssigned: true,
+    clientCorrectionId: 'c1f3a8de-0000',
+    syncStatus: 'synced',
+  },
+  {
     id: 'cor-1',
     examVersionId: 'versao-1',
     studentId: 'est-1',
@@ -42,9 +59,13 @@ export const correcoesMock: Correcao[] = [
     syncStatus: 'synced',
   },
   {
-    /** Correcao sem identificacao: pendente de lancamento manual (Feature 9). */
+    /**
+     * Correcao vinda de versao-3 (aplic-3), gerada sem identificacao do aluno.
+     * O QR Code trouxe apenas a versao, entao nao ha studentId e a nota so entra
+     * no historico depois da atribuicao manual (RF09).
+     */
     id: 'cor-3',
-    examVersionId: 'versao-1',
+    examVersionId: 'versao-3',
     reportedStudentName: 'Clara A.',
     reportedStudentRegistration: '2026103',
     objectiveResults: [

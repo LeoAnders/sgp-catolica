@@ -1,161 +1,150 @@
 <div align="center">
 
-# SGP Catolica
+# SGP Católica
 
-**Sistema de Geracao de Provas: o professor monta e aplica provas, o aplicativo corrige o cartao-resposta e o estudante acompanha suas notas.**
+### Da criação da prova à devolutiva da nota, em um único fluxo.
 
-Link do sistema hospedado: _a publicar na N1_
+O professor prepara e aplica avaliações, corrige cartões-resposta pelo celular e
+acompanha resultados. O estudante consulta suas notas com mais rapidez e clareza.
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-F5A623?style=flat-square)
-![Entrega](https://img.shields.io/badge/entrega%20atual-N1-3D348B?style=flat-square)
-![Licenca](https://img.shields.io/badge/licen%C3%A7a-uso%20acad%C3%AAmico-7B4FA6?style=flat-square)
+[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-F5A623?style=flat-square)](#fase-atual)
+[![Entrega](https://img.shields.io/badge/entrega-N1-3D348B?style=flat-square)](#fase-atual)
+[![Vue](https://img.shields.io/badge/Vue-3-42B883?style=flat-square&logo=vuedotjs&logoColor=white)](apps/web)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json)
+[![React Native](https://img.shields.io/badge/React%20Native-mobile-61DAFB?style=flat-square&logo=react&logoColor=111111)](apps/mobile)
+[![Expo](https://img.shields.io/badge/Expo-51-000020?style=flat-square&logo=expo&logoColor=white)](apps/mobile)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white)](.nvmrc)
+![Licença](https://img.shields.io/badge/licença-uso%20acadêmico-7B4FA6?style=flat-square)
+
+[Visão do produto](docs/produto/visao-do-produto.md) ·
+[Documentação](docs/README.md) ·
+[Executar localmente](#executar-localmente) ·
+[Contribuir](CONTRIBUTING.md)
 
 </div>
 
-## Equipe
-
-| Nome completo | Papel / principais frentes no projeto |
-| --- | --- |
-| Cintia Wilbert Lorenzetti | _a definir_ |
-| Gabriel Massaia de Oliveira | _a definir_ |
-| Leonardo Matheus Anders | _a definir_ |
-| Rian Carlos Odwazny Flexa | _a definir_ |
-| Wesley Diorrani Ferreira | _a definir_ |
-
-## Sumario
-
-- [1. Visao Geral](#1-visao-geral)
-- [2. Requisitos](#2-requisitos)
-- [3. Modelagem (UML)](#3-modelagem-uml)
-- [4. Telas do Sistema](#4-telas-do-sistema)
-- [5. Arquitetura de Software](#5-arquitetura-de-software)
-- [6. Decisoes Arquiteturais (ADRs)](#6-decisoes-arquiteturais-adrs)
-- [7. Modelo de Dados](#7-modelo-de-dados)
-- [8. Stack Tecnologica](#8-stack-tecnologica)
-- [9. Estrutura de Pastas](#9-estrutura-de-pastas)
-- [10. Como Executar o Projeto](#10-como-executar-o-projeto)
-- [11. Especificacao da API](#11-especificacao-da-api)
-- [12. Testes e Validacoes](#12-testes-e-validacoes)
-- [13. Manual do Usuario](#13-manual-do-usuario)
-- [14. Equipe e Contribuicoes](#14-equipe-e-contribuicoes)
-
 ---
 
-## 1. Visao Geral
+## Avaliar não precisa significar corrigir tudo à mão
 
-Professores com muitas turmas chegam as semanas de prova com centenas de provas para
-corrigir a mao, o que atrasa a devolutiva para o estudante. O SGP Catolica permite ao
-professor montar provas a partir de um banco de questoes, gerar o PDF impresso com
-versoes embaralhadas e QR Code, corrigir o cartao-resposta pelo aplicativo e devolver
-a nota rapidamente. O estudante entra na turma por codigo de convite e consulta suas
-provas, notas e evolucao.
+Em semanas de prova, um professor pode acumular centenas de avaliações para
+corrigir. O SGP Católica nasce para reduzir esse trabalho: organiza turmas e
+questões, gera provas com versões diferentes, identifica cada aplicação por QR Code
+e transforma a correção em uma experiência rápida pelo celular.
 
-Resumo completo do produto em [`docs/produto/visao-do-produto.md`](docs/produto/visao-do-produto.md).
+Para o estudante, o mesmo fluxo encurta a espera pela nota e reúne o histórico de
+desempenho em um único lugar.
 
-## 2. Requisitos
+## Uma experiência, três perspectivas
 
-Levantamento em andamento a partir da especificacao do cliente. As tabelas de RF e RNF
-serao registradas em `docs/produto/` e referenciadas aqui.
+| Professor na web | Professor no aplicativo | Estudante na web |
+| :--- | :--- | :--- |
+| Organiza turmas, questões, provas e aplicações. | Lê o QR Code, confere respostas e registra a correção. | Entra em turmas e acompanha notas e evolução. |
 
-## 3. Modelagem (UML)
+O fluxo central conecta as três superfícies:
 
-Prevista para a N2. Os diagramas ficarao em `docs/uml/`.
+**criar a prova → gerar as versões → aplicar → corrigir → publicar o resultado**
 
-## 4. Telas do Sistema
+## Fase atual
 
-Em construcao. Os prints das telas navegaveis ficarao em `docs/telas/` e serao
-inseridos aqui na ordem do fluxo de navegacao.
+> **N1 — interfaces navegáveis.** A experiência está sendo construída com dados
+> estáticos de [`packages/mocks`](packages/mocks), sem banco de dados, API,
+> autenticação ou processamento real de câmera nesta etapa.
 
-## 5. Arquitetura de Software
+O conjunto final de telas da N1 ainda depende de validação da equipe e da professora.
+As divergências e definições pendentes permanecem registradas em
+[`docs/pendencias.md`](docs/pendencias.md), sem serem tratadas como decisões.
 
-Prevista para a N3, com os diagramas em `docs/arquitetura/`.
+Quando o fluxo for aprovado, os registros visuais da entrega serão publicados em
+[`docs/telas/`](docs/telas) e o mapa de navegação em [`docs/design/`](docs/design).
 
-## 6. Decisoes Arquiteturais (ADRs)
+## Produto e requisitos
 
-Nenhuma decisao registrada ate o momento. O formato e o indice ficam em
-[`docs/decisoes/`](docs/decisoes/README.md).
+A especificação do produto está organizada fora deste README para que esta página
+continue simples e orientada à visão geral:
 
-## 7. Modelo de Dados
+- [Visão do produto](docs/produto/visao-do-produto.md) — problema, público e proposta de valor.
+- [Requisitos funcionais](docs/produto/requisitos-funcionais.md) — RF01 a RF11 e critérios de aceite.
+- [Requisitos não funcionais](docs/produto/requisitos-nao-funcionais.md) — desempenho, segurança, privacidade, operação offline e qualidade.
+- [Dicionário de entidades](docs/modelo-dados/dicionario-de-entidades.md) — conceitos do domínio e correspondência com os tipos do código.
 
-Previsto para a N2, em `docs/modelo-dados/`. Na fase atual, as entidades do dominio
-estao descritas como tipos em `packages/shared-types/src`.
+O recorte de requisitos por entrega ainda não foi aprovado. A especificação descreve
+o produto completo; ela não deve ser confundida com o escopo técnico da N1.
 
-## 8. Stack Tecnologica
+## Fundação técnica
 
-O que ja esta no repositorio:
+O projeto é um monorepo TypeScript com **Vue e Vite** na experiência web,
+**React Native e Expo** no aplicativo do professor e pacotes compartilhados para
+tipos, dados de demonstração e identidade visual.
 
-- **Vite + Vue + TypeScript**: aplicacao web (`apps/web`), alinhada a especificacao.
-- **React Native + Expo + TypeScript**: aplicativo do professor (`apps/mobile`).
-- **npm workspaces**: monorepo com pacotes compartilhados entre web e mobile.
-
-Nao ha backend nem banco de dados nesta fase: as telas consomem dados estaticos de
-`packages/mocks`. A web esta alinhada em Vite + Vue. Para o backend, os documentos ainda
-divergem entre NestJS/Fastify na spec e Node.js + Express na disciplina; nenhuma dessas
-alternativas deve ser escolhida por inferencia.
-
-## 9. Estrutura de Pastas
-
-```
-apps/
-  web/                 aplicacao web (professor e estudante)
-  mobile/              aplicativo do professor
-packages/
-  design-tokens/       cores, espacamento, tipografia
-  mocks/               dados estaticos da fase N1
-  shared-types/        tipos do dominio
-docs/
-  produto/  design/  decisoes/
-  telas/  uml/  arquitetura/  modelo-dados/  api/
+```text
+apps/       web · mobile
+packages/   shared-types · mocks · design-tokens
+docs/       produto · design · decisões · modelo de dados · API
 ```
 
-## 10. Como Executar o Projeto
+Na N1, as aplicações consomem somente mocks. A escolha do backend futuro permanece
+aberta porque as fontes divergem entre Node.js com Express e NestJS/Fastify. A
+arquitetura completa será publicada em [`docs/arquitetura/`](docs/arquitetura) quando
+houver uma decisão formal da equipe.
 
-Requisitos: Node.js 20 ou superior e npm 10 ou superior.
+## Executar localmente
+
+Use **Node.js 20 ou superior** e **npm 10 ou superior**.
 
 ```bash
 git clone https://github.com/LeoAnders/sgp-catolica.git
 cd sgp-catolica
-npm install
+npm ci
 ```
-
-Aplicacao web (abre em `http://localhost:5173`):
 
 ```bash
-npm run web
+npm run web        # aplicação web em http://localhost:5173
+npm run mobile     # aplicativo do professor com Expo
+npm run typecheck  # valida todos os workspaces
 ```
 
-Aplicativo do professor (Expo; leia o QR Code com o app Expo Go ou use um emulador):
+O sistema hospedado será disponibilizado durante a entrega da N1.
 
-```bash
-npm run mobile
-```
+## Documentação
 
-Verificacao de tipos em todos os pacotes:
+[`docs/README.md`](docs/README.md) é a porta de entrada para a documentação completa.
+Lá estão os requisitos, o modelo do domínio, as pendências e, conforme o projeto
+evoluir, os diagramas, decisões arquiteturais, telas, API e manual do usuário.
 
-```bash
-npm run typecheck
-```
+Para participar do desenvolvimento, consulte o
+[`CONTRIBUTING.md`](CONTRIBUTING.md). O guia reúne o fluxo de Issues, branches,
+commits, Pull Requests e revisão da equipe.
 
-## 11. Especificacao da API
+## Equipe
 
-Prevista para a N2, em `docs/api/`.
-
-## 12. Testes e Validacoes
-
-Previsto para a N3.
-
-## 13. Manual do Usuario
-
-Previsto para a N3.
-
-## 14. Equipe e Contribuicoes
-
-A preencher ao longo da fase, com as principais contribuicoes de cada integrante.
-
----
+<table align="center">
+  <tr>
+    <td align="center" width="160">
+      <img src="docs/assets/equipe/padrao.svg" width="88" alt="Avatar padrão"><br>
+      <sub><strong>Cintia Wilbert<br>Lorenzetti</strong></sub>
+    </td>
+    <td align="center" width="160">
+      <img src="docs/assets/equipe/padrao.svg" width="88" alt="Avatar padrão"><br>
+      <sub><strong>Gabriel Massaia<br>de Oliveira</strong></sub>
+    </td>
+    <td align="center" width="160">
+      <img src="docs/assets/equipe/padrao.svg" width="88" alt="Avatar padrão"><br>
+      <sub><strong>Leonardo Matheus<br>Anders</strong></sub>
+    </td>
+    <td align="center" width="160">
+      <img src="docs/assets/equipe/padrao.svg" width="88" alt="Avatar padrão"><br>
+      <sub><strong>Rian Carlos<br>Odwazny Flexa</strong></sub>
+    </td>
+    <td align="center" width="160">
+      <img src="docs/assets/equipe/padrao.svg" width="88" alt="Avatar padrão"><br>
+      <sub><strong>Wesley Diorrani<br>Ferreira</strong></sub>
+    </td>
+  </tr>
+</table>
 
 <div align="center">
 
-*Projeto da disciplina de Projeto e Arquitetura de Software.*
+Projeto acadêmico da disciplina de Projeto e Arquitetura de Software.
 
 </div>

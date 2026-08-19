@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title>Avatar padrão da equipe</title>
+  <defs>
+    <linearGradient id="background" x1="20" y1="15" x2="145" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7B1A24"/>
+      <stop offset="1" stop-color="#3D348B"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="80" r="76" fill="url(#background)"/>
+  <circle cx="80" cy="80" r="68" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+  <circle cx="80" cy="61" r="24" fill="#fff"/>
+  <path d="M38 128c3-25 19-40 42-40s39 15 42 40" fill="#fff"/>
+</svg>
