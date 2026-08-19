@@ -45,8 +45,8 @@ export const correcoesMock: Correcao[] = [
     /** Correcao sem identificacao: pendente de lancamento manual (Feature 9). */
     id: 'cor-3',
     examVersionId: 'versao-1',
-    reportedStudentName: 'Camila L.',
-    reportedStudentRegistration: '2026003',
+    reportedStudentName: 'Clara A.',
+    reportedStudentRegistration: '2026103',
     objectiveResults: [
       { questionId: 'q-1', correct: true, score: 1.5 },
       { questionId: 'q-3', correct: true, score: 1.5 },
@@ -71,7 +71,7 @@ export const notasDoEstudanteMock: NotaDoEstudante[] = [
     examTitle: 'Avaliacao 01 - Arquitetura e Requisitos',
     className: 'Projeto e Arquitetura de Software',
     subject: 'Engenharia de Software',
-    teacherName: 'Tassiana Kautzmann',
+    teacherName: 'Helena Marques',
     date: '2026-04-22',
     totalScore: 7.5,
     maxScore: 10,
@@ -82,7 +82,7 @@ export const notasDoEstudanteMock: NotaDoEstudante[] = [
     examTitle: 'Diagnostica - Fundamentos',
     className: 'Projeto e Arquitetura de Software',
     subject: 'Engenharia de Software',
-    teacherName: 'Tassiana Kautzmann',
+    teacherName: 'Helena Marques',
     date: '2026-03-11',
     totalScore: 6,
     maxScore: 10,
