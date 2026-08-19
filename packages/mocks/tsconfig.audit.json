@@ -1,0 +1,15 @@
+{
+  "//": "Emite os mocks em JavaScript para que a auditoria rode no Node sem runner de teste nem dependencia extra. A saida vai para dist/, ja ignorada pelo Git.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": ["src"]
+}

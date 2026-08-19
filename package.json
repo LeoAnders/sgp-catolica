@@ -13,7 +13,8 @@
     "web:build": "npm run build --workspace @sgp/web",
     "web:preview": "npm run preview --workspace @sgp/web",
     "mobile": "npm run start --workspace @sgp/mobile",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "audit:mocks": "npm run audit --workspace @sgp/mocks"
   },
   "engines": {
     "node": ">=20.0.0",
