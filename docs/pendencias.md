@@ -30,6 +30,15 @@ correspondente, e sai desta lista.
 | 9 | Ferramenta de backlog | Os documentos exigem Issues no repositorio e aceitam ferramenta externa com visualizacao publica sem login, sem indicar qual. |
 | 10 | Nomenclatura de decisoes | O modelo de README pede uma pasta `docs/adr/`. Este repositorio usa `docs/decisoes/`. Falta decidir se renomeia. |
 | 11 | Regras criticas de negocio | RNF09 exige cobertura minima de testes nas regras criticas, sem enumerar quais compoem esse conjunto. |
+| 16 | Relacao entre a pontuacao da questao e a da prova | RF02 da a questao discursiva uma pontuacao maxima propria; RF04 da a prova uma pontuacao individual por questao e diz que a soma nao e validada pelo sistema. Nenhuma fonte diz se o valor atribuido na prova pode divergir do valor da questao, nem qual dos dois prevalece. Nos tipos isso corresponde a `Questao.maxScore` e `QuestaoDaProva.score`. |
+| 17 | Ordem das alternativas quando nao ha embaralhamento | RF06 exige que a ordem embaralhada seja materializada e persistida na geracao, sem o que o aplicativo nao consegue interpretar a marcacao. Nenhuma fonte diz se essa ordem deve ser gravada tambem quando o embaralhamento de alternativas esta desligado, ou se nesse caso vale a ordem de cadastro da questao. Nos tipos isso corresponde a `LayoutVersao.alternativeOrder` e `VersaoProva.shuffleAlternatives`. |
+
+> Os itens 16 e 17 nasceram da auditoria de coerencia dos dados de exemplo
+> (`npm run audit:mocks`), que precisou de uma leitura provisoria para conseguir
+> validar os mocks: hoje ela aceita que o valor da questao na prova seja
+> independente da pontuacao maxima da questao, e que a ordem de cadastro valha
+> quando nao ha embaralhamento. Sao leituras de trabalho, nao decisoes; quando a
+> equipe definir os dois pontos, a auditoria e os mocks acompanham.
 
 ## Pedidos do cliente nao incorporados como criterio de aceite
 
