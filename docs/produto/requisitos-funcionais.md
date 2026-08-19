@@ -192,13 +192,15 @@ O professor pode digitar nome e matricula lidos na prova fisica. E apenas auxili
 - Toda correcao e salva **primeiro** no dispositivo, com ou sem internet
 - Cada item tem identificador gerado no dispositivo, garantindo deduplicacao idempotente
 - Guarda copia do gabarito usado no momento da correcao
-- Havendo gabarito atualizado na API, ele tem **precedencia sobre a copia local** no
-  recalculo, e o professor e avisado da divergencia
+- Durante a correcao, o aplicativo tenta obter primeiro o gabarito atualizado da API;
+  sem conexao, utiliza a ultima copia local disponivel
+- Se o gabarito oficial mudar entre a correcao local e a sincronizacao, o servidor
+  recalcula usando o `answerKeySnapshot` salvo com a correcao e sinaliza o professor
 - Sincroniza em segundo plano ao reconectar, enviando em lote
 - O reenvio de uma correcao ja registrada e tratado de forma **idempotente**: nao gera
   registro duplicado
-- Erro de validacao na sincronizacao mantem o item na fila com status de erro, para
-  ajuste e nova tentativa
+- Erro de validacao mantem o item com status de erro; o professor e notificado e pode
+  corrigir os dados e reenviar
 - Status por item: `pending`, `synced` ou `error`, com nova tentativa manual disponivel
 - Havendo duas correcoes para o mesmo aluno e versao, mantem a primeira e sinaliza para
   revisao; **nunca sobrescreve em silencio**
