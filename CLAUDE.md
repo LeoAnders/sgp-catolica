@@ -41,10 +41,11 @@ A documentacao oficial esta em `docs/`, indexada por [`docs/README.md`](docs/REA
 requisitos funcionais com criterios de aceite, requisitos nao funcionais, dicionario de
 entidades e pendencias em aberto. Comece por la.
 
-Este repositorio e autocontido. Tudo que autoriza uma decisao de escopo, tecnologia ou
-fluxo esta aqui ou nos documentos originais do projeto. Anotacoes pessoais que existam
-fora dele nao fazem parte do repositorio: nao devem ser referenciadas, citadas por
-caminho, nem copiadas para ca.
+Este repositorio e a unica raiz esperada para o desenvolvimento. A documentacao
+versionada deve ser suficiente para o trabalho cotidiano e manter rastreabilidade aos
+documentos originais fornecidos ou a aprovacoes formalmente registradas. Anotacoes
+pessoais externas nao sao fonte de requisitos nem contexto esperado e nao devem ser
+citadas por caminho ou copiadas para ca.
 
 ## Como trabalhar aqui
 
