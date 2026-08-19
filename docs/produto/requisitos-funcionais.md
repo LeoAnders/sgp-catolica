@@ -37,8 +37,8 @@ proprios dados.
 - Login retorna JWT e refresh token
 - Recuperacao de senha por e-mail
 - Rate limiting contra ataque de forca bruta
-- Logout do dispositivo e opcao de sair de todos os dispositivos, revogando todos os
-  refresh tokens
+- Logout do dispositivo atual: revoga apenas o refresh token daquele dispositivo
+- Sair de todos os dispositivos: revoga todos os refresh tokens do usuario
 - Endpoint autenticado para consulta dos proprios dados
 
 ## RF01.1 — Anonimizacao de conta (LGPD)
@@ -75,7 +75,8 @@ O professor cria turmas e matricula alunos, para aplicar provas a um grupo espec
 - O professor pode ver e regenerar o codigo; o anterior e invalidado imediatamente
 - O professor matricula, por e-mail, aluno ja cadastrado
 - O aluno se matricula sozinho com o codigo; se o e-mail nao tiver conta, o sistema cria
-  a conta (validando o dominio de estudante) e matricula na mesma operacao
+  a conta (validando o dominio de estudante), matricula na mesma operacao e retorna o
+  estudante ja autenticado, com JWT e refresh token
 - Listar e remover alunos, sem apagar o historico de notas
 - Editar nome, disciplina e periodo; arquivar a turma sem apagar as aplicacoes
 - Um aluno pode estar em varias turmas; o mesmo codigo nao duplica a matricula
@@ -94,6 +95,7 @@ reutilizavel, aplicavel a varias turmas depois.
   operacao dedicada para essa transicao
 - Arquivar fecha a prova (`closed`): nao aceita novas aplicacoes, mas as existentes
   seguem funcionando
+- Fechar **nao exclui** a prova: ela continua listada e filtravel por status
 - A prova pertence a um professor e **nao** e ligada diretamente a uma turma
 
 ## RF05 — Criacao de aplicacoes
@@ -102,6 +104,7 @@ O professor aplica uma prova existente a uma turma, para gerar o PDF, distribuir
 corrigir aquela aplicacao.
 
 - Combina uma prova existente e uma turma de destino
+- Cada aplicacao pertence a exatamente um professor, uma prova e uma turma
 - A mesma prova pode ir para varias turmas, ou ser reaplicada a mesma turma (segunda
   chamada); as aplicacoes sao independentes entre si
 - Nasce em `draft` e passa a `generated` quando o PDF e gerado
@@ -126,8 +129,10 @@ identificacao.
 
 ### Regras de geracao
 
-- O PDF e um **unico arquivo consolidado**, com todas as provas em sequencia; nao um
-  arquivo por aluno
+- Com identificacao, o sistema gera uma atribuicao para **cada estudante matriculado** na
+  turma da aplicacao: uma prova por estudante
+- O PDF e um **unico arquivo consolidado**, com todas as provas em sequencia; nao e
+  separado por aluno nem por versao
 - A ordem embaralhada e materializada e persistida no momento da geracao: qual questao
   em qual posicao e qual alternativa virou a letra A, B ou C. Sem isso o aplicativo nao
   consegue interpretar a marcacao
@@ -186,9 +191,14 @@ O professor pode digitar nome e matricula lidos na prova fisica. E apenas auxili
 
 - Toda correcao e salva **primeiro** no dispositivo, com ou sem internet
 - Cada item tem identificador gerado no dispositivo, garantindo deduplicacao idempotente
-- Guarda copia do gabarito usado; se o gabarito mudar no servidor, o recalculo usa a
-  copia e o professor e avisado
+- Guarda copia do gabarito usado no momento da correcao
+- Havendo gabarito atualizado na API, ele tem **precedencia sobre a copia local** no
+  recalculo, e o professor e avisado da divergencia
 - Sincroniza em segundo plano ao reconectar, enviando em lote
+- O reenvio de uma correcao ja registrada e tratado de forma **idempotente**: nao gera
+  registro duplicado
+- Erro de validacao na sincronizacao mantem o item na fila com status de erro, para
+  ajuste e nova tentativa
 - Status por item: `pending`, `synced` ou `error`, com nova tentativa manual disponivel
 - Havendo duas correcoes para o mesmo aluno e versao, mantem a primeira e sinaliza para
   revisao; **nunca sobrescreve em silencio**
@@ -206,6 +216,7 @@ Quando a prova foi gerada sem identificacao, associar a nota ja calculada ao alu
 correspondente, identificado pelo nome ou matricula escritos a mao.
 
 - A correcao sem identificacao fica registrada sem vinculo com aluno
+- A atribuicao manual pode ser feita tanto pela aplicacao web quanto pelo aplicativo
 - Listar, por aplicacao, todas as correcoes pendentes de atribuicao
 - Nome e matricula digitados no aplicativo vem pre-preenchidos, para agilizar a busca
 - Atribuir **preenche o vinculo na correcao existente**, sem criar novo registro,

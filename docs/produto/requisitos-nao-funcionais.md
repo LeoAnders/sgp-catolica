@@ -3,8 +3,8 @@
 Requisitos derivados da especificacao do produto (v1.10). Descrevem qualidade,
 restricao e capacidade esperadas do sistema, nao funcionalidades.
 
-Nenhum deles e implementado na fase N1, que trabalha com interfaces navegaveis e dados
-estaticos. Entram aqui como requisitos declarados do produto.
+A N1 nao exige a implementacao real destes requisitos de producao. Entram aqui como
+requisitos declarados do produto.
 
 | ID | Categoria | Requisito |
 | --- | --- | --- |
@@ -20,9 +20,8 @@ estaticos. Entram aqui como requisitos declarados do produto.
 
 ## Observacoes
 
-- **RNF05** depende de RF01.1 para a anonimizacao e de RF11 para o isolamento do
-  historico do estudante.
-- **RNF06** e o requisito mais restritivo do produto: condiciona o desenho da correcao
-  mobile descrito em RF08, incluindo cache de gabarito, fila persistente e deduplicacao.
+- A especificacao trata a anonimizacao em RF01.1 e o isolamento do historico do estudante
+  em RF11; ambos os temas aparecem em **RNF05**.
+- **RNF06** condiciona o desenho de RF08 e da sincronizacao.
 - **RNF09** fala em regras criticas de negocio, sem enumerar quais. A definicao desse
   conjunto ainda nao existe nos documentos recebidos.
