@@ -3,8 +3,7 @@
 Indice da documentacao oficial do SGP Catolica. O que esta aqui vale como fonte para a
 equipe; rascunhos e ideias em discussao ficam fora do repositorio ate serem acordados.
 
-Este arquivo e o ponto de entrada da documentacao. `CLAUDE.md` e `AGENTS.md`, na raiz,
-apontam para ca.
+Este arquivo e o ponto de entrada da documentacao do projeto.
 
 ## Documentos disponiveis
 
@@ -38,8 +37,8 @@ apontam para ca.
 | `api/` | Especificacao de endpoints e colecoes de teste | vazio |
 
 As pastas vazias entram no repositorio com um `.gitkeep` e sao preenchidas conforme as
-fases avancam. Duas dependem de decisao registrada em [pendencias](pendencias.md): o
-conteudo de `design/` depende do recorte de telas, e a nomenclatura de `decisoes/`
-depende do item sobre `docs/adr/`.
+fases avancam. Dois pontos dependem de decisao registrada em
+[pendencias](pendencias.md): o mapa de telas e os fluxos de navegacao dependem do
+recorte de telas, e a nomenclatura de `decisoes/` depende do item sobre `docs/adr/`.
 
-A documentacao de endpoints entra quando a API entrar no escopo.
+O modelo de README da disciplina preve a documentacao de API a partir da N2.

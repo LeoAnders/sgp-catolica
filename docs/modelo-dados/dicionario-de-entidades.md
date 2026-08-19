@@ -7,6 +7,9 @@ Os nomes das entidades seguem a especificacao, em ingles. Os tipos no codigo seg
 idioma do dominio adotado no repositorio, em portugues. Um arquivo de tipos agrupa mais
 de uma entidade quando elas pertencem ao mesmo assunto.
 
+A correspondencia indica qual tipo representa cada entidade no scaffold atual; nao
+significa paridade completa de campos, pois os tipos ainda refletem a fase N1.
+
 ## Correspondencia
 
 | Entidade | Tipo no codigo | Arquivo |
@@ -44,7 +47,8 @@ emissao, data de expiracao e data de revogacao quando houver.
 
 - O logout comum revoga apenas o token do dispositivo atual
 - Sair de todos os dispositivos revoga todos os tokens ativos do usuario
-- A informacao de dispositivo alimenta a lista de sessoes na area de conta
+- A informacao do dispositivo identifica a sessao no fluxo de sair de todos os
+  dispositivos
 
 ## Class
 
@@ -97,7 +101,7 @@ Aplicacao: uma prova aplicada a uma turma. Tudo que vem depois se refere a ela.
 Campos: identificador, prova, turma, professor, situacao (`draft`, `generated` ou
 `closed`), endereco do PDF e data de criacao.
 
-- O PDF e o arquivo unico consolidado, sobrescrito a cada regeracao
+- O PDF e o arquivo unico consolidado, sobrescrito a cada regeneracao
 - A mesma prova gera aplicacoes independentes por turma ou por reaplicacao
 
 ## ExamVersion
