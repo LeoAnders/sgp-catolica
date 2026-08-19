@@ -3,6 +3,17 @@
 Sistema de Geracao de Provas. Monorepo com a aplicacao web, o aplicativo mobile do
 professor e os pacotes compartilhados entre os dois.
 
+## Stack alinhada com a especificacao
+
+- A aplicacao web deve seguir **Vite + Vue**, conforme a especificacao v1.10 e o
+  alinhamento confirmado em 2026-08-17.
+- O scaffold web foi migrado de React para Vue em 2026-08-17. Nao reintroduzir React
+  na aplicacao web.
+- O mobile segue **React Native / Expo**, como descrito na especificacao.
+- Os documentos da disciplina apresentam **Node.js + Express + MySQL** como stack
+  obrigatoria, enquanto a spec descreve **NestJS ou Fastify** para a API. Essa
+  divergencia de backend continua aberta e nao deve ser resolvida por inferencia.
+
 ## Fase atual: N1 — interfaces navegaveis
 
 - O objetivo da fase e ter telas navegaveis (a tela A leva a tela B) com dados
@@ -16,7 +27,7 @@ professor e os pacotes compartilhados entre os dois.
 ## Estrutura
 
 ```
-apps/web       aplicacao web (React), para professor e estudante
+apps/web       aplicacao web em Vite + Vue, para professor e estudante
 apps/mobile    aplicativo do professor (React Native), correcao de provas
 packages/design-tokens  tokens visuais compartilhados (cores, espacamento, tipografia)
 packages/mocks          dados estaticos da fase N1

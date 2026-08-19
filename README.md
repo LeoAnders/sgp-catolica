@@ -84,13 +84,14 @@ estao descritas como tipos em `packages/shared-types/src`.
 
 O que ja esta no repositorio:
 
-- **React + Vite + TypeScript**: aplicacao web (`apps/web`).
+- **Vite + Vue + TypeScript**: aplicacao web (`apps/web`), alinhada a especificacao.
 - **React Native + Expo + TypeScript**: aplicativo do professor (`apps/mobile`).
 - **npm workspaces**: monorepo com pacotes compartilhados entre web e mobile.
 
 Nao ha backend nem banco de dados nesta fase: as telas consomem dados estaticos de
-`packages/mocks`. A stack de backend das fases seguintes segue o que a disciplina
-define (Node.js, Express e MySQL) e sera registrada aqui quando a equipe iniciar a N2.
+`packages/mocks`. A web esta alinhada em Vite + Vue. Para o backend, os documentos ainda
+divergem entre NestJS/Fastify na spec e Node.js + Express na disciplina; nenhuma dessas
+alternativas deve ser escolhida por inferencia.
 
 ## 9. Estrutura de Pastas
 

@@ -6,22 +6,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@sgp/design-tokens": "*",
     "@sgp/mocks": "*",
     "@sgp/shared-types": "*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "vue": "^3.5.41"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-vue": "^5.2.4",
     "typescript": "^5.6.3",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vue-tsc": "^3.3.10"
   }
 }
