@@ -2,8 +2,16 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* A N1 tem apenas o tema claro; controles nativos seguem o mesmo esquema. */
+  color-scheme: light;
+}
+
 body {
   margin: 0;
+  /* Sem atraso de clique no toque, e realce de toque sob controle da aplicacao. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   font-family: var(--fonte-familia);
   font-size: var(--fonte-md);
   color: var(--cor-texto);
@@ -12,4 +20,38 @@ body {
 
 a {
   color: var(--cor-marca);
+}
+
+/*
+  Em botoes e controles o Vuetify sinaliza o foco por um veu de baixo contraste.
+  A aplicacao usa um anel visivel proprio. As regras do Vuetify ficam em
+  `@layer`, entao estas, sem camada, prevalecem sem `!important`.
+*/
+:focus-visible {
+  outline: 2px solid var(--cor-marca);
+  outline-offset: 2px;
+}
+
+/* Nos campos o contorno ja e desenhado pelo proprio Vuetify: sem anel duplo. */
+.v-field input:focus-visible,
+.v-field textarea:focus-visible,
+.v-field__input:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* O indicador de carregamento continua legivel, apenas parado. */
+  .v-progress-circular__overlay {
+    stroke-dasharray: 60, 200;
+    stroke-dashoffset: 0;
+  }
 }
