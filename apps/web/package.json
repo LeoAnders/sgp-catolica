@@ -11,15 +11,18 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@mdi/js": "^7.4.47",
     "@sgp/design-tokens": "*",
     "@sgp/mocks": "*",
     "@sgp/shared-types": "*",
-    "vue": "^3.5.41"
+    "vue": "^3.5.41",
+    "vuetify": "^4.1.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
+    "vite-plugin-vuetify": "^2.1.3",
     "vue-tsc": "^3.3.10"
   }
 }
