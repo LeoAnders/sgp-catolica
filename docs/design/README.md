@@ -1,10 +1,12 @@
 # Design
 
-A preencher pela equipe:
+Fonte oficial para decisões de interface e experiência web.
 
-- design system (cores, tipografia, componentes) a partir de `packages/design-tokens`;
-- mapa de telas;
-- fluxos de navegacao (qual tela leva a qual).
+| Documento | Uso |
+| --- | --- |
+| [Design system web](design-system-web.md) | Fundamentos, tokens, layouts, componentes, estados e checklist de tela. |
+| [Experiência web atual](experiencia-web-atual.md) | Mapa de navegação, telas disponíveis, fluxos, estados e limites da implementação atual. |
 
-Os valores atuais em `packages/design-tokens` sao um ponto de partida para discussao,
-nao um padrao fechado.
+O design system atual define a fundação técnica e visual do produto. O vinho Católica já
+é uma decisão de tokens: fica restrito a ações, foco e ao degradê sutil dos cartões de
+resumo, conforme descrito no design system.

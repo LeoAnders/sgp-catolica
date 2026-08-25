@@ -52,8 +52,11 @@ citadas por caminho ou copiadas para ca.
 - Tipos de dominio ficam em `packages/shared-types` e sao a referencia unica; eles
   seguem a especificacao do cliente e nao devem ser inventados caso a caso.
 - Dados de exemplo ficam em `packages/mocks`, nunca embutidos dentro de uma tela.
-- Valores visuais (cor, espacamento, raio, fonte) vem de `packages/design-tokens`,
-  nao de literais espalhados no codigo.
+- Valores visuais (cor, espacamento, raio, fonte) nunca sao literais espalhados no
+  codigo. Na web, o tema e os tokens semanticos vem de
+  `apps/web/src/styles/global.css`, conforme o
+  [design system web](docs/design/design-system-web.md). No mobile, vem de
+  `packages/design-tokens`.
 - O idioma do dominio e o portugues (turma, prova, aplicacao, correcao, questao).
 - Comentarios e documentacao em portugues.
 
