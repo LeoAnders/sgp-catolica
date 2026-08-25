@@ -1,10 +1,11 @@
 # Design
 
-A preencher pela equipe:
+Fonte oficial para decisões de interface e experiência web.
 
-- design system (cores, tipografia, componentes) a partir de `packages/design-tokens`;
-- mapa de telas;
-- fluxos de navegacao (qual tela leva a qual).
+| Documento | Uso |
+| --- | --- |
+| [Design system web](design-system-web.md) | Fundamentos, tokens, layouts, componentes, estados e checklist de tela. |
 
-Os valores atuais em `packages/design-tokens` sao um ponto de partida para discussao,
-nao um padrao fechado.
+O design system atual define a fundação técnica e visual do produto. Identidade de marca
+(como o vermelho institucional) só será incluída quando for uma decisão explícita de
+tokens, aplicada globalmente e documentada aqui.
