@@ -267,7 +267,10 @@ async function criarRascunho(): Promise<void> {
       </Dialog>
     </div>
 
-    <section class="grid auto-rows-min gap-4 md:grid-cols-3" aria-label="Resumo das provas">
+    <section
+      class="grid auto-rows-min gap-4 *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:bg-gradient-to-t md:grid-cols-3"
+      aria-label="Resumo das provas"
+    >
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardDescription>Provas no acervo</CardDescription>

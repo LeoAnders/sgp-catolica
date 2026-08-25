@@ -35,14 +35,34 @@ Usar nomes semânticos — `background`, `foreground`, `card`, `popover`, `prima
 | Papel | Classe/token | Regra |
 | --- | --- | --- |
 | Canvas da página | `bg-background` | No tema escuro é preto. Abriga conteúdo operacional e a área livre da página. |
-| Superfície elevada | `bg-card` | Mesma família visual da sidebar. Usar em cartões de resumo, filtros e cabeçalhos de grids. |
+| Superfície elevada | `bg-card` | Superfície neutra padrão do shadcn para cartões, filtros e grids. |
 | Sobreposição | `bg-popover` | Somente menus, diálogos, selects e tooltips. |
-| Separação | `border`, ring nativo | Distinguir superfícies sem inventar outra cor. |
+| Separação | `border`, `ring-border` | Contorno neutro e discreto em cartões e sobreposições. |
 | Texto secundário | `text-muted-foreground` | Descrições, metadados e conteúdo de apoio. |
 
 No tema escuro, a diferença entre canvas preto e `card` escuro é intencional: os blocos
-ganham hierarquia sem parecerem um dashboard genérico. A identidade de marca não deve ser
-antecipada com um vermelho local; quando aprovada, ela entrará nos tokens globais.
+ganham hierarquia sem parecerem um dashboard genérico.
+
+## Paleta vinho Católica
+
+O vermelho institucional é aplicado pelos tokens globais de `src/styles/global.css` e é
+reservado para ações, foco e destaque pontual. Caso o manual institucional forneça um
+valor oficial mais específico, a alteração deve ocorrer somente nesses tokens.
+
+| Papel | Tema claro | Tema escuro | Uso |
+| --- | --- | --- | --- |
+| Ação institucional | Vinho profundo | Vinho mais luminoso | `primary`, `sidebar-primary`, ações principais e ícone da marca. |
+| Estrutura | Neutra | Neutra | `background`, `card`, `sidebar`, `border`, `input`, `accent` e `sidebar-accent`. |
+| Destaque de resumo | Gradiente vinho de 5% | Gradiente vinho de 5% | Somente cartões de métrica: `from-primary/5 to-card bg-gradient-to-t`. |
+| Seleção e hover | Neutra | Neutra | `accent` e `sidebar-accent`; o estado não deve colorir a navegação de vermelho. |
+| Foco | Vinho profundo | Vinho luminoso | `ring`; nunca remover o foco visível. |
+
+`destructive` continua reservado para erro ou remoção: ele não é o vermelho institucional
+de ação primária.
+
+O degradê não pertence ao componente `Card`: ele é aplicado no contêiner de um grupo de
+resumos. Por isso não se propaga a tabelas, cards de formulários, grids ou à casca da
+aplicação.
 
 ## Estrutura da aplicação
 
