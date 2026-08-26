@@ -14,10 +14,25 @@
     "web:preview": "npm run preview --workspace @sgp/web",
     "mobile": "npm run start --workspace @sgp/mobile",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "audit:mocks": "npm run audit --workspace @sgp/mocks"
+    "audit:mocks": "npm run audit --workspace @sgp/mocks",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.9.6"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue,cjs,mjs,json,css,md,yml,yaml}": "prettier --write"
   }
 }
