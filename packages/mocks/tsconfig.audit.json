@@ -9,7 +9,8 @@
     "rootDir": "src",
     "outDir": "dist",
     "declaration": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "types": []
   },
   "include": ["src"]
 }

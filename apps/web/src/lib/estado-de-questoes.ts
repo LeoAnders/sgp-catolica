@@ -1,0 +1,66 @@
+/**
+ * Extensão local do banco de questões para o protótipo N1.
+ *
+ * Os mocks continuam sendo a semente imutável. Questões criadas dentro da prova só
+ * entram aqui quando o professor escolhe “Salvar no banco”, e sobrevivem ao F5 no
+ * navegador até a API de RF02 existir.
+ */
+import { reactive, watch } from 'vue';
+import { questoesMock } from '@sgp/mocks';
+import type { Questao } from '@sgp/shared-types';
+
+const CHAVE = 'sgp:questoes-locais:v1';
+
+function clonar(questao: Questao): Questao {
+  return JSON.parse(JSON.stringify(questao)) as Questao;
+}
+
+function ler(): Questao[] {
+  try {
+    const bruto = window.localStorage.getItem(CHAVE);
+    if (!bruto) return [];
+    const lido = JSON.parse(bruto) as unknown;
+    return Array.isArray(lido) ? (lido as Questao[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+const questoesLocais = reactive<Questao[]>(ler());
+
+watch(
+  questoesLocais,
+  () => {
+    try {
+      window.localStorage.setItem(CHAVE, JSON.stringify(questoesLocais));
+    } catch {
+      // O editor continua funcionando sem persistência local.
+    }
+  },
+  { deep: true },
+);
+
+export function listarQuestoesDoBanco(): Questao[] {
+  return [...questoesLocais, ...questoesMock.filter((mock) => !questoesLocais.some((item) => item.id === mock.id))];
+}
+
+export function encontrarQuestaoDoBanco(id: string): Questao | undefined {
+  return questoesLocais.find((questao) => questao.id === id)
+    ?? questoesMock.find((questao) => questao.id === id);
+}
+
+export function questaoEstaNoBanco(id: string): boolean {
+  return listarQuestoesDoBanco().some((questao) => questao.id === id);
+}
+
+/** Insere ou atualiza pelo id, evitando duplicatas ao salvar alterações. */
+export function salvarQuestaoNoBanco(questao: Questao): 'criada' | 'atualizada' {
+  const indice = questoesLocais.findIndex((item) => item.id === questao.id);
+  const copia = clonar(questao);
+  if (indice >= 0) {
+    questoesLocais[indice] = copia;
+    return 'atualizada';
+  }
+  questoesLocais.unshift(copia);
+  return 'criada';
+}

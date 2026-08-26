@@ -1,44 +1,51 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn-vue/tailwind.css';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/instrument-sans';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.2 0.012 315);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.2 0.012 315);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.43 0.15 24);
+  --popover-foreground: oklch(0.2 0.012 315);
+  /* Aubergine neutro da referencia. A paleta institucional sera reavaliada depois. */
+  --primary: oklch(0.31 0.025 315);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.965 0.003 315);
+  --secondary-foreground: oklch(0.25 0.012 315);
+  --muted: oklch(0.965 0.003 315);
+  --muted-foreground: oklch(0.5 0.012 315);
+  --accent: oklch(0.955 0.004 315);
+  --accent-foreground: oklch(0.25 0.012 315);
   --destructive: oklch(0.5 0.19 27);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.5 0.15 24);
+  --border: oklch(0.9 0.004 315);
+  --input: oklch(0.9 0.004 315);
+  --ring: oklch(0.42 0.035 315);
+  /* Moldura: a cor de fora. Todo painel e todo conteudo flutuam sobre ela. */
+  --field: oklch(0.97 0.003 315);
+  /* Folha: representa papel; branca nos dois temas, por isso nao inverte. */
+  --sheet: oklch(1 0 0);
+  --sheet-foreground: oklch(0.16 0 0);
+  --sheet-border: oklch(0.9 0.003 30);
   --chart-1: oklch(0.5 0.16 24);
   --chart-2: oklch(0.56 0.09 44);
   --chart-3: oklch(0.42 0.08 24);
   --chart-4: oklch(0.7 0.1 70);
   --chart-5: oklch(0.62 0.12 350);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.43 0.15 24);
+  --sidebar: oklch(0.97 0.003 315);
+  --sidebar-foreground: oklch(0.2 0.012 315);
+  --sidebar-primary: oklch(0.31 0.025 315);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.5 0.15 24);
+  --sidebar-ring: oklch(0.42 0.035 315);
 }
 
 .dark {
@@ -48,7 +55,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.5 0.17 24);
+  --primary: oklch(0.72 0.018 315);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -60,7 +67,11 @@
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.58 0.16 24);
+  --ring: oklch(0.72 0.025 315);
+  --field: oklch(0.145 0.004 25);
+  --sheet: oklch(1 0 0);
+  --sheet-foreground: oklch(0.16 0 0);
+  --sheet-border: oklch(0.86 0.004 30);
   --chart-1: oklch(0.58 0.18 24);
   --chart-2: oklch(0.68 0.11 44);
   --chart-3: oklch(0.7 0.1 70);
@@ -68,16 +79,16 @@
   --chart-5: oklch(0.62 0.12 24);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.5 0.17 24);
+  --sidebar-primary: oklch(0.72 0.018 315);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.58 0.16 24);
+  --sidebar-ring: oklch(0.72 0.025 315);
 }
 
 @theme inline {
-  --font-sans: 'Inter Variable', sans-serif;
+  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -97,6 +108,10 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-field: var(--field);
+  --color-sheet: var(--sheet);
+  --color-sheet-foreground: var(--sheet-foreground);
+  --color-sheet-border: var(--sheet-border);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -126,5 +141,38 @@
 
   body {
     @apply bg-background font-sans text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-sutil {
+    scrollbar-color: color-mix(in oklab, var(--muted-foreground) 38%, transparent) transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-sutil::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar-sutil::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-sutil::-webkit-scrollbar-thumb {
+    min-height: 40px;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-color: color-mix(in oklab, var(--muted-foreground) 38%, transparent);
+    background-clip: padding-box;
+  }
+
+  .scrollbar-sutil::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--muted-foreground) 58%, transparent);
+  }
+
+  .scrollbar-sutil::-webkit-scrollbar-button {
+    display: none;
   }
 }
