@@ -16,6 +16,7 @@ Este arquivo e o ponto de entrada da documentacao do projeto.
 | [Pendencias](pendencias.md)                                        | Divergencias entre fontes e definicoes ainda ausentes         |
 | [Design system web](design/design-system-web.md)                   | Padroes de UI, componentes, temas e paleta                    |
 | [Experiencia web atual](design/experiencia-web-atual.md)           | Mapa de telas, navegacao e fluxos implementados               |
+| [Prints das telas](telas/README.md)                                | Convencao de nome e captura dos prints referenciados aqui     |
 
 ## Por onde comecar
 
@@ -28,19 +29,19 @@ Este arquivo e o ponto de entrada da documentacao do projeto.
 
 ## Estrutura das pastas
 
-| Pasta           | Conteudo                                           | Situacao |
-| --------------- | -------------------------------------------------- | -------- |
-| `produto/`      | Visao do produto, requisitos e escopo de cada fase | em uso   |
-| `modelo-dados/` | Dicionario de entidades; MER/DER a partir da N2    | em uso   |
-| `decisoes/`     | Registro das decisoes ja tomadas pela equipe       | vazio    |
-| `design/`       | Design system, mapa de telas e fluxos de navegacao | em uso   |
-| `telas/`        | Prints das telas, referenciados pelo README        | vazio    |
-| `uml/`          | Diagramas de casos de uso, classes e atividades    | vazio    |
-| `arquitetura/`  | Diagramas de arquitetura e camadas                 | vazio    |
-| `api/`          | Especificacao de endpoints e colecoes de teste     | vazio    |
+| Pasta           | Conteudo                                           | Situacao                                                 |
+| --------------- | -------------------------------------------------- | -------------------------------------------------------- |
+| `produto/`      | Visao do produto, requisitos e escopo de cada fase | em uso                                                   |
+| `modelo-dados/` | Dicionario de entidades; MER/DER a partir da N2    | em uso                                                   |
+| `decisoes/`     | Registro das decisoes ja tomadas pela equipe       | vazio                                                    |
+| `design/`       | Design system, mapa de telas e fluxos de navegacao | em uso                                                   |
+| `telas/`        | Prints das telas, referenciados pelo README        | em uso (convencao em [telas/README.md](telas/README.md)) |
+| `uml/`          | Diagramas de casos de uso, classes e atividades    | vazio                                                    |
+| `arquitetura/`  | Diagramas de arquitetura e camadas                 | vazio                                                    |
+| `api/`          | Especificacao de endpoints e colecoes de teste     | vazio                                                    |
 
-As pastas vazias entram no repositorio com um `.gitkeep` e sao preenchidas conforme as
-fases avancam. O mapa de telas e os fluxos atualmente implementados estao em
+As demais pastas vazias entram no repositorio com um `.gitkeep` e sao preenchidas
+conforme as fases avancam. O mapa de telas e os fluxos atualmente implementados estao em
 [design/experiencia-web-atual.md](design/experiencia-web-atual.md). A nomenclatura de
 `decisoes/` ainda depende do item sobre `docs/adr/` em [pendencias](pendencias.md).
 
