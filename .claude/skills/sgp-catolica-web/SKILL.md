@@ -12,11 +12,11 @@ a fundação já está decidida e documentada.
 
 Leia antes de escrever código de tela — não deduza padrão a partir de uma tela isolada:
 
-| Documento | Quando |
-| --- | --- |
-| [docs/design/design-system-web.md](../../../docs/design/design-system-web.md) | Tokens, superfícies, paleta, layout, grades, controles, mapa de componentes e checklist de tela. |
-| [docs/design/experiencia-web-atual.md](../../../docs/design/experiencia-web-atual.md) | Rotas existentes, casca de navegação, fluxo de Provas e limites do que está implementado. |
-| [docs/design/README.md](../../../docs/design/README.md) | Índice de design. |
+| Documento                                                                             | Quando                                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [docs/design/design-system-web.md](../../../docs/design/design-system-web.md)         | Tokens, superfícies, paleta, layout, grades, controles, mapa de componentes e checklist de tela. |
+| [docs/design/experiencia-web-atual.md](../../../docs/design/experiencia-web-atual.md) | Rotas existentes, casca de navegação, fluxo de Provas e limites do que está implementado.        |
+| [docs/design/README.md](../../../docs/design/README.md)                               | Índice de design.                                                                                |
 
 `apps/web/src/telas/Provas.vue` é a referência executável de interação; a implementação em
 `apps/web` e o tema em `apps/web/src/styles/global.css` valem como referência quando o
@@ -46,7 +46,7 @@ mesma entrega.
   colapsável para ícones com tooltips, breadcrumb e alternância direta claro/escuro. Não
   existe modo “sistema”.
 - **Layout**: `flex flex-1 flex-col gap-4 p-4`; resumo em `grid auto-rows-min gap-4
-  md:grid-cols-3`; `min-w-0` no contêiner e `overflow-x-auto` no conteúdo largo. Sem
+md:grid-cols-3`; `min-w-0` no contêiner e `overflow-x-auto` no conteúdo largo. Sem
   espaçamento ad hoc para corrigir uma tela.
 - **Estados**: `Skeleton` no carregamento, `TableEmpty` no vazio com ação de recuperação
   quando ela existir de fato, erro explicando o que fazer, `vue-sonner` para confirmação.

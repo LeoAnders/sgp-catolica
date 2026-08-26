@@ -16,12 +16,54 @@ export const professorMock: Professor = {
 };
 
 export const estudantesMock: Estudante[] = [
-  { id: 'est-1', role: 'estudante', fullName: 'Alice Ferreira', email: 'alice.ferreira@aluno.example.com', registration: '2026101', createdAt: '2026-02-12T12:00:00.000Z' },
-  { id: 'est-2', role: 'estudante', fullName: 'Bernardo Costa', email: 'bernardo.costa@aluno.example.com', registration: '2026102', createdAt: '2026-02-12T12:00:00.000Z' },
-  { id: 'est-3', role: 'estudante', fullName: 'Clara Antunes', email: 'clara.antunes@aluno.example.com', registration: '2026103', createdAt: '2026-02-12T12:00:00.000Z' },
-  { id: 'est-4', role: 'estudante', fullName: 'Daniel Moraes', email: 'daniel.moraes@aluno.example.com', registration: '2026104', createdAt: '2026-02-13T12:00:00.000Z' },
-  { id: 'est-5', role: 'estudante', fullName: 'Elisa Barbosa', email: 'elisa.barbosa@aluno.example.com', registration: '2026105', createdAt: '2026-02-13T12:00:00.000Z' },
-  { id: 'est-6', role: 'estudante', fullName: 'Gustavo Ramos', email: 'gustavo.ramos@aluno.example.com', registration: '2026106', createdAt: '2026-02-13T12:00:00.000Z' },
+  {
+    id: 'est-1',
+    role: 'estudante',
+    fullName: 'Alice Ferreira',
+    email: 'alice.ferreira@aluno.example.com',
+    registration: '2026101',
+    createdAt: '2026-02-12T12:00:00.000Z',
+  },
+  {
+    id: 'est-2',
+    role: 'estudante',
+    fullName: 'Bernardo Costa',
+    email: 'bernardo.costa@aluno.example.com',
+    registration: '2026102',
+    createdAt: '2026-02-12T12:00:00.000Z',
+  },
+  {
+    id: 'est-3',
+    role: 'estudante',
+    fullName: 'Clara Antunes',
+    email: 'clara.antunes@aluno.example.com',
+    registration: '2026103',
+    createdAt: '2026-02-12T12:00:00.000Z',
+  },
+  {
+    id: 'est-4',
+    role: 'estudante',
+    fullName: 'Daniel Moraes',
+    email: 'daniel.moraes@aluno.example.com',
+    registration: '2026104',
+    createdAt: '2026-02-13T12:00:00.000Z',
+  },
+  {
+    id: 'est-5',
+    role: 'estudante',
+    fullName: 'Elisa Barbosa',
+    email: 'elisa.barbosa@aluno.example.com',
+    registration: '2026105',
+    createdAt: '2026-02-13T12:00:00.000Z',
+  },
+  {
+    id: 'est-6',
+    role: 'estudante',
+    fullName: 'Gustavo Ramos',
+    email: 'gustavo.ramos@aluno.example.com',
+    registration: '2026106',
+    createdAt: '2026-02-13T12:00:00.000Z',
+  },
 ];
 
 /** Estudante usado como usuario logado nas telas da area do estudante. */

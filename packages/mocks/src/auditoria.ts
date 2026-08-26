@@ -71,7 +71,10 @@ export function auditarMocks(): ResultadoAuditoria {
         `${questao.id}: questao objetiva tem exatamente uma alternativa correta`,
       );
     } else {
-      conferir(typeof questao.maxScore === 'number', `${questao.id}: questao discursiva tem pontuacao maxima`);
+      conferir(
+        typeof questao.maxScore === 'number',
+        `${questao.id}: questao discursiva tem pontuacao maxima`,
+      );
     }
   }
 
@@ -112,7 +115,10 @@ export function auditarMocks(): ResultadoAuditoria {
     const prova = provas.get(aplicacao!.examId);
     if (!conferir(!!prova, `${versao.id}: prova da aplicacao existe`)) continue;
 
-    const daProva = prova!.questions.map((q) => q.questionId).sort().join(',');
+    const daProva = prova!.questions
+      .map((q) => q.questionId)
+      .sort()
+      .join(',');
     const doLayout = [...versao.layout.questionOrder].sort().join(',');
     conferir(daProva === doLayout, `${versao.id}: layout cobre exatamente as questoes da prova`);
 
@@ -131,7 +137,8 @@ export function auditarMocks(): ResultadoAuditoria {
   // --- Atribuicoes: so existem em versao COM identificacao (RF06) ---
   for (const atribuicao of atribuicoesMock) {
     const versao = versoes.get(atribuicao.examVersionId);
-    if (!conferir(!!versao, `${atribuicao.id}: versao ${atribuicao.examVersionId} existe`)) continue;
+    if (!conferir(!!versao, `${atribuicao.id}: versao ${atribuicao.examVersionId} existe`))
+      continue;
     conferir(
       versao!.withStudentIdentification,
       `${atribuicao.id}: nao existe atribuicao em versao sem identificacao`,
@@ -182,7 +189,10 @@ export function auditarMocks(): ResultadoAuditoria {
         `${correcao.id}: existe atribuicao daquele aluno naquela versao`,
       );
     } else {
-      conferir(!correcao.studentId, `${correcao.id}: versao anonima nao atribui aluno automaticamente`);
+      conferir(
+        !correcao.studentId,
+        `${correcao.id}: versao anonima nao atribui aluno automaticamente`,
+      );
       conferir(
         correcao.isAutomaticallyAssigned === false,
         `${correcao.id}: versao anonima nunca gera atribuicao automatica`,
@@ -194,10 +204,13 @@ export function auditarMocks(): ResultadoAuditoria {
     if (prova) {
       const valorNaProva = new Map(prova.questions.map((q) => [q.questionId, q.score]));
       for (const item of itens) {
-        if (!conferir(
-          valorNaProva.has(item.questionId),
-          `${correcao.id}/${item.questionId}: questao pertence a prova aplicada`,
-        )) continue;
+        if (
+          !conferir(
+            valorNaProva.has(item.questionId),
+            `${correcao.id}/${item.questionId}: questao pertence a prova aplicada`,
+          )
+        )
+          continue;
         conferir(
           item.score <= (valorNaProva.get(item.questionId) ?? 0) + TOLERANCIA,
           `${correcao.id}/${item.questionId}: nota nao passa do valor da questao na prova`,
@@ -223,19 +236,33 @@ export function auditarMocks(): ResultadoAuditoria {
       `fila ${item.clientCorrectionId}: snapshot e da mesma versao do item`,
     );
     if (versao!.withStudentIdentification) {
-      conferir(!!item.studentId, `fila ${item.clientCorrectionId}: versao com identificacao tem studentId`);
+      conferir(
+        !!item.studentId,
+        `fila ${item.clientCorrectionId}: versao com identificacao tem studentId`,
+      );
     } else {
-      conferir(!item.studentId, `fila ${item.clientCorrectionId}: versao anonima nao carrega studentId`);
+      conferir(
+        !item.studentId,
+        `fila ${item.clientCorrectionId}: versao anonima nao carrega studentId`,
+      );
     }
 
     for (const gabarito of item.answerKeySnapshot.objectiveQuestions) {
       const questao = questoes.get(gabarito.questionId);
-      if (!conferir(!!questao, `fila ${item.clientCorrectionId}/${gabarito.questionId}: questao existe`)) continue;
+      if (
+        !conferir(
+          !!questao,
+          `fila ${item.clientCorrectionId}/${gabarito.questionId}: questao existe`,
+        )
+      )
+        continue;
       conferir(
         questao!.correctAlternativeId === gabarito.correctAlternativeId,
         `fila ${item.clientCorrectionId}/${gabarito.questionId}: alternativa correta bate com o banco`,
       );
-      const noLayout = versao!.layout.alternativeOrder.find((a) => a.questionId === gabarito.questionId);
+      const noLayout = versao!.layout.alternativeOrder.find(
+        (a) => a.questionId === gabarito.questionId,
+      );
       const esperada = noLayout ? noLayout.printedOrder : ordemDeCadastro(questao!);
       conferir(
         JSON.stringify(esperada) === JSON.stringify(gabarito.printedOrder),
@@ -244,7 +271,13 @@ export function auditarMocks(): ResultadoAuditoria {
     }
     for (const gabarito of item.answerKeySnapshot.discursiveQuestions) {
       const questao = questoes.get(gabarito.questionId);
-      if (!conferir(!!questao, `fila ${item.clientCorrectionId}/${gabarito.questionId}: questao existe`)) continue;
+      if (
+        !conferir(
+          !!questao,
+          `fila ${item.clientCorrectionId}/${gabarito.questionId}: questao existe`,
+        )
+      )
+        continue;
       conferir(
         questao!.maxScore === gabarito.maxScore,
         `fila ${item.clientCorrectionId}/${gabarito.questionId}: pontuacao maxima discursiva bate`,
@@ -255,9 +288,13 @@ export function auditarMocks(): ResultadoAuditoria {
     if (item.syncStatus === 'error') {
       // Erro de validacao mantem o item na fila e nao registra Correcao (RF08).
       conferir(!correcao, `fila ${item.clientCorrectionId}: item com erro nao virou Correcao`);
-      conferir(!!item.syncError, `fila ${item.clientCorrectionId}: item com erro descreve o motivo`);
+      conferir(
+        !!item.syncError,
+        `fila ${item.clientCorrectionId}: item com erro descreve o motivo`,
+      );
     } else {
-      if (!conferir(!!correcao, `fila ${item.clientCorrectionId}: tem Correcao correspondente`)) continue;
+      if (!conferir(!!correcao, `fila ${item.clientCorrectionId}: tem Correcao correspondente`))
+        continue;
       conferir(
         correcao!.syncStatus === item.syncStatus,
         `fila ${item.clientCorrectionId}: syncStatus igual ao da Correcao`,
@@ -280,7 +317,8 @@ export function auditarMocks(): ResultadoAuditoria {
     if (!conferir(!!aplicacao, `nota ${nota.applicationId}: aplicacao existe`)) continue;
     const prova = provas.get(aplicacao!.examId);
     const turma = turmas.get(aplicacao!.classId);
-    if (!conferir(!!prova && !!turma, `nota ${nota.applicationId}: prova e turma existem`)) continue;
+    if (!conferir(!!prova && !!turma, `nota ${nota.applicationId}: prova e turma existem`))
+      continue;
 
     const versoesDaAplicacao = versoesMock
       .filter((v) => v.applicationId === aplicacao!.id)
@@ -288,15 +326,22 @@ export function auditarMocks(): ResultadoAuditoria {
     const correcao = correcoesMock.find(
       (c) => versoesDaAplicacao.includes(c.examVersionId) && c.studentId === estudanteLogadoMock.id,
     );
-    if (!conferir(!!correcao, `nota ${nota.applicationId}: existe correcao do estudante logado`)) continue;
+    if (!conferir(!!correcao, `nota ${nota.applicationId}: existe correcao do estudante logado`))
+      continue;
 
     conferir(
       correcao!.totalScore === nota.totalScore,
       `nota ${nota.applicationId}: totalScore bate com a correcao`,
     );
     const maximo = prova!.questions.reduce((total, q) => total + q.score, 0);
-    conferir(maximo === nota.maxScore, `nota ${nota.applicationId}: maxScore bate com a soma da prova`);
-    conferir(nota.examTitle === prova!.title, `nota ${nota.applicationId}: titulo bate com a prova`);
+    conferir(
+      maximo === nota.maxScore,
+      `nota ${nota.applicationId}: maxScore bate com a soma da prova`,
+    );
+    conferir(
+      nota.examTitle === prova!.title,
+      `nota ${nota.applicationId}: titulo bate com a prova`,
+    );
     conferir(nota.className === turma!.name, `nota ${nota.applicationId}: turma bate`);
     conferir(nota.subject === turma!.subject, `nota ${nota.applicationId}: disciplina bate`);
     conferir(

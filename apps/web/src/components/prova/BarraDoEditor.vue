@@ -18,11 +18,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { formatarPontos, statusDaProva, varianteDoStatusDaProva } from '@/lib/dominio';
 import { MAXIMO_DE_QUESTOES } from '@/lib/blocos-da-prova';
 

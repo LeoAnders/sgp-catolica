@@ -39,7 +39,9 @@ async function entrar(): Promise<void> {
       aria-label="Apresentação do SGP Católica"
     >
       <div class="flex items-center gap-2.5 text-sm font-medium">
-        <span class="flex size-8 items-center justify-center rounded-md bg-primary-foreground text-primary">
+        <span
+          class="flex size-8 items-center justify-center rounded-md bg-primary-foreground text-primary"
+        >
           <GraduationCap class="size-4" aria-hidden="true" />
         </span>
         SGP Católica
@@ -75,7 +77,9 @@ async function entrar(): Promise<void> {
         </Button>
 
         <div class="flex items-center gap-2 lg:hidden">
-          <span class="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+          <span
+            class="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground"
+          >
             <GraduationCap class="size-4" aria-hidden="true" />
           </span>
           <span class="text-sm font-medium">SGP Católica</span>
@@ -86,7 +90,9 @@ async function entrar(): Promise<void> {
         <form class="w-full max-w-md" novalidate @submit.prevent="entrar">
           <div class="mb-8 text-center">
             <div class="mx-auto flex w-fit items-center gap-2.5">
-              <span class="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <span
+                class="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground"
+              >
                 <GraduationCap class="size-5" aria-hidden="true" />
               </span>
               <span class="text-xl font-medium">SGP Católica</span>

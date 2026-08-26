@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { HTMLAttributes } from 'vue'
+import type { HTMLAttributes } from 'vue';
 
-import { ChevronRightIcon } from '@lucide/vue'
-import { cn } from '@/lib/utils'
+import { ChevronRightIcon } from '@lucide/vue';
+import { cn } from '@/lib/utils';
 
 const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
+  class?: HTMLAttributes['class'];
+}>();
 </script>
 
 <template>

@@ -42,7 +42,11 @@ import {
   obterCabecalhoDaProva,
   salvarModeloDeCabecalho,
 } from '@/lib/cabecalhos-da-prova';
-import { encontrarProva, obterBlocosDaProva, atualizarQuestoesDaProva } from '@/lib/estado-de-provas';
+import {
+  encontrarProva,
+  obterBlocosDaProva,
+  atualizarQuestoesDaProva,
+} from '@/lib/estado-de-provas';
 import {
   encontrarQuestaoDoBanco,
   questaoEstaNoBanco,
@@ -67,9 +71,7 @@ const rota = useRoute();
 const carregando = ref(true);
 const prova = ref(encontrarProva(rota.params.id as string) ?? null);
 const blocos = ref<BlocoDaProva[]>(prova.value ? obterBlocosDaProva(prova.value) : []);
-const cabecalho = computed(() =>
-  prova.value ? obterCabecalhoDaProva(prova.value.id) : null,
-);
+const cabecalho = computed(() => (prova.value ? obterCabecalhoDaProva(prova.value.id) : null));
 
 onMounted(() => {
   window.setTimeout(() => {
@@ -174,7 +176,8 @@ function observarElementosDaFolha(): void {
   observadorDePaginacao = new ResizeObserver((entradas) => {
     for (const entrada of entradas) {
       const elemento = entrada.target as HTMLElement;
-      const altura = entrada.borderBoxSize?.[0]?.blockSize ?? elemento.getBoundingClientRect().height;
+      const altura =
+        entrada.borderBoxSize?.[0]?.blockSize ?? elemento.getBoundingClientRect().height;
       if (elemento.dataset.medicaoCabecalho !== undefined) {
         if (Math.abs(alturaDoCabecalho.value - altura) > 0.5) alturaDoCabecalho.value = altura;
         continue;
@@ -185,16 +188,18 @@ function observarElementosDaFolha(): void {
       }
     }
   });
-  folha.value.querySelectorAll<HTMLElement>('[data-medicao-cabecalho], [data-medicao-bloco]')
+  folha.value
+    .querySelectorAll<HTMLElement>('[data-medicao-cabecalho], [data-medicao-bloco]')
     .forEach((elemento) => observadorDePaginacao?.observe(elemento));
 }
 
 function ajustarFolhaAoCanvas(): void {
   if (!folha.value) return;
   const estilo = window.getComputedStyle(folha.value);
-  const espacoDisponivel = folha.value.clientWidth
-    - Number.parseFloat(estilo.paddingLeft)
-    - Number.parseFloat(estilo.paddingRight);
+  const espacoDisponivel =
+    folha.value.clientWidth -
+    Number.parseFloat(estilo.paddingLeft) -
+    Number.parseFloat(estilo.paddingRight);
   const proximaEscala = Math.min(1, espacoDisponivel / LARGURA_A4_PX);
   escalaDaFolha.value = Math.max(0.3, proximaEscala);
 }
@@ -208,7 +213,8 @@ function observarLarguraDoCanvas(): void {
 }
 
 watch(
-  () => `${carregando.value}:${paginas.value.map((pagina) => pagina.map((bloco) => bloco.id).join(',')).join('|')}`,
+  () =>
+    `${carregando.value}:${paginas.value.map((pagina) => pagina.map((bloco) => bloco.id).join(',')).join('|')}`,
   async () => {
     await nextTick();
     observarElementosDaFolha();
@@ -295,20 +301,21 @@ function adicionarBloco(tipo: TipoDeInsercao): void {
     return;
   }
   const posicao = posicaoDeInsercao();
-  const novo = tipo === 'questao-objetiva'
-    ? criarBlocoDeQuestaoVazia('objetiva')
-    : tipo === 'questao-curta'
-      ? criarBlocoDeQuestaoVazia('curta')
-      : tipo === 'questao-longa'
-        ? criarBlocoDeQuestaoVazia('longa')
-        : criarBloco(tipo);
+  const novo =
+    tipo === 'questao-objetiva'
+      ? criarBlocoDeQuestaoVazia('objetiva')
+      : tipo === 'questao-curta'
+        ? criarBlocoDeQuestaoVazia('curta')
+        : tipo === 'questao-longa'
+          ? criarBlocoDeQuestaoVazia('longa')
+          : criarBloco(tipo);
   blocos.value.splice(posicao, 0, novo);
   void selecionar(novo.id);
 }
 
 function aoAdicionarQuestao(questao: Questao): void {
   if (noLimite.value) return;
-  const pontuacaoPadrao = questao.type === 'discursiva' ? questao.maxScore ?? 1 : 1;
+  const pontuacaoPadrao = questao.type === 'discursiva' ? (questao.maxScore ?? 1) : 1;
   const novo = criarBlocoDeQuestao(questao, pontuacaoPadrao);
   blocos.value.splice(posicaoDeInsercao(), 0, novo);
   void selecionar(novo.id, true);
@@ -327,9 +334,8 @@ function salvarQuestaoSelecionadaNoBanco(): void {
     toast.error('Selecione a alternativa correta antes de salvar.');
     return;
   }
-  const questaoParaSalvar = questao.type === 'discursiva'
-    ? { ...questao, maxScore: bloco.pontuacao }
-    : questao;
+  const questaoParaSalvar =
+    questao.type === 'discursiva' ? { ...questao, maxScore: bloco.pontuacao } : questao;
   const resultado = salvarQuestaoNoBanco(questaoParaSalvar);
   toast.success(resultado === 'criada' ? 'Questão salva no banco' : 'Questão atualizada no banco');
 }
@@ -362,7 +368,10 @@ function aplicarModelo(modeloId: string): void {
       <Skeleton class="h-full w-full max-w-3xl self-center" />
     </div>
 
-    <div v-else-if="!prova" class="flex flex-1 flex-col items-center justify-center gap-3 p-6 text-center">
+    <div
+      v-else-if="!prova"
+      class="flex flex-1 flex-col items-center justify-center gap-3 p-6 text-center"
+    >
       <h1 class="text-xl font-semibold">Prova não encontrada</h1>
       <p class="max-w-sm text-sm text-muted-foreground">
         Ela pode ter sido removida ou o endereço está incorreto.
@@ -425,7 +434,11 @@ function aplicarModelo(modeloId: string): void {
                     v-if="cabecalho && indiceDaPagina === 0"
                     data-medicao-cabecalho
                     class="relative rounded-sm transition-shadow"
-                    :class="selecionado === null ? 'ring-2 ring-primary ring-offset-4 ring-offset-sheet' : ''"
+                    :class="
+                      selecionado === null
+                        ? 'ring-2 ring-primary ring-offset-4 ring-offset-sheet'
+                        : ''
+                    "
                   >
                     <button
                       type="button"
@@ -464,7 +477,9 @@ function aplicarModelo(modeloId: string): void {
                       :questao="questaoDoBloco(bloco)"
                       :numero="numeracao[bloco.id]"
                       :selecionado="selecionado === bloco.id"
-                      @update:bloco="(atualizado) => atualizarBloco(indiceDoBloco(bloco.id), atualizado)"
+                      @update:bloco="
+                        (atualizado) => atualizarBloco(indiceDoBloco(bloco.id), atualizado)
+                      "
                     />
                     <AcoesDoBloco
                       v-if="selecionado === bloco.id"
@@ -484,13 +499,20 @@ function aplicarModelo(modeloId: string): void {
             </div>
           </div>
 
-          <div class="pointer-events-none absolute inset-x-0 bottom-3 z-30 flex justify-center px-3">
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-3 z-30 flex justify-center px-3"
+          >
             <div
               role="toolbar"
               aria-label="Ferramentas de autoria"
               class="pointer-events-auto flex items-center gap-1.5 rounded-xl border bg-background/95 p-1.5 shadow-md backdrop-blur-sm"
             >
-              <Button variant="outline" size="sm" :disabled="noLimite" @click="painelDireito = 'banco'">
+              <Button
+                variant="outline"
+                size="sm"
+                :disabled="noLimite"
+                @click="painelDireito = 'banco'"
+              >
                 <Library aria-hidden="true" />
                 Banco de questões
               </Button>
@@ -530,7 +552,9 @@ function aplicarModelo(modeloId: string): void {
           :descricao-da-prova="prova.description ?? ''"
           :cabecalho="cabecalho"
           :modelos-de-cabecalho="modelosDeCabecalho"
-          :questao-esta-no-banco="blocoSelecionado?.type === 'questao' && questaoEstaNoBanco(blocoSelecionado.questionId)"
+          :questao-esta-no-banco="
+            blocoSelecionado?.type === 'questao' && questaoEstaNoBanco(blocoSelecionado.questionId)
+          "
           @update:bloco="(atualizado) => atualizarBloco(indiceSelecionado, atualizado)"
           @update:descricao="prova.description = $event || undefined"
           @update:cabecalho="atualizarCabecalho"

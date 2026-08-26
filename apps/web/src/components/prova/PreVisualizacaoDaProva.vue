@@ -11,12 +11,7 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import { Expand, Minus, Plus, X } from '@lucide/vue';
 import type { Questao } from '@sgp/shared-types';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import type { CabecalhoDaProva } from '@/lib/cabecalhos-da-prova';
 import type { BlocoDaProva } from '@/lib/blocos-da-prova';
 import BlocoNaFolha from './BlocoNaFolha.vue';
@@ -96,14 +91,25 @@ onBeforeUnmount(() => observador?.disconnect());
       :show-close-button="false"
       class="h-svh w-screen max-w-none gap-0 rounded-none border-0 bg-field p-0 ring-0 sm:max-w-none"
     >
-      <DialogTitle class="sr-only">Pré-visualização de {{ titulo || 'prova sem título' }}</DialogTitle>
+      <DialogTitle class="sr-only"
+        >Pré-visualização de {{ titulo || 'prova sem título' }}</DialogTitle
+      >
       <DialogDescription class="sr-only">
         Visualização somente leitura da prova em uma folha A4.
       </DialogDescription>
 
-      <div class="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between p-3">
-        <div class="pointer-events-auto flex min-w-0 items-center gap-2 rounded-lg border bg-background/95 p-1 shadow-sm backdrop-blur-sm">
-          <Button variant="ghost" size="icon-sm" aria-label="Sair da pré-visualização" @click="fechar">
+      <div
+        class="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between p-3"
+      >
+        <div
+          class="pointer-events-auto flex min-w-0 items-center gap-2 rounded-lg border bg-background/95 p-1 shadow-sm backdrop-blur-sm"
+        >
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Sair da pré-visualização"
+            @click="fechar"
+          >
             <X aria-hidden="true" />
           </Button>
           <div class="min-w-0 border-l pl-3 pr-2">
@@ -113,7 +119,10 @@ onBeforeUnmount(() => observador?.disconnect());
         </div>
       </div>
 
-      <main ref="canvas" class="canvas-da-previa scrollbar-sutil h-svh overflow-auto px-6 pb-24 pt-20">
+      <main
+        ref="canvas"
+        class="canvas-da-previa scrollbar-sutil h-svh overflow-auto px-6 pb-24 pt-20"
+      >
         <div class="mx-auto flex w-fit flex-col gap-5" :style="{ zoom: escala }">
           <article
             v-for="(pagina, indiceDaPagina) in paginas"
@@ -153,7 +162,9 @@ onBeforeUnmount(() => observador?.disconnect());
       </main>
 
       <div class="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-4">
-        <div class="pointer-events-auto flex items-center gap-1 rounded-lg border bg-background/95 p-1 shadow-sm backdrop-blur-sm">
+        <div
+          class="pointer-events-auto flex items-center gap-1 rounded-lg border bg-background/95 p-1 shadow-sm backdrop-blur-sm"
+        >
           <Button
             variant="ghost"
             size="icon-sm"
@@ -192,7 +203,10 @@ onBeforeUnmount(() => observador?.disconnect());
 
 <style scoped>
 .canvas-da-previa {
-  background-image: radial-gradient(color-mix(in srgb, var(--border) 75%, transparent) 1px, transparent 1px);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--border) 75%, transparent) 1px,
+    transparent 1px
+  );
   background-size: 20px 20px;
 }
 

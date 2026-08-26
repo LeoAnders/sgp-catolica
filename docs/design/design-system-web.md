@@ -29,15 +29,15 @@ tokens globais, sem reescrever as telas.
 
 ## Fundação técnica
 
-| Tema | Padrão |
-| --- | --- |
-| Framework | Vue 3, Vite e TypeScript. |
-| Estilos | Tailwind CSS v4 e tokens CSS em `src/styles/global.css`. |
-| Componentes | shadcn-vue sobre Reka UI, em `src/components/ui`. |
-| Tipografia | Instrument Sans Variable, com `system-ui` como fallback. |
-| Ícones | `@lucide/vue`; traço simples, normalmente 14 ou 16 px. |
-| Feedback | `vue-sonner`, por um `Toaster` único na raiz. |
-| Tema | Claro é canônico na N1. Tokens escuros são preservados, mas não há troca exposta. |
+| Tema        | Padrão                                                                            |
+| ----------- | --------------------------------------------------------------------------------- |
+| Framework   | Vue 3, Vite e TypeScript.                                                         |
+| Estilos     | Tailwind CSS v4 e tokens CSS em `src/styles/global.css`.                          |
+| Componentes | shadcn-vue sobre Reka UI, em `src/components/ui`.                                 |
+| Tipografia  | Instrument Sans Variable, com `system-ui` como fallback.                          |
+| Ícones      | `@lucide/vue`; traço simples, normalmente 14 ou 16 px.                            |
+| Feedback    | `vue-sonner`, por um `Toaster` único na raiz.                                     |
+| Tema        | Claro é canônico na N1. Tokens escuros são preservados, mas não há troca exposta. |
 
 Usar os primitivos instalados. Não recriar manualmente Button, Input, Textarea, Select,
 Switch, Dialog, DropdownMenu, Card, Table, Alert, Badge, Tooltip ou Skeleton.
@@ -48,18 +48,18 @@ A paleta atual é provisória: aubergine escuro nas ações, cinza levemente vio
 de trabalho, branco nas superfícies e texto quase preto. Cores literais não pertencem às
 telas; toda cor deve vir de token semântico.
 
-| Papel | Token/classe | Uso |
-| --- | --- | --- |
-| Margem externa | `background` / `bg-background` | Barra superior, controles e espaço branco ao redor da aplicação. |
-| Campo de trabalho | `field` / `bg-field` | Moldura cinza, canvas do editor e fundo da pré-visualização. |
-| Objeto elevado | `card` / `bg-card` | Linhas de lista, painéis contextuais, estados vazios. |
-| Sobreposição | `popover` / `bg-popover` | Dialog, select, dropdown e tooltip. |
-| Papel | `sheet` / `bg-sheet` | Folha A4, sempre branca inclusive no tema escuro. |
-| Tinta do papel | `sheet-foreground` | Todo texto impresso. |
-| Contorno do papel | `sheet-border` | Linhas de resposta, divisórias e limite da folha. |
-| Ação principal | `primary` | Botão primário, indicador ativo e foco. |
-| Seleção discreta | `accent` e `secondary` | Hover, recorte ativo e ícones auxiliares. |
-| Remoção/erro | `destructive` | Excluir, erro de formulário e falha; nunca ação comum. |
+| Papel             | Token/classe                   | Uso                                                              |
+| ----------------- | ------------------------------ | ---------------------------------------------------------------- |
+| Margem externa    | `background` / `bg-background` | Barra superior, controles e espaço branco ao redor da aplicação. |
+| Campo de trabalho | `field` / `bg-field`           | Moldura cinza, canvas do editor e fundo da pré-visualização.     |
+| Objeto elevado    | `card` / `bg-card`             | Linhas de lista, painéis contextuais, estados vazios.            |
+| Sobreposição      | `popover` / `bg-popover`       | Dialog, select, dropdown e tooltip.                              |
+| Papel             | `sheet` / `bg-sheet`           | Folha A4, sempre branca inclusive no tema escuro.                |
+| Tinta do papel    | `sheet-foreground`             | Todo texto impresso.                                             |
+| Contorno do papel | `sheet-border`                 | Linhas de resposta, divisórias e limite da folha.                |
+| Ação principal    | `primary`                      | Botão primário, indicador ativo e foco.                          |
+| Seleção discreta  | `accent` e `secondary`         | Hover, recorte ativo e ícones auxiliares.                        |
+| Remoção/erro      | `destructive`                  | Excluir, erro de formulário e falha; nunca ação comum.           |
 
 ### Regras de superfície
 
@@ -73,16 +73,16 @@ telas; toda cor deve vir de token semântico.
 
 ## Tipografia
 
-| Uso | Tamanho e peso | Regra |
-| --- | --- | --- |
-| Texto operacional | 14 px, 400 | Padrão de campos, listas e parágrafos curtos. |
-| Controle compacto | 13 px, 500 | Botões `sm`, abas e ações contextuais. |
-| Metadado | 12 px, 400/500 | Datas, contagens, descrições e ajuda. |
-| Rótulo de grupo | 11 px, 500, caixa alta | Seções curtas de painel; usar com parcimônia. |
-| Título de página | 22 px, 500 | Um por tela comum. |
-| Título do login | 24 px, 400 | Convite de entrada no formulário. |
-| Chamada de apresentação | 30–36 px, 500 | Apenas no painel visual do login. |
-| Conteúdo impresso | 12–16 px conforme papel | Priorizar legibilidade e proporção A4. |
+| Uso                     | Tamanho e peso          | Regra                                         |
+| ----------------------- | ----------------------- | --------------------------------------------- |
+| Texto operacional       | 14 px, 400              | Padrão de campos, listas e parágrafos curtos. |
+| Controle compacto       | 13 px, 500              | Botões `sm`, abas e ações contextuais.        |
+| Metadado                | 12 px, 400/500          | Datas, contagens, descrições e ajuda.         |
+| Rótulo de grupo         | 11 px, 500, caixa alta  | Seções curtas de painel; usar com parcimônia. |
+| Título de página        | 22 px, 500              | Um por tela comum.                            |
+| Título do login         | 24 px, 400              | Convite de entrada no formulário.             |
+| Chamada de apresentação | 30–36 px, 500           | Apenas no painel visual do login.             |
+| Conteúdo impresso       | 12–16 px conforme papel | Priorizar legibilidade e proporção A4.        |
 
 Usar peso 500 na maior parte da hierarquia. `font-semibold` e `font-bold` ficam para
 número da questão, total, gabarito e contraste pontual. Evitar `tracking-tight`; reservar
@@ -101,17 +101,17 @@ espaçamento de letras para rótulos curtos em caixa alta.
 
 ## Régua de controles
 
-| Elemento | Medida implementada |
-| --- | --- |
-| Button padrão | 40 px de altura, 14 px, peso 500. |
-| Button `sm` | 32 px, 13 px; barras, filtros, listas e painéis. |
-| Button `xs` | 28 px; ação contextual sobre outro elemento. |
-| Button `lg` | 44 px, 15 px; ação principal do login. |
+| Elemento               | Medida implementada                                       |
+| ---------------------- | --------------------------------------------------------- |
+| Button padrão          | 40 px de altura, 14 px, peso 500.                         |
+| Button `sm`            | 32 px, 13 px; barras, filtros, listas e painéis.          |
+| Button `xs`            | 28 px; ação contextual sobre outro elemento.              |
+| Button `lg`            | 44 px, 15 px; ação principal do login.                    |
 | Botão apenas com ícone | 40, 32 ou 28 px conforme contexto; sempre nome acessível. |
-| Input e Select padrão | 40 px, texto de 14 px. |
-| Select `sm` | 32 px. |
-| Textarea | mínimo de 64 px; cresce com o conteúdo. |
-| Badge | 24 px, texto de 12 px, formato de pílula. |
+| Input e Select padrão  | 40 px, texto de 14 px.                                    |
+| Select `sm`            | 32 px.                                                    |
+| Textarea               | mínimo de 64 px; cresce com o conteúdo.                   |
+| Badge                  | 24 px, texto de 12 px, formato de pílula.                 |
 
 ### Barras de rolagem
 
@@ -129,13 +129,13 @@ cinza competindo com a borda do painel.
 
 ### Hierarquia de ações
 
-| Intenção | Variante |
-| --- | --- |
-| Próxima ação principal | `Button` padrão. |
-| Fonte alternativa ou ação secundária | `outline`. |
-| Ação de baixa ênfase | `ghost`. |
-| Remoção | `destructive`, com rótulo ou nome acessível inequívoco. |
-| Ação indisponível | `disabled` e, quando necessário, Tooltip explicando o limite. |
+| Intenção                             | Variante                                                      |
+| ------------------------------------ | ------------------------------------------------------------- |
+| Próxima ação principal               | `Button` padrão.                                              |
+| Fonte alternativa ou ação secundária | `outline`.                                                    |
+| Ação de baixa ênfase                 | `ghost`.                                                      |
+| Remoção                              | `destructive`, com rótulo ou nome acessível inequívoco.       |
+| Ação indisponível                    | `disabled` e, quando necessário, Tooltip explicando o limite. |
 
 Uma região deve ter uma ação primária evidente. No editor, “Nova questão” é primária e
 “Banco de questões” é secundária. No login, “Entrar” ocupa toda a largura do formulário.
@@ -144,12 +144,12 @@ Uma região deve ter uma ação primária evidente. No editor, “Nova questão�
 
 A casca segue a composição “margem branca + workspace cinza”:
 
-| Região | Composição |
-| --- | --- |
-| Barra externa | 56 px, branca; marca à esquerda e Integrações, Ajuda e perfil à direita. |
-| Moldura | Margem de 12–16 px, `rounded-xl`, borda, `bg-field`, `overflow-hidden`. |
-| Abas | 48 px, dentro da moldura; ícone e rótulo sempre visíveis, ativa sobre branco com indicador inferior. |
-| Página | Painel da seção e conteúdo compartilham o mesmo campo cinza, separados por borda. |
+| Região        | Composição                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
+| Barra externa | 56 px, branca; marca à esquerda e Integrações, Ajuda e perfil à direita.                             |
+| Moldura       | Margem de 12–16 px, `rounded-xl`, borda, `bg-field`, `overflow-hidden`.                              |
+| Abas          | 48 px, dentro da moldura; ícone e rótulo sempre visíveis, ativa sobre branco com indicador inferior. |
+| Página        | Painel da seção e conteúdo compartilham o mesmo campo cinza, separados por borda.                    |
 
 Regras:
 
@@ -198,11 +198,11 @@ imagem apoia a promessa do produto sem competir com o formulário.
 O editor é um modo de trabalho em tela cheia, com barra própria e três zonas. Ele não usa
 a casca autenticada.
 
-| Zona | Largura e função |
-| --- | --- |
+| Zona      | Largura e função                                                                         |
+| --------- | ---------------------------------------------------------------------------------------- |
 | Estrutura | 240 px (`lg:w-60`); páginas calculadas, cabeçalho na Página 1 e ordem global dos blocos. |
-| Folha | Flexível; canvas rolável contendo a folha A4. |
-| Contexto | 320 px (`lg:w-80`) em todos os estados: propriedades, autoria ou banco. |
+| Folha     | Flexível; canvas rolável contendo a folha A4.                                            |
+| Contexto  | 320 px (`lg:w-80`) em todos os estados: propriedades, autoria ou banco.                  |
 
 Trocar o painel direito não pode mudar sua largura nem deslocar a folha. Em telas menores
 as zonas empilham e permanecem utilizáveis.
@@ -241,11 +241,11 @@ miniatura completa do papel.
 
 “Nova questão” abre três tipos:
 
-| Tipo | Autoria | Saída no papel |
-| --- | --- | --- |
+| Tipo             | Autoria                                                   | Saída no papel                                               |
+| ---------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
 | Múltipla escolha | Enunciado, 2 a 5 alternativas e seleção única da correta. | Alternativas com círculos vazios; o gabarito não é revelado. |
-| Resposta curta | Enunciado e pontuação. | Quatro linhas em área mínima de 28 mm. |
-| Resposta longa | Enunciado e pontuação. | Oito linhas em área mínima de 64 mm. |
+| Resposta curta   | Enunciado e pontuação.                                    | Quatro linhas em área mínima de 28 mm.                       |
+| Resposta longa   | Enunciado e pontuação.                                    | Oito linhas em área mínima de 64 mm.                         |
 
 O enunciado e as alternativas são editados diretamente na folha. Tipo de resposta,
 pontuação, gabarito resumido, tags e ação “Salvar no banco” ficam no painel direito.
@@ -292,15 +292,15 @@ A prévia segue o comportamento de apresentação do Figma:
 
 ## Estados, feedback e conteúdo
 
-| Situação | Padrão |
-| --- | --- |
-| Carregamento | Skeleton com geometria próxima do conteúdo final. |
-| Vazio | Mensagem curta, motivo e uma ação recuperável quando existir. |
-| Validação | Mensagem junto do campo, `aria-invalid` e foco preservado. |
-| Sucesso | Toast curto; não interrompe o fluxo. |
-| Remoção reversível | Toast com ação “Desfazer”. |
-| Área futura | Estado vazio honesto; não simular controles conectados. |
-| Erro destrutivo | Token e variante `destructive`. |
+| Situação           | Padrão                                                        |
+| ------------------ | ------------------------------------------------------------- |
+| Carregamento       | Skeleton com geometria próxima do conteúdo final.             |
+| Vazio              | Mensagem curta, motivo e uma ação recuperável quando existir. |
+| Validação          | Mensagem junto do campo, `aria-invalid` e foco preservado.    |
+| Sucesso            | Toast curto; não interrompe o fluxo.                          |
+| Remoção reversível | Toast com ação “Desfazer”.                                    |
+| Área futura        | Estado vazio honesto; não simular controles conectados.       |
+| Erro destrutivo    | Token e variante `destructive`.                               |
 
 ## Acessibilidade e movimento
 
@@ -315,26 +315,26 @@ A prévia segue o comportamento de apresentação do Figma:
 
 ## Responsividade
 
-| Faixa | Comportamento |
-| --- | --- |
+| Faixa          | Comportamento                                                                                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Abaixo de `sm` | Marca textual e utilidades secundárias podem reduzir; formulário ocupa a largura; folha reduz sua escala visual para preservar a proporção A4 sem rolagem horizontal. |
-| Abaixo de `lg` | Painéis de seção e zonas do editor empilham; metadados secundários de listas podem ser ocultados. |
-| `lg` ou maior | Casca completa, painel de seção lateral e editor em três zonas. |
+| Abaixo de `lg` | Painéis de seção e zonas do editor empilham; metadados secundários de listas podem ser ocultados.                                                                     |
+| `lg` ou maior  | Casca completa, painel de seção lateral e editor em três zonas.                                                                                                       |
 
 Ocultar texto só é aceitável quando a função continua nomeada de forma acessível. Dados
 essenciais não devem desaparecer; quando necessário, usar rolagem localizada.
 
 ## Mapa de implementação
 
-| Padrão | Referência executável |
-| --- | --- |
-| Tokens e fonte | `src/styles/global.css` |
-| Casca | `src/App.vue`, `src/components/casca/` |
-| Login | `src/telas/Login.vue` |
-| Workspace/lista | `src/telas/Provas.vue` |
-| Editor | `src/telas/EditorDeProva.vue`, `src/components/prova/` |
+| Padrão                    | Referência executável                                                            |
+| ------------------------- | -------------------------------------------------------------------------------- |
+| Tokens e fonte            | `src/styles/global.css`                                                          |
+| Casca                     | `src/App.vue`, `src/components/casca/`                                           |
+| Login                     | `src/telas/Login.vue`                                                            |
+| Workspace/lista           | `src/telas/Provas.vue`                                                           |
+| Editor                    | `src/telas/EditorDeProva.vue`, `src/components/prova/`                           |
 | Estado local do protótipo | `src/lib/estado-de-provas.ts`, `estado-de-questoes.ts`, `cabecalhos-da-prova.ts` |
-| Primitivos | `src/components/ui/` |
+| Primitivos                | `src/components/ui/`                                                             |
 
 ## Checklist de entrega
 

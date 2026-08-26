@@ -22,10 +22,10 @@ professor usado na correcao via camera e QR Code. Foco em:
 
 ## Personas
 
-| Persona | Objetivos principais |
-| --- | --- |
+| Persona   | Objetivos principais                                                                |
+| --------- | ----------------------------------------------------------------------------------- |
 | Professor | Criar provas, gerar PDFs, corrigir pelo aplicativo, lancar notas, gerar relatorios. |
-| Estudante | Entrar em turmas, consultar provas atribuidas e o historico de notas. |
+| Estudante | Entrar em turmas, consultar provas atribuidas e o historico de notas.               |
 
 ## Features previstas na especificacao
 

@@ -15,17 +15,17 @@ Classificação usada:
 
 ## Mapa de navegação
 
-| Rota | Situação | Experiência atual |
-| --- | --- | --- |
-| `/` | Implementado | Redireciona para `/login`. |
-| `/login` | Implementado na N1 | Valida localmente e abre `/provas`; não autentica. |
-| `/provas` | Implementado na N1 | Workspace para buscar, filtrar, ordenar, abrir e criar provas. |
-| `/provas/:id` | Protótipo em avaliação | Editor A4 em tela cheia, autoria por blocos e pré-visualização. |
-| `/banco-de-questoes` | Marcador | Estado em construção; o banco utilizável hoje existe dentro do editor. |
-| `/turmas` | Marcador | Estado em construção. |
-| `/correcoes` | Marcador | Estado em construção. |
-| `/relatorios` | Marcador | Estado em construção. |
-| Rota desconhecida | Implementado | Redireciona para `/provas`. |
+| Rota                 | Situação               | Experiência atual                                                      |
+| -------------------- | ---------------------- | ---------------------------------------------------------------------- |
+| `/`                  | Implementado           | Redireciona para `/login`.                                             |
+| `/login`             | Implementado na N1     | Valida localmente e abre `/provas`; não autentica.                     |
+| `/provas`            | Implementado na N1     | Workspace para buscar, filtrar, ordenar, abrir e criar provas.         |
+| `/provas/:id`        | Protótipo em avaliação | Editor A4 em tela cheia, autoria por blocos e pré-visualização.        |
+| `/banco-de-questoes` | Marcador               | Estado em construção; o banco utilizável hoje existe dentro do editor. |
+| `/turmas`            | Marcador               | Estado em construção.                                                  |
+| `/correcoes`         | Marcador               | Estado em construção.                                                  |
+| `/relatorios`        | Marcador               | Estado em construção.                                                  |
+| Rota desconhecida    | Implementado           | Redireciona para `/provas`.                                            |
 
 As cinco seções aparecem nas abas para tornar a arquitetura do produto visível sem
 simular funções prontas. Login e editor usam `meta.telaCheia`; as demais rotas usam a
@@ -60,14 +60,14 @@ O próprio formulário informa esse limite.
 
 A casca tem uma barra branca externa e uma moldura cinza arredondada:
 
-| Região | Conteúdo | Situação |
-| --- | --- | --- |
-| Marca | Ícone e “SGP Católica”, com link para Provas. | Funcional. |
-| Integrações | Botão na barra externa. | Marcador sem ação. |
-| Ajuda | Botão apenas com ícone. | Marcador sem ação. |
-| Perfil | Nome/e-mail do mock e ação “Sair”. | Menu funciona; sair apenas informa que falta autenticação. |
-| Abas | Provas, Banco de questões, Turmas, Correções e Relatórios. | Navegação funcional; quatro destinos ainda são marcadores. |
-| Moldura | Abas e página sobre o mesmo campo cinza. | Funcional e responsiva. |
+| Região      | Conteúdo                                                   | Situação                                                   |
+| ----------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Marca       | Ícone e “SGP Católica”, com link para Provas.              | Funcional.                                                 |
+| Integrações | Botão na barra externa.                                    | Marcador sem ação.                                         |
+| Ajuda       | Botão apenas com ícone.                                    | Marcador sem ação.                                         |
+| Perfil      | Nome/e-mail do mock e ação “Sair”.                         | Menu funciona; sair apenas informa que falta autenticação. |
+| Abas        | Provas, Banco de questões, Turmas, Correções e Relatórios. | Navegação funcional; quatro destinos ainda são marcadores. |
+| Moldura     | Abas e página sobre o mesmo campo cinza.                   | Funcional e responsiva.                                    |
 
 As abas rolam horizontalmente em tela estreita sem mostrar uma barra de rolagem. A
 aplicação mantém o atalho “Ir para o conteúdo”.
@@ -125,11 +125,11 @@ Da esquerda para a direita:
 
 ### Três zonas
 
-| Zona | Comportamento |
-| --- | --- |
-| Estrutura | Grupos “Página N” espelham as folhas calculadas. Página 1 contém o cabeçalho; cada grupo lista seus blocos. Selecionar rola a folha e setas movem o bloco. |
-| Folha | Sequência centralizada de páginas A4 de 210 × 297 mm e margem de 16 mm. A escala visual se ajusta à largura do canvas, sem barra horizontal; o conteúdo continua medido na geometria real e distribuído automaticamente sem partir blocos. |
-| Contexto | Painel de 320 px que alterna entre propriedades, criação de conteúdo e banco sem mudar a largura da folha. |
+| Zona      | Comportamento                                                                                                                                                                                                                              |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Estrutura | Grupos “Página N” espelham as folhas calculadas. Página 1 contém o cabeçalho; cada grupo lista seus blocos. Selecionar rola a folha e setas movem o bloco.                                                                                 |
+| Folha     | Sequência centralizada de páginas A4 de 210 × 297 mm e margem de 16 mm. A escala visual se ajusta à largura do canvas, sem barra horizontal; o conteúdo continua medido na geometria real e distribuído automaticamente sem partir blocos. |
+| Contexto  | Painel de 320 px que alterna entre propriedades, criação de conteúdo e banco sem mudar a largura da folha.                                                                                                                                 |
 
 Em tela menor que `lg`, as zonas passam para disposição vertical.
 
@@ -144,11 +144,11 @@ conteúdo continua editável normalmente. Nos dois casos, a edição não é blo
 
 **Nova questão** abre o painel “Adicionar à prova”. As opções principais são:
 
-| Tipo | Estado inicial | Edição |
-| --- | --- | --- |
+| Tipo             | Estado inicial                                  | Edição                                                                             |
+| ---------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Múltipla escolha | Enunciado vazio, quatro alternativas e 1 ponto. | Enunciado e alternativas na folha; resposta correta por radio; 2 a 5 alternativas. |
-| Resposta curta | Enunciado vazio, 1 ponto e quatro linhas. | Enunciado na folha; tipo e pontuação no painel. |
-| Resposta longa | Enunciado vazio, 1 ponto e oito linhas. | Enunciado na folha; tipo e pontuação no painel. |
+| Resposta curta   | Enunciado vazio, 1 ponto e quatro linhas.       | Enunciado na folha; tipo e pontuação no painel.                                    |
+| Resposta longa   | Enunciado vazio, 1 ponto e oito linhas.         | Enunciado na folha; tipo e pontuação no painel.                                    |
 
 O bloco entra depois do selecionado; sem seleção, entra no fim. A numeração considera
 somente questões e é recalculada pela ordem da folha.
@@ -192,11 +192,11 @@ banco**. Uma questão já presente na prova não pode ser adicionada novamente p
 
 O mesmo painel de inserção apresenta uma seção secundária de apoios:
 
-| Apoio | Edição | Impressão |
-| --- | --- | --- |
-| Título de seção | Título e descrição diretamente na folha. | Organiza partes; não altera embaralhamento. |
-| Texto ou instrução | Texto na folha; estilo no painel. | Parágrafo, instrução lateral ou destaque. |
-| Imagem | Arquivo local e legenda na folha. | Imagem e legenda, sem upload para servidor. |
+| Apoio              | Edição                                   | Impressão                                   |
+| ------------------ | ---------------------------------------- | ------------------------------------------- |
+| Título de seção    | Título e descrição diretamente na folha. | Organiza partes; não altera embaralhamento. |
+| Texto ou instrução | Texto na folha; estilo no painel.        | Parágrafo, instrução lateral ou destaque.   |
+| Imagem             | Arquivo local e legenda na folha.        | Imagem e legenda, sem upload para servidor. |
 
 Esses blocos não recebem número nem pontuação. O antigo bloco isolado de espaço para
 resposta ainda é lido de estados locais anteriores, mas não pode ser criado pelo fluxo
@@ -249,11 +249,11 @@ A prévia não gera PDF nem cria uma aplicação.
 
 Não há backend. O navegador usa três chaves independentes:
 
-| Chave | Conteúdo |
-| --- | --- |
-| `sgp:estado-de-provas:v1` | Provas e blocos de autoria. |
+| Chave                        | Conteúdo                                      |
+| ---------------------------- | --------------------------------------------- |
+| `sgp:estado-de-provas:v1`    | Provas e blocos de autoria.                   |
 | `sgp:cabecalhos-da-prova:v1` | Cabeçalhos por prova e modelos reutilizáveis. |
-| `sgp:questoes-locais:v1` | Questões salvas ou atualizadas pelo editor. |
+| `sgp:questoes-locais:v1`     | Questões salvas ou atualizadas pelo editor.   |
 
 Os mocks semeiam provas, questões, aplicações e turmas. Recarregar a página preserva o
 estado local, mas outro dispositivo ou navegador não recebe essas alterações. O tooltip
@@ -261,15 +261,15 @@ de salvamento no editor informa esse limite.
 
 ## Estados e feedback
 
-| Situação | Implementação |
-| --- | --- |
-| Carregando | Skeleton no workspace e no editor. |
-| Prova inexistente | Mensagem e link para o acervo. |
-| Lista sem resultado | Explicação e limpar filtros ou criar prova. |
-| Limite de 20 questões | Ações de questão desabilitadas e mensagem na folha/painel. |
-| Bloco removido | Toast com Desfazer. |
-| Salvamento de modelo/questão | Toast de sucesso. |
-| Aplicar, Integrações, Ajuda e logout | Desabilitado ou feedback que explicita a fase. |
+| Situação                             | Implementação                                              |
+| ------------------------------------ | ---------------------------------------------------------- |
+| Carregando                           | Skeleton no workspace e no editor.                         |
+| Prova inexistente                    | Mensagem e link para o acervo.                             |
+| Lista sem resultado                  | Explicação e limpar filtros ou criar prova.                |
+| Limite de 20 questões                | Ações de questão desabilitadas e mensagem na folha/painel. |
+| Bloco removido                       | Toast com Desfazer.                                        |
+| Salvamento de modelo/questão         | Toast de sucesso.                                          |
+| Aplicar, Integrações, Ajuda e logout | Desabilitado ou feedback que explicita a fase.             |
 
 ## Acessibilidade implementada
 

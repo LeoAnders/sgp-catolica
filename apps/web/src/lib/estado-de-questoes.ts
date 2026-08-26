@@ -41,12 +41,17 @@ watch(
 );
 
 export function listarQuestoesDoBanco(): Questao[] {
-  return [...questoesLocais, ...questoesMock.filter((mock) => !questoesLocais.some((item) => item.id === mock.id))];
+  return [
+    ...questoesLocais,
+    ...questoesMock.filter((mock) => !questoesLocais.some((item) => item.id === mock.id)),
+  ];
 }
 
 export function encontrarQuestaoDoBanco(id: string): Questao | undefined {
-  return questoesLocais.find((questao) => questao.id === id)
-    ?? questoesMock.find((questao) => questao.id === id);
+  return (
+    questoesLocais.find((questao) => questao.id === id) ??
+    questoesMock.find((questao) => questao.id === id)
+  );
 }
 
 export function questaoEstaNoBanco(id: string): boolean {

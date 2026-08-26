@@ -6,10 +6,10 @@ relevante de UI.
 
 ## Documentos
 
-| Documento | Responsabilidade |
-| --- | --- |
-| [Design system web](design-system-web.md) | Regras normativas: direção visual, tokens, tipografia, densidade, layouts, componentes, acessibilidade e padrões do editor. |
-| [Experiência web atual](experiencia-web-atual.md) | Estado executável: rotas, fluxos, comportamentos, persistência local e limites conhecidos. |
+| Documento                                         | Responsabilidade                                                                                                            |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [Design system web](design-system-web.md)         | Regras normativas: direção visual, tokens, tipografia, densidade, layouts, componentes, acessibilidade e padrões do editor. |
+| [Experiência web atual](experiencia-web-atual.md) | Estado executável: rotas, fluxos, comportamentos, persistência local e limites conhecidos.                                  |
 
 O design system responde **como novas interfaces devem ser construídas**. A experiência
 atual responde **o que já funciona hoje**. Requisitos de produto continuam em

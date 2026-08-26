@@ -10,20 +10,20 @@ deve ser inferido.
 
 ## Resumo
 
-| ID | Requisito | Fase |
-| --- | --- | --- |
-| RF01 | Cadastro e autenticacao de professor e estudante | a definir |
-| RF01.1 | Anonimizacao de conta (LGPD) | a definir |
-| RF02 | Gerenciamento de questoes | a definir |
-| RF03 | Criacao de turmas e matriculas | a definir |
-| RF04 | Criacao de provas | a definir |
-| RF05 | Criacao de aplicacoes | a definir |
-| RF06 | Geracao de PDF e versoes | a definir |
-| RF07 | Publicacao de gabarito | a definir |
-| RF08 | Correcao via aplicativo mobile | a definir |
-| RF09 | Lancamento manual de nota | a definir |
-| RF10 | Relatorios de notas | a definir |
-| RF11 | Historico de notas do estudante | a definir |
+| ID     | Requisito                                        | Fase      |
+| ------ | ------------------------------------------------ | --------- |
+| RF01   | Cadastro e autenticacao de professor e estudante | a definir |
+| RF01.1 | Anonimizacao de conta (LGPD)                     | a definir |
+| RF02   | Gerenciamento de questoes                        | a definir |
+| RF03   | Criacao de turmas e matriculas                   | a definir |
+| RF04   | Criacao de provas                                | a definir |
+| RF05   | Criacao de aplicacoes                            | a definir |
+| RF06   | Geracao de PDF e versoes                         | a definir |
+| RF07   | Publicacao de gabarito                           | a definir |
+| RF08   | Correcao via aplicativo mobile                   | a definir |
+| RF09   | Lancamento manual de nota                        | a definir |
+| RF10   | Relatorios de notas                              | a definir |
+| RF11   | Historico de notas do estudante                  | a definir |
 
 ## RF01 — Cadastro e autenticacao
 

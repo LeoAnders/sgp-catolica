@@ -7,15 +7,15 @@ Este arquivo e o ponto de entrada da documentacao do projeto.
 
 ## Documentos disponiveis
 
-| Documento | Conteudo |
-| --- | --- |
-| [Visao do produto](produto/visao-do-produto.md) | Problema que o sistema resolve e publico atendido |
-| [Requisitos funcionais](produto/requisitos-funcionais.md) | Os 12 requisitos com criterios de aceite |
-| [Requisitos nao funcionais](produto/requisitos-nao-funcionais.md) | Os 9 requisitos de qualidade e restricao |
+| Documento                                                          | Conteudo                                                      |
+| ------------------------------------------------------------------ | ------------------------------------------------------------- |
+| [Visao do produto](produto/visao-do-produto.md)                    | Problema que o sistema resolve e publico atendido             |
+| [Requisitos funcionais](produto/requisitos-funcionais.md)          | Os 12 requisitos com criterios de aceite                      |
+| [Requisitos nao funcionais](produto/requisitos-nao-funcionais.md)  | Os 9 requisitos de qualidade e restricao                      |
 | [Dicionario de entidades](modelo-dados/dicionario-de-entidades.md) | Entidades do dominio e correspondencia com os tipos do codigo |
-| [Pendencias](pendencias.md) | Divergencias entre fontes e definicoes ainda ausentes |
-| [Design system web](design/design-system-web.md) | Padroes de UI, componentes, temas e paleta |
-| [Experiencia web atual](design/experiencia-web-atual.md) | Mapa de telas, navegacao e fluxos implementados |
+| [Pendencias](pendencias.md)                                        | Divergencias entre fontes e definicoes ainda ausentes         |
+| [Design system web](design/design-system-web.md)                   | Padroes de UI, componentes, temas e paleta                    |
+| [Experiencia web atual](design/experiencia-web-atual.md)           | Mapa de telas, navegacao e fluxos implementados               |
 
 ## Por onde comecar
 
@@ -28,16 +28,16 @@ Este arquivo e o ponto de entrada da documentacao do projeto.
 
 ## Estrutura das pastas
 
-| Pasta | Conteudo | Situacao |
-| --- | --- | --- |
-| `produto/` | Visao do produto, requisitos e escopo de cada fase | em uso |
-| `modelo-dados/` | Dicionario de entidades; MER/DER a partir da N2 | em uso |
-| `decisoes/` | Registro das decisoes ja tomadas pela equipe | vazio |
-| `design/` | Design system, mapa de telas e fluxos de navegacao | em uso |
-| `telas/` | Prints das telas, referenciados pelo README | vazio |
-| `uml/` | Diagramas de casos de uso, classes e atividades | vazio |
-| `arquitetura/` | Diagramas de arquitetura e camadas | vazio |
-| `api/` | Especificacao de endpoints e colecoes de teste | vazio |
+| Pasta           | Conteudo                                           | Situacao |
+| --------------- | -------------------------------------------------- | -------- |
+| `produto/`      | Visao do produto, requisitos e escopo de cada fase | em uso   |
+| `modelo-dados/` | Dicionario de entidades; MER/DER a partir da N2    | em uso   |
+| `decisoes/`     | Registro das decisoes ja tomadas pela equipe       | vazio    |
+| `design/`       | Design system, mapa de telas e fluxos de navegacao | em uso   |
+| `telas/`        | Prints das telas, referenciados pelo README        | vazio    |
+| `uml/`          | Diagramas de casos de uso, classes e atividades    | vazio    |
+| `arquitetura/`  | Diagramas de arquitetura e camadas                 | vazio    |
+| `api/`          | Especificacao de endpoints e colecoes de teste     | vazio    |
 
 As pastas vazias entram no repositorio com um `.gitkeep` e sao preenchidas conforme as
 fases avancam. O mapa de telas e os fluxos atualmente implementados estao em

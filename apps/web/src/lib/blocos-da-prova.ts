@@ -33,12 +33,7 @@ export type TamanhoDeEspaco = 'pequeno' | 'medio' | 'grande';
 export type EstiloDeTexto = 'paragrafo' | 'instrucoes' | 'destaque';
 export type FormatoDeResposta = 'objetiva' | 'curta' | 'longa';
 export type TipoDeInsercao =
-  | 'questao-objetiva'
-  | 'questao-curta'
-  | 'questao-longa'
-  | 'titulo'
-  | 'texto'
-  | 'imagem';
+  'questao-objetiva' | 'questao-curta' | 'questao-longa' | 'titulo' | 'texto' | 'imagem';
 
 interface BlocoBase {
   id: string;
@@ -81,11 +76,7 @@ export interface BlocoDeEspaco extends BlocoBase {
 }
 
 export type BlocoDaProva =
-  | BlocoDeTitulo
-  | BlocoDeTexto
-  | BlocoDeImagem
-  | BlocoDeQuestao
-  | BlocoDeEspaco;
+  BlocoDeTitulo | BlocoDeTexto | BlocoDeImagem | BlocoDeQuestao | BlocoDeEspaco;
 
 export interface DefinicaoDeTipoDeBloco {
   tipo: TipoDeBloco;
@@ -94,11 +85,27 @@ export interface DefinicaoDeTipoDeBloco {
 }
 
 export const DEFINICOES_DE_BLOCO: DefinicaoDeTipoDeBloco[] = [
-  { tipo: 'questao', rotulo: 'Questão do banco', descricao: 'Insere uma questão existente e define a pontuação.' },
-  { tipo: 'titulo', rotulo: 'Título de seção', descricao: 'Organiza partes da prova sem alterar o embaralhamento.' },
-  { tipo: 'texto', rotulo: 'Texto ou instrução', descricao: 'Parágrafo, orientação ou aviso em destaque.' },
+  {
+    tipo: 'questao',
+    rotulo: 'Questão do banco',
+    descricao: 'Insere uma questão existente e define a pontuação.',
+  },
+  {
+    tipo: 'titulo',
+    rotulo: 'Título de seção',
+    descricao: 'Organiza partes da prova sem alterar o embaralhamento.',
+  },
+  {
+    tipo: 'texto',
+    rotulo: 'Texto ou instrução',
+    descricao: 'Parágrafo, orientação ou aviso em destaque.',
+  },
   { tipo: 'imagem', rotulo: 'Imagem', descricao: 'Figura, gráfico ou mapa de apoio.' },
-  { tipo: 'espaco', rotulo: 'Espaço para resposta', descricao: 'Área pautada com dimensão real para impressão A4.' },
+  {
+    tipo: 'espaco',
+    rotulo: 'Espaço para resposta',
+    descricao: 'Área pautada com dimensão real para impressão A4.',
+  },
 ];
 
 /** Limite de questões por prova definido em RF04. */
@@ -198,21 +205,23 @@ export function criarBlocoDeQuestao(questao: Questao, pontuacaoPadrao: number): 
 export function blocosIniciaisApartirDeProva(prova: Prova): BlocoDaProva[] {
   return [...prova.questions]
     .sort((a, b) => a.order - b.order)
-    .map(
-      (questao): BlocoDeQuestao => ({
-        id: gerarIdDeBloco('questao'),
-        type: 'questao',
-        questionId: questao.questionId,
-        pontuacao: questao.score,
-      }),
-    );
+    .map((questao): BlocoDeQuestao => ({
+      id: gerarIdDeBloco('questao'),
+      type: 'questao',
+      questionId: questao.questionId,
+      pontuacao: questao.score,
+    }));
 }
 
 /** Projeta os blocos de volta para o formato que `Prova.questions` espera hoje. */
 export function questoesParaProva(blocos: BlocoDaProva[]): QuestaoDaProva[] {
   return blocos
     .filter((bloco): bloco is BlocoDeQuestao => bloco.type === 'questao')
-    .map((bloco, indice) => ({ questionId: bloco.questionId, order: indice + 1, score: bloco.pontuacao }));
+    .map((bloco, indice) => ({
+      questionId: bloco.questionId,
+      order: indice + 1,
+      score: bloco.pontuacao,
+    }));
 }
 
 export function totalDePontos(blocos: BlocoDaProva[]): number {
