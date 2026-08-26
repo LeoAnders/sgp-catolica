@@ -111,7 +111,9 @@ const grupos: Array<{
             class="group flex w-full items-start gap-3 rounded-lg border bg-background p-3 text-left transition-colors outline-none hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring/40"
             @click="emit('adicionar', item.tipo)"
           >
-            <span class="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
+            <span
+              class="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary text-secondary-foreground"
+            >
               <component :is="item.icone" class="size-4" aria-hidden="true" />
             </span>
             <span class="min-w-0 flex-1">
@@ -120,7 +122,10 @@ const grupos: Array<{
                 {{ item.descricao }}
               </span>
             </span>
-            <Plus class="mt-1 size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
+            <Plus
+              class="mt-1 size-3.5 shrink-0 text-muted-foreground group-hover:text-foreground"
+              aria-hidden="true"
+            />
           </button>
         </div>
       </section>

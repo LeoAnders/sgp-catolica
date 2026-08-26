@@ -71,7 +71,8 @@ defineExpose({ focarTexto });
 
 function classeDoTexto(estilo: EstiloDeTexto | undefined): string {
   if (estilo === 'instrucoes') return 'border-l-2 border-sheet-border pl-3 italic';
-  if (estilo === 'destaque') return 'rounded-sm border border-sheet-border bg-sheet-foreground/5 p-3';
+  if (estilo === 'destaque')
+    return 'rounded-sm border border-sheet-border bg-sheet-foreground/5 p-3';
   return '';
 }
 
@@ -118,9 +119,8 @@ function removerAlternativa(id: string): void {
   atualizarQuestao({
     ...props.questao,
     alternatives: props.questao.alternatives?.filter((alternativa) => alternativa.id !== id),
-    correctAlternativeId: props.questao.correctAlternativeId === id
-      ? undefined
-      : props.questao.correctAlternativeId,
+    correctAlternativeId:
+      props.questao.correctAlternativeId === id ? undefined : props.questao.correctAlternativeId,
   });
 }
 
@@ -133,14 +133,19 @@ function formatoDaResposta(): 'curta' | 'longa' {
 <template>
   <div
     class="rounded-sm px-2 py-1.5 transition-shadow"
-    :class="selecionado && !somenteLeitura ? 'ring-2 ring-primary ring-offset-2 ring-offset-sheet' : ''"
+    :class="
+      selecionado && !somenteLeitura ? 'ring-2 ring-primary ring-offset-2 ring-offset-sheet' : ''
+    "
   >
     <!-- Questão completa: autoria na folha, propriedades no painel. -->
     <div v-if="bloco.type === 'questao'" class="flex gap-3">
       <span class="w-6 shrink-0 text-sm font-bold tabular-nums">{{ numero }}.</span>
       <div class="min-w-0 flex-1">
         <div v-if="questao" class="flex items-start gap-2">
-          <p v-if="somenteLeitura" class="min-w-0 flex-1 text-sm leading-relaxed whitespace-pre-line">
+          <p
+            v-if="somenteLeitura"
+            class="min-w-0 flex-1 text-sm leading-relaxed whitespace-pre-line"
+          >
             {{ questao.statement || 'Questão sem enunciado' }}
           </p>
           <Textarea
@@ -169,8 +174,13 @@ function formatoDaResposta(): 'curta' | 'longa' {
             class="group/alternativa flex min-w-0 items-center gap-2 text-sm leading-relaxed"
           >
             <template v-if="somenteLeitura">
-              <span class="size-3.5 shrink-0 rounded-full border border-sheet-border" aria-hidden="true" />
-              <span class="shrink-0 font-medium text-sheet-foreground/70">{{ letrasDasAlternativas[indice] }})</span>
+              <span
+                class="size-3.5 shrink-0 rounded-full border border-sheet-border"
+                aria-hidden="true"
+              />
+              <span class="shrink-0 font-medium text-sheet-foreground/70"
+                >{{ letrasDasAlternativas[indice] }})</span
+              >
               <span>{{ alternativa.text || 'Alternativa sem texto' }}</span>
             </template>
             <template v-else>
@@ -181,15 +191,19 @@ function formatoDaResposta(): 'curta' | 'longa' {
                 :aria-label="`Marcar alternativa ${letrasDasAlternativas[indice]} como correta`"
                 class="size-4 shrink-0 accent-current"
                 @change="marcarCorreta(alternativa.id)"
+              />
+              <span class="shrink-0 font-medium text-sheet-foreground/70"
+                >{{ letrasDasAlternativas[indice] }})</span
               >
-              <span class="shrink-0 font-medium text-sheet-foreground/70">{{ letrasDasAlternativas[indice] }})</span>
               <input
                 class="min-w-0 flex-1 border-0 border-b border-sheet-border bg-transparent px-0 py-1 text-sm outline-none placeholder:text-sheet-foreground/35 focus:border-primary"
                 :value="alternativa.text"
                 :aria-label="`Texto da alternativa ${letrasDasAlternativas[indice]}`"
                 placeholder="Escreva a alternativa"
-                @input="atualizarAlternativa(alternativa.id, ($event.target as HTMLInputElement).value)"
-              >
+                @input="
+                  atualizarAlternativa(alternativa.id, ($event.target as HTMLInputElement).value)
+                "
+              />
               <Button
                 v-if="(questao.alternatives?.length ?? 0) > 2"
                 variant="ghost"
@@ -217,10 +231,16 @@ function formatoDaResposta(): 'curta' | 'longa' {
         <div
           v-else-if="questao"
           class="area-de-resposta mt-3"
-          :class="formatoDaResposta() === 'longa' ? 'area-de-resposta--longa' : 'area-de-resposta--curta'"
+          :class="
+            formatoDaResposta() === 'longa' ? 'area-de-resposta--longa' : 'area-de-resposta--curta'
+          "
           aria-label="Espaço para resposta"
         >
-          <span v-for="linha in formatoDaResposta() === 'longa' ? 8 : 4" :key="linha" class="linha-de-resposta" />
+          <span
+            v-for="linha in formatoDaResposta() === 'longa' ? 8 : 4"
+            :key="linha"
+            class="linha-de-resposta"
+          />
         </div>
       </div>
     </div>
@@ -241,16 +261,26 @@ function formatoDaResposta(): 'curta' | 'longa' {
         placeholder="Título da seção"
         aria-label="Título da seção"
         :value="(bloco as BlocoDeTitulo).titulo"
-        @input="emit('update:bloco', { ...(bloco as BlocoDeTitulo), titulo: ($event.target as HTMLInputElement).value })"
-      >
+        @input="
+          emit('update:bloco', {
+            ...(bloco as BlocoDeTitulo),
+            titulo: ($event.target as HTMLInputElement).value,
+          })
+        "
+      />
       <input
         v-if="!somenteLeitura"
         class="mt-1 w-full border-none bg-transparent p-0 text-xs text-sheet-foreground/65 outline-none placeholder:text-sheet-foreground/35 focus-visible:ring-1 focus-visible:ring-ring"
         placeholder="Descrição opcional"
         aria-label="Descrição da seção"
         :value="(bloco as BlocoDeTitulo).descricao"
-        @input="emit('update:bloco', { ...(bloco as BlocoDeTitulo), descricao: ($event.target as HTMLInputElement).value })"
-      >
+        @input="
+          emit('update:bloco', {
+            ...(bloco as BlocoDeTitulo),
+            descricao: ($event.target as HTMLInputElement).value,
+          })
+        "
+      />
     </div>
 
     <!-- Texto de apoio -->
@@ -265,7 +295,9 @@ function formatoDaResposta(): 'curta' | 'longa' {
         placeholder="Escreva uma instrução, epígrafe ou trecho de apoio…"
         :model-value="(bloco as BlocoDeTexto).conteudo"
         aria-label="Texto de apoio"
-        @update:model-value="emit('update:bloco', { ...(bloco as BlocoDeTexto), conteudo: String($event) })"
+        @update:model-value="
+          emit('update:bloco', { ...(bloco as BlocoDeTexto), conteudo: String($event) })
+        "
       />
     </div>
 
@@ -274,7 +306,13 @@ function formatoDaResposta(): 'curta' | 'longa' {
       v-else-if="bloco.type === 'imagem' && (!somenteLeitura || (bloco as BlocoDeImagem).url)"
       class="flex flex-col items-center gap-2"
     >
-      <input ref="inputArquivo" type="file" accept="image/*" class="hidden" @change="onArquivoSelecionado">
+      <input
+        ref="inputArquivo"
+        type="file"
+        accept="image/*"
+        class="hidden"
+        @change="onArquivoSelecionado"
+      />
 
       <button
         v-if="!(bloco as BlocoDeImagem).url && !somenteLeitura"
@@ -291,10 +329,13 @@ function formatoDaResposta(): 'curta' | 'longa' {
         :src="(bloco as BlocoDeImagem).url"
         :alt="(bloco as BlocoDeImagem).legenda || 'Imagem da prova, sem legenda'"
         class="max-h-80 w-auto max-w-full object-contain"
-      >
+      />
 
       <figcaption v-if="(bloco as BlocoDeImagem).url" class="w-full">
-        <p v-if="somenteLeitura && (bloco as BlocoDeImagem).legenda" class="text-center text-xs text-sheet-foreground/70">
+        <p
+          v-if="somenteLeitura && (bloco as BlocoDeImagem).legenda"
+          class="text-center text-xs text-sheet-foreground/70"
+        >
           {{ (bloco as BlocoDeImagem).legenda }}
         </p>
         <input
@@ -303,8 +344,13 @@ function formatoDaResposta(): 'curta' | 'longa' {
           placeholder="Legenda (opcional, sai impressa)"
           aria-label="Legenda da imagem"
           :value="(bloco as BlocoDeImagem).legenda"
-          @input="emit('update:bloco', { ...(bloco as BlocoDeImagem), legenda: ($event.target as HTMLInputElement).value })"
-        >
+          @input="
+            emit('update:bloco', {
+              ...(bloco as BlocoDeImagem),
+              legenda: ($event.target as HTMLInputElement).value,
+            })
+          "
+        />
       </figcaption>
     </figure>
 

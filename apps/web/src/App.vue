@@ -23,10 +23,7 @@ const telaCheia = computed(() => rota.meta.telaCheia === true);
 </script>
 
 <template>
-  <Button
-    as-child
-    class="fixed left-3 top-3 z-50 -translate-y-24 focus-visible:translate-y-0"
-  >
+  <Button as-child class="fixed left-3 top-3 z-50 -translate-y-24 focus-visible:translate-y-0">
     <a href="#conteudo-principal">Ir para o conteúdo</a>
   </Button>
 
@@ -44,7 +41,9 @@ const telaCheia = computed(() => rota.meta.telaCheia === true);
     <div v-else class="flex min-h-svh flex-col bg-background">
       <BarraSuperior />
 
-      <div class="mx-3 mb-3 flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border bg-field sm:mx-4 sm:mb-4">
+      <div
+        class="mx-3 mb-3 flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border bg-field sm:mx-4 sm:mb-4"
+      >
         <AbasDeSecao />
         <main id="conteudo-principal" class="flex min-w-0 flex-1 flex-col" tabindex="-1">
           <RouterView />

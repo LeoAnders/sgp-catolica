@@ -13,18 +13,32 @@ interface Celula {
 
 const TAMANHO = 15;
 
-function dentroDoLocalizador(linha: number, coluna: number, topo: number, esquerda: number): boolean {
+function dentroDoLocalizador(
+  linha: number,
+  coluna: number,
+  topo: number,
+  esquerda: number,
+): boolean {
   return linha >= topo && linha < topo + 5 && coluna >= esquerda && coluna < esquerda + 5;
 }
 
-function moduloDoLocalizador(linha: number, coluna: number, topo: number, esquerda: number): boolean {
+function moduloDoLocalizador(
+  linha: number,
+  coluna: number,
+  topo: number,
+  esquerda: number,
+): boolean {
   const y = linha - topo;
   const x = coluna - esquerda;
   return y === 0 || y === 4 || x === 0 || x === 4 || (y === 2 && x === 2);
 }
 
 function ativo(linha: number, coluna: number): boolean {
-  for (const [topo, esquerda] of [[0, 0], [0, 10], [10, 0]] as const) {
+  for (const [topo, esquerda] of [
+    [0, 0],
+    [0, 10],
+    [10, 0],
+  ] as const) {
     if (dentroDoLocalizador(linha, coluna, topo, esquerda)) {
       return moduloDoLocalizador(linha, coluna, topo, esquerda);
     }

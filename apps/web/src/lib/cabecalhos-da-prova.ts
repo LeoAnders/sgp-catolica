@@ -75,11 +75,15 @@ function ler(): EstadoDeCabecalhos {
     const bruto = window.localStorage.getItem(CHAVE);
     if (!bruto) return { porProva: {}, modelos: [] };
     const lido = JSON.parse(bruto) as Partial<EstadoDeCabecalhos>;
-    const porProva = lido.porProva && typeof lido.porProva === 'object'
-      ? Object.fromEntries(
-          Object.entries(lido.porProva).map(([provaId, cabecalho]) => [provaId, clonar(cabecalho)]),
-        )
-      : {};
+    const porProva =
+      lido.porProva && typeof lido.porProva === 'object'
+        ? Object.fromEntries(
+            Object.entries(lido.porProva).map(([provaId, cabecalho]) => [
+              provaId,
+              clonar(cabecalho),
+            ]),
+          )
+        : {};
     const modelos = Array.isArray(lido.modelos)
       ? lido.modelos.map((modelo) => ({ ...modelo, conteudo: clonar(modelo.conteudo) }))
       : [];
@@ -113,10 +117,7 @@ export function obterCabecalhoDaProva(provaId: string): CabecalhoDaProva {
   return cabecalhosPorProva[provaId];
 }
 
-export function atualizarCabecalhoDaProva(
-  provaId: string,
-  atualizado: CabecalhoDaProva,
-): void {
+export function atualizarCabecalhoDaProva(provaId: string, atualizado: CabecalhoDaProva): void {
   cabecalhosPorProva[provaId] = clonar(atualizado);
 }
 

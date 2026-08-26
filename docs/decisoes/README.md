@@ -9,12 +9,15 @@ Modelo minimo:
 # ADR-001: Titulo curto da decisao
 
 ## Contexto
+
 Qual problema ou duvida tecnica motivou a decisao.
 
 ## Decisao
+
 O que a equipe decidiu fazer.
 
 ## Consequencias
+
 O que a escolha facilita, o que custa ou limita.
 ```
 

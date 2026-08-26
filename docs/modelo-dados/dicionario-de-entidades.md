@@ -12,18 +12,18 @@ significa paridade completa de campos, pois os tipos ainda refletem a fase N1.
 
 ## Correspondencia
 
-| Entidade | Tipo no codigo | Arquivo |
-| --- | --- | --- |
-| User | `Usuario` (e `Professor`, `Estudante`) | `usuario.ts` |
-| RefreshToken | — | — |
-| Class | `Turma` | `turma.ts` |
-| ClassEnrollment | `Matricula` | `turma.ts` |
-| Question | `Questao` | `questao.ts` |
-| Exam | `Prova` | `prova.ts` |
-| Application | `Aplicacao` | `prova.ts` |
-| ExamVersion | `VersaoProva` | `prova.ts` |
-| ExamAssignment | `AtribuicaoVersao` | `prova.ts` |
-| Correction | `Correcao` | `correcao.ts` |
+| Entidade        | Tipo no codigo                         | Arquivo       |
+| --------------- | -------------------------------------- | ------------- |
+| User            | `Usuario` (e `Professor`, `Estudante`) | `usuario.ts`  |
+| RefreshToken    | —                                      | —             |
+| Class           | `Turma`                                | `turma.ts`    |
+| ClassEnrollment | `Matricula`                            | `turma.ts`    |
+| Question        | `Questao`                              | `questao.ts`  |
+| Exam            | `Prova`                                | `prova.ts`    |
+| Application     | `Aplicacao`                            | `prova.ts`    |
+| ExamVersion     | `VersaoProva`                          | `prova.ts`    |
+| ExamAssignment  | `AtribuicaoVersao`                     | `prova.ts`    |
+| Correction      | `Correcao`                             | `correcao.ts` |
 
 `RefreshToken` ainda nao tem tipo correspondente. A autenticacao real nao faz parte da
 N1, e os documentos recebidos nao definem em qual entrega ela deve existir.

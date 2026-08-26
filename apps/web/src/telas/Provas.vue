@@ -132,7 +132,8 @@ async function criarRascunho(): Promise<void> {
  * Grade única para o cabeçalho de colunas e para as linhas, para as duas ficarem
  * alinhadas sem números mágicos repetidos em dois lugares.
  */
-const GRADE = 'grid grid-cols-[2.5rem_minmax(0,1fr)_1.25rem] items-center gap-4 ' +
+const GRADE =
+  'grid grid-cols-[2.5rem_minmax(0,1fr)_1.25rem] items-center gap-4 ' +
   'lg:grid-cols-[2.5rem_minmax(0,1fr)_6rem_6.5rem_5rem_6.5rem_7.5rem_1.25rem]';
 
 const recortes = [
@@ -170,16 +171,22 @@ const recortes = [
         </div>
       </template>
 
-      <p class="px-2.5 pb-1 text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground">
+      <p
+        class="px-2.5 pb-1 text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground"
+      >
         Espaço de trabalho
       </p>
-      <div class="mb-3 flex h-8 items-center gap-2 rounded-lg bg-background px-2.5 text-sm font-medium">
+      <div
+        class="mb-3 flex h-8 items-center gap-2 rounded-lg bg-background px-2.5 text-sm font-medium"
+      >
         <LayoutGrid class="size-3.5 text-muted-foreground" aria-hidden="true" />
         <span class="min-w-0 flex-1 truncate">Meu espaço</span>
         <span class="text-xs tabular-nums text-muted-foreground">{{ totalPorStatus.todas }}</span>
       </div>
 
-      <p class="px-2.5 pb-1 text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground">
+      <p
+        class="px-2.5 pb-1 text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground"
+      >
         Situação
       </p>
       <ItemDeRecorte
@@ -219,7 +226,11 @@ const recortes = [
 
       <div v-if="carregando" class="flex flex-col gap-2 px-5 pb-6 sm:px-8" role="status">
         <span class="sr-only">Carregando provas…</span>
-        <div v-for="item in 3" :key="item" class="flex items-center gap-4 rounded-xl border bg-card px-4 py-3">
+        <div
+          v-for="item in 3"
+          :key="item"
+          class="flex items-center gap-4 rounded-xl border bg-card px-4 py-3"
+        >
           <Skeleton class="size-10 rounded-lg" />
           <div class="flex-1 space-y-2">
             <Skeleton class="h-4 w-1/2" />
@@ -237,7 +248,11 @@ const recortes = [
         <div>
           <p class="font-medium">Nenhuma prova encontrada</p>
           <p class="mt-1 text-sm text-muted-foreground">
-            {{ temFiltros ? 'Revise a busca ou remova os filtros.' : 'Crie a primeira prova do acervo.' }}
+            {{
+              temFiltros
+                ? 'Revise a busca ou remova os filtros.'
+                : 'Crie a primeira prova do acervo.'
+            }}
           </p>
         </div>
         <Button v-if="temFiltros" variant="outline" size="sm" @click="limparFiltros">
@@ -252,10 +267,7 @@ const recortes = [
       <template v-else>
         <div class="px-5 pb-6 sm:px-8">
           <!-- Rótulos soltos sobre os cartões, como na área de workspace da referência. -->
-          <div
-            :class="GRADE"
-            class="px-4 pb-2 text-xs font-normal text-muted-foreground"
-          >
+          <div :class="GRADE" class="px-4 pb-2 text-xs font-normal text-muted-foreground">
             <span aria-hidden="true" />
             <span>Prova</span>
             <span class="hidden text-right lg:block">Situação</span>
@@ -273,7 +285,9 @@ const recortes = [
               :class="GRADE"
               class="group relative rounded-xl border bg-card px-4 py-3 transition-colors hover:bg-accent/40 focus-within:bg-accent/40"
             >
-              <span class="flex size-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
+              <span
+                class="flex size-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground"
+              >
                 <FileText class="size-5" aria-hidden="true" />
               </span>
 
@@ -295,20 +309,24 @@ const recortes = [
                 </Badge>
               </div>
 
-            <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
-              {{ prova.questions.length }}
-            </span>
-            <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
-              {{ formatarPontos(prova.totalDePontos) }}
-            </span>
-            <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
-              {{ prova.aplicacoes.length
-                ? `${prova.aplicacoes.length} ${prova.aplicacoes.length === 1 ? 'turma' : 'turmas'}`
-                : '—' }}
-            </span>
-            <span class="hidden whitespace-nowrap text-right text-sm text-muted-foreground lg:block">
-              {{ formatarData(prova.createdAt) }}
-            </span>
+              <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
+                {{ prova.questions.length }}
+              </span>
+              <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
+                {{ formatarPontos(prova.totalDePontos) }}
+              </span>
+              <span class="hidden text-right text-sm tabular-nums text-muted-foreground lg:block">
+                {{
+                  prova.aplicacoes.length
+                    ? `${prova.aplicacoes.length} ${prova.aplicacoes.length === 1 ? 'turma' : 'turmas'}`
+                    : '—'
+                }}
+              </span>
+              <span
+                class="hidden whitespace-nowrap text-right text-sm text-muted-foreground lg:block"
+              >
+                {{ formatarData(prova.createdAt) }}
+              </span>
 
               <ChevronRight
                 class="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
@@ -318,7 +336,6 @@ const recortes = [
           </ul>
         </div>
       </template>
-
     </div>
   </div>
 </template>

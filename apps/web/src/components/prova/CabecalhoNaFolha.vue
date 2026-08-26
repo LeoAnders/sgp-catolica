@@ -29,7 +29,10 @@ const camposAtivos = computed(() => {
   <header class="flex flex-col gap-4 border-b border-sheet-border pb-5">
     <div class="flex items-start justify-between gap-6">
       <div class="min-w-0 flex-1">
-        <p v-if="cabecalho.instituicao" class="text-xs font-medium uppercase tracking-wide text-sheet-foreground/60">
+        <p
+          v-if="cabecalho.instituicao"
+          class="text-xs font-medium uppercase tracking-wide text-sheet-foreground/60"
+        >
           {{ cabecalho.instituicao }}
         </p>
         <p v-if="cabecalho.linhaComplementar" class="mt-1 text-xs text-sheet-foreground/60">
@@ -60,7 +63,10 @@ const camposAtivos = computed(() => {
       </div>
     </dl>
 
-    <p v-if="cabecalho.instrucoes" class="border-t border-sheet-border pt-3 text-xs leading-relaxed text-sheet-foreground/70">
+    <p
+      v-if="cabecalho.instrucoes"
+      class="border-t border-sheet-border pt-3 text-xs leading-relaxed text-sheet-foreground/70"
+    >
       {{ cabecalho.instrucoes }}
     </p>
   </header>

@@ -14,9 +14,11 @@ import { Button } from '@/components/ui/button';
 const rota = useRoute();
 
 const oQueVemAqui: Record<string, string> = {
-  '/banco-de-questoes': 'Cadastrar, marcar e reaproveitar questões objetivas e discursivas entre provas (RF02).',
+  '/banco-de-questoes':
+    'Cadastrar, marcar e reaproveitar questões objetivas e discursivas entre provas (RF02).',
   '/turmas': 'Criar turmas e matricular estudantes por e-mail ou código de convite (RF03).',
-  '/correcoes': 'Acompanhar a correção feita no aplicativo do professor e publicar gabaritos (RF07, RF08).',
+  '/correcoes':
+    'Acompanhar a correção feita no aplicativo do professor e publicar gabaritos (RF07, RF08).',
   '/relatorios': 'Ver desempenho por turma, por questão e por alternativa marcada (RF10).',
 };
 
@@ -29,7 +31,9 @@ const descricao = computed(
   <div class="flex min-w-0 flex-1 flex-col gap-5 p-5 sm:p-8">
     <h1 class="text-[1.375rem] font-medium">{{ rota.meta.titulo }}</h1>
 
-    <div class="flex flex-col items-center gap-3 rounded-xl border border-dashed bg-card px-6 py-20 text-center">
+    <div
+      class="flex flex-col items-center gap-3 rounded-xl border border-dashed bg-card px-6 py-20 text-center"
+    >
       <Hammer class="size-7 text-muted-foreground" aria-hidden="true" />
       <div>
         <p class="font-medium">Esta seção entra em uma próxima entrega</p>

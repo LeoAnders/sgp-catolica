@@ -46,7 +46,8 @@ const questoesFiltradas = computed(() => {
         termo === '' ||
         normalizar(questao.statement).includes(termo) ||
         questao.tags.some((tag) => normalizar(tag).includes(termo));
-      const correspondeAoTipo = tipoEscolhido.value === 'todas' || questao.type === tipoEscolhido.value;
+      const correspondeAoTipo =
+        tipoEscolhido.value === 'todas' || questao.type === tipoEscolhido.value;
       return correspondeABusca && correspondeAoTipo;
     });
 });
@@ -63,7 +64,12 @@ function jaEstaNaProva(questaoId: string): boolean {
   >
     <div class="flex items-center gap-2 border-b px-4 py-3">
       <p class="mr-auto text-sm font-medium">Banco de questões</p>
-      <Button variant="ghost" size="icon-sm" aria-label="Fechar o banco de questões" @click="emit('fechar')">
+      <Button
+        variant="ghost"
+        size="icon-sm"
+        aria-label="Fechar o banco de questões"
+        @click="emit('fechar')"
+      >
         <X aria-hidden="true" />
       </Button>
     </div>
@@ -100,17 +106,16 @@ function jaEstaNaProva(questaoId: string): boolean {
     </p>
 
     <div class="scrollbar-sutil min-h-0 flex-1 overflow-y-auto p-3">
-      <div v-if="questoesFiltradas.length === 0" class="flex flex-col items-center gap-2 py-12 text-center">
+      <div
+        v-if="questoesFiltradas.length === 0"
+        class="flex flex-col items-center gap-2 py-12 text-center"
+      >
         <CircleDashed class="size-6 text-muted-foreground" aria-hidden="true" />
         <p class="text-sm text-muted-foreground">Nenhuma questão encontrada.</p>
       </div>
 
       <ul v-else class="flex flex-col gap-2">
-        <li
-          v-for="questao in questoesFiltradas"
-          :key="questao.id"
-          class="rounded-lg border p-3"
-        >
+        <li v-for="questao in questoesFiltradas" :key="questao.id" class="rounded-lg border p-3">
           <div class="mb-1.5 flex flex-wrap items-center gap-1.5">
             <Badge variant="outline">
               {{ questao.type === 'objetiva' ? 'Objetiva' : 'Discursiva' }}

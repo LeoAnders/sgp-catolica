@@ -30,18 +30,16 @@ function solicitarLogout(): void {
       to="/provas"
       class="flex shrink-0 items-center gap-2.5 rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <span class="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+      <span
+        class="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground"
+      >
         <GraduationCap class="size-4" aria-hidden="true" />
       </span>
       <span class="hidden text-sm font-medium sm:inline">SGP Católica</span>
     </RouterLink>
 
     <div class="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
-      <Button
-        variant="ghost"
-        size="sm"
-        class="hidden sm:inline-flex"
-      >
+      <Button variant="ghost" size="sm" class="hidden sm:inline-flex">
         <Grid2X2Plus aria-hidden="true" />
         Integrações
       </Button>

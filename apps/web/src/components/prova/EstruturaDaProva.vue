@@ -60,7 +60,9 @@ function totalDeItens(pagina: BlocoDaProva[], indiceDaPagina: number): number {
     aria-label="Estrutura da prova"
     class="flex w-full shrink-0 flex-col overflow-hidden rounded-xl border bg-card lg:w-60"
   >
-    <p class="px-4 pb-2 pt-3 text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
+    <p
+      class="px-4 pb-2 pt-3 text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground"
+    >
       Estrutura
     </p>
 
@@ -72,7 +74,9 @@ function totalDeItens(pagina: BlocoDaProva[], indiceDaPagina: number): number {
         :class="indiceDaPagina > 0 ? 'border-t pt-2' : ''"
         :aria-label="`Página ${indiceDaPagina + 1}`"
       >
-        <div class="flex h-7 items-center gap-2 px-2 text-[0.6875rem] font-medium text-muted-foreground">
+        <div
+          class="flex h-7 items-center gap-2 px-2 text-[0.6875rem] font-medium text-muted-foreground"
+        >
           <FileText class="size-3.5" aria-hidden="true" />
           <span>Página {{ indiceDaPagina + 1 }}</span>
           <span class="ml-auto tabular-nums">
@@ -86,9 +90,11 @@ function totalDeItens(pagina: BlocoDaProva[], indiceDaPagina: number): number {
           type="button"
           :aria-pressed="selecionado === null"
           class="mb-0.5 flex w-full items-center gap-2.5 rounded-lg border border-dashed px-2.5 py-2 text-left text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-          :class="selecionado === null
-            ? 'border-primary/50 bg-primary/10 text-primary'
-            : 'text-muted-foreground hover:bg-accent hover:text-foreground'"
+          :class="
+            selecionado === null
+              ? 'border-primary/50 bg-primary/10 text-primary'
+              : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+          "
           @click="$emit('selecionar', null)"
         >
           <span class="w-4 shrink-0 text-center">—</span>
@@ -101,9 +107,11 @@ function totalDeItens(pagina: BlocoDaProva[], indiceDaPagina: number): number {
               type="button"
               :aria-pressed="selecionado === bloco.id"
               class="flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-              :class="selecionado === bloco.id
-                ? 'bg-primary/10 text-primary'
-                : 'text-muted-foreground hover:bg-accent hover:text-foreground'"
+              :class="
+                selecionado === bloco.id
+                  ? 'bg-primary/10 text-primary'
+                  : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+              "
               @click="$emit('selecionar', bloco.id)"
             >
               <span
@@ -111,11 +119,19 @@ function totalDeItens(pagina: BlocoDaProva[], indiceDaPagina: number): number {
                 :class="selecionado === bloco.id ? 'text-primary' : 'text-muted-foreground'"
               >
                 <template v-if="numeracao[bloco.id]">{{ numeracao[bloco.id] }}</template>
-                <component :is="iconePorTipoDeBloco[bloco.type]" v-else class="size-3.5" aria-hidden="true" />
+                <component
+                  :is="iconePorTipoDeBloco[bloco.type]"
+                  v-else
+                  class="size-3.5"
+                  aria-hidden="true"
+                />
               </span>
               <span class="min-w-0 flex-1">
                 <span class="line-clamp-2 text-xs leading-snug">{{ resumo(bloco) }}</span>
-                <span v-if="!numeracao[bloco.id]" class="mt-0.5 block text-[0.65rem] text-muted-foreground">
+                <span
+                  v-if="!numeracao[bloco.id]"
+                  class="mt-0.5 block text-[0.65rem] text-muted-foreground"
+                >
                   {{ rotuloPorTipoDeBloco[bloco.type] }}
                 </span>
               </span>

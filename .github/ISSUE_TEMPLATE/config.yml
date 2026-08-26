@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Dúvida sobre o processo de Issues/PRs
+    url: https://github.com/LeoAnders/sgp-catolica/blob/main/CONTRIBUTING.md
+    about: Consulte o CONTRIBUTING.md antes de abrir uma issue fora do padrão.

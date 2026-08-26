@@ -72,7 +72,11 @@ function atualizarCabecalho<K extends keyof Omit<CabecalhoDaProva, 'campos'>>(
   campo: K,
   valor: CabecalhoDaProva[K],
 ): void {
-  emit('update:cabecalho', { ...props.cabecalho, campos: { ...props.cabecalho.campos }, [campo]: valor });
+  emit('update:cabecalho', {
+    ...props.cabecalho,
+    campos: { ...props.cabecalho.campos },
+    [campo]: valor,
+  });
 }
 
 function atualizarCampo(campo: keyof CamposDoCabecalho, valor: boolean): void {
@@ -120,10 +124,10 @@ const podeSalvarNoBanco = computed(() => {
   if (!questao?.statement.trim()) return false;
   if (questao.type !== 'objetiva') return true;
   return Boolean(
-    questao.correctAlternativeId
-      && questao.alternatives
-      && questao.alternatives.length >= 2
-      && questao.alternatives.every((alternativa) => alternativa.text.trim()),
+    questao.correctAlternativeId &&
+    questao.alternatives &&
+    questao.alternatives.length >= 2 &&
+    questao.alternatives.every((alternativa) => alternativa.text.trim()),
   );
 });
 
@@ -136,23 +140,25 @@ function atualizarFormatoDaQuestao(formato: FormatoDeResposta): void {
     statement: atual.statement,
     tags: [...atual.tags],
   };
-  const rascunho: Questao = formato === 'objetiva'
-    ? {
-        ...base,
-        type: 'objetiva',
-        alternatives: atual.type === 'objetiva' && atual.alternatives?.length
-          ? atual.alternatives.map((alternativa) => ({ ...alternativa }))
-          : Array.from({ length: 4 }, (_, indice) => ({
-              id: `${atual.id}-alternativa-${indice + 1}`,
-              text: '',
-            })),
-        correctAlternativeId: atual.type === 'objetiva' ? atual.correctAlternativeId : undefined,
-      }
-    : {
-        ...base,
-        type: 'discursiva',
-        maxScore: props.bloco.pontuacao,
-      };
+  const rascunho: Questao =
+    formato === 'objetiva'
+      ? {
+          ...base,
+          type: 'objetiva',
+          alternatives:
+            atual.type === 'objetiva' && atual.alternatives?.length
+              ? atual.alternatives.map((alternativa) => ({ ...alternativa }))
+              : Array.from({ length: 4 }, (_, indice) => ({
+                  id: `${atual.id}-alternativa-${indice + 1}`,
+                  text: '',
+                })),
+          correctAlternativeId: atual.type === 'objetiva' ? atual.correctAlternativeId : undefined,
+        }
+      : {
+          ...base,
+          type: 'discursiva',
+          maxScore: props.bloco.pontuacao,
+        };
   emit('update:bloco', { ...props.bloco, formatoResposta: formato, rascunho });
 }
 
@@ -227,7 +233,9 @@ const titulo = computed(() => {
           :model-value="descricaoDaProva"
           @update:model-value="emit('update:descricao', String($event))"
         />
-        <p class="text-xs text-muted-foreground">Sai impressa abaixo do título, na primeira página.</p>
+        <p class="text-xs text-muted-foreground">
+          Sai impressa abaixo do título, na primeira página.
+        </p>
       </div>
 
       <div class="flex flex-col gap-1.5">
@@ -244,7 +252,11 @@ const titulo = computed(() => {
       <fieldset class="flex flex-col gap-3 border-t pt-4">
         <legend class="mb-1 text-sm font-medium">Campos de identificação</legend>
 
-        <div v-for="item in camposConfiguraveis" :key="item.campo" class="flex items-center justify-between gap-4">
+        <div
+          v-for="item in camposConfiguraveis"
+          :key="item.campo"
+          class="flex items-center justify-between gap-4"
+        >
           <Label :for="`campo-${item.campo}`" class="font-normal">{{ item.rotulo }}</Label>
           <Switch
             :id="`campo-${item.campo}`"
@@ -268,7 +280,9 @@ const titulo = computed(() => {
             Salvar
           </Button>
         </div>
-        <p class="text-xs text-muted-foreground">O modelo fica disponível para outras provas neste navegador.</p>
+        <p class="text-xs text-muted-foreground">
+          O modelo fica disponível para outras provas neste navegador.
+        </p>
       </div>
 
       <div class="flex items-center justify-between border-t pt-3 text-sm">
@@ -306,7 +320,9 @@ const titulo = computed(() => {
           name="pontuacao"
           autocomplete="off"
           :model-value="(bloco as BlocoDeQuestao).pontuacao"
-          @update:model-value="emit('update:bloco', { ...(bloco as BlocoDeQuestao), pontuacao: Number($event) || 0 })"
+          @update:model-value="
+            emit('update:bloco', { ...(bloco as BlocoDeQuestao), pontuacao: Number($event) || 0 })
+          "
         />
         <p class="text-xs text-muted-foreground">
           De {{ formatarPontos(totalDePontos) }} na prova. A soma não é validada (RF04).
@@ -316,7 +332,8 @@ const titulo = computed(() => {
       <div v-if="gabarito" class="flex flex-col gap-1.5">
         <span class="text-sm font-medium">Gabarito</span>
         <p class="text-sm text-muted-foreground">
-          <span class="font-semibold text-primary">{{ gabarito.letra }}</span> — {{ gabarito.texto }}
+          <span class="font-semibold text-primary">{{ gabarito.letra }}</span> —
+          {{ gabarito.texto }}
         </p>
         <p class="text-xs text-muted-foreground">Não sai impresso na folha.</p>
       </div>
@@ -329,11 +346,7 @@ const titulo = computed(() => {
       </div>
 
       <div class="flex flex-col gap-2 border-t pt-4">
-        <Button
-          variant="outline"
-          :disabled="!podeSalvarNoBanco"
-          @click="emit('salvarNoBanco')"
-        >
+        <Button variant="outline" :disabled="!podeSalvarNoBanco" @click="emit('salvarNoBanco')">
           <Save aria-hidden="true" />
           {{ questaoEstaNoBanco ? 'Atualizar no banco' : 'Salvar no banco' }}
         </Button>
@@ -355,7 +368,12 @@ const titulo = computed(() => {
         <Label :for="`tamanho-${bloco.id}`">Altura do espaço</Label>
         <Select
           :model-value="(bloco as BlocoDeEspaco).tamanho"
-          @update:model-value="emit('update:bloco', { ...(bloco as BlocoDeEspaco), tamanho: $event as TamanhoDeEspaco })"
+          @update:model-value="
+            emit('update:bloco', {
+              ...(bloco as BlocoDeEspaco),
+              tamanho: $event as TamanhoDeEspaco,
+            })
+          "
         >
           <SelectTrigger :id="`tamanho-${bloco.id}`" class="w-full" aria-label="Altura do espaço">
             <SelectValue />
@@ -366,7 +384,9 @@ const titulo = computed(() => {
             <SelectItem value="grande">Grande — 12 linhas / 96 mm</SelectItem>
           </SelectContent>
         </Select>
-        <p class="text-xs text-muted-foreground">As medidas representam o espaço ocupado no papel A4.</p>
+        <p class="text-xs text-muted-foreground">
+          As medidas representam o espaço ocupado no papel A4.
+        </p>
       </div>
     </template>
 
@@ -375,7 +395,9 @@ const titulo = computed(() => {
         <Label :for="`estilo-${bloco.id}`">Apresentação</Label>
         <Select
           :model-value="(bloco as BlocoDeTexto).estilo ?? 'paragrafo'"
-          @update:model-value="emit('update:bloco', { ...(bloco as BlocoDeTexto), estilo: $event as EstiloDeTexto })"
+          @update:model-value="
+            emit('update:bloco', { ...(bloco as BlocoDeTexto), estilo: $event as EstiloDeTexto })
+          "
         >
           <SelectTrigger :id="`estilo-${bloco.id}`" class="w-full">
             <SelectValue />
@@ -386,14 +408,16 @@ const titulo = computed(() => {
             <SelectItem value="destaque">Aviso em destaque</SelectItem>
           </SelectContent>
         </Select>
-        <p class="text-xs text-muted-foreground">O conteúdo continua sendo editado diretamente na folha.</p>
+        <p class="text-xs text-muted-foreground">
+          O conteúdo continua sendo editado diretamente na folha.
+        </p>
       </div>
     </template>
 
     <template v-else-if="bloco.type === 'titulo'">
       <p class="text-sm text-muted-foreground">
-        Título e descrição são editados diretamente na folha. Este bloco organiza a leitura,
-        mas não altera o embaralhamento da aplicação.
+        Título e descrição são editados diretamente na folha. Este bloco organiza a leitura, mas não
+        altera o embaralhamento da aplicação.
       </p>
     </template>
 

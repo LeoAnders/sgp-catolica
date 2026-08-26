@@ -54,7 +54,12 @@ const emit = defineEmits<{
 
     <Tooltip>
       <TooltipTrigger as-child>
-        <Button variant="ghost" size="icon-xs" aria-label="Duplicar bloco" @click="emit('duplicar')">
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          aria-label="Duplicar bloco"
+          @click="emit('duplicar')"
+        >
           <Copy aria-hidden="true" />
         </Button>
       </TooltipTrigger>
@@ -63,7 +68,12 @@ const emit = defineEmits<{
 
     <Tooltip>
       <TooltipTrigger as-child>
-        <Button variant="destructive" size="icon-xs" aria-label="Excluir bloco" @click="emit('remover')">
+        <Button
+          variant="destructive"
+          size="icon-xs"
+          aria-label="Excluir bloco"
+          @click="emit('remover')"
+        >
           <Trash2 aria-hidden="true" />
         </Button>
       </TooltipTrigger>

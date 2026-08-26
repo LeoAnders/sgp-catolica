@@ -37,8 +37,8 @@ desempenho em um único lugar.
 
 ## Uma experiência, três perspectivas
 
-| Professor na web | Professor no aplicativo | Estudante na web |
-| :--- | :--- | :--- |
+| Professor na web                                | Professor no aplicativo                                | Estudante na web                              |
+| :---------------------------------------------- | :----------------------------------------------------- | :-------------------------------------------- |
 | Organiza turmas, questões, provas e aplicações. | Lê o QR Code, confere respostas e registra a correção. | Entra em turmas e acompanha notas e evolução. |
 
 O fluxo central conecta as três superfícies:

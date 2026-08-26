@@ -52,6 +52,13 @@ docs: atualiza visão geral do produto
 As mensagens usam tipo e escopo em inglês, descrição em português, no imperativo,
 em letras minúsculas e sem ponto final.
 
+Esse padrão é verificado automaticamente, não só por convenção: o hook `commit-msg`
+do Husky roda `commitlint` a cada commit local, e o CI valida de novo todos os
+commits do Pull Request — um commit fora do padrão não passa em nenhum dos dois. Da
+mesma forma, o hook `pre-commit` roda `prettier` nos arquivos staged, e o CI roda
+`npm run format:check` e `npm run lint`; rode `npm run format` antes de commitar se
+o hook local acusar algo.
+
 ## Pull Requests
 
 Mantenha cada PR focado em uma mudança verificável. A descrição deve explicar o
