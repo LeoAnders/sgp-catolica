@@ -1,163 +1,349 @@
 # Design system web — SGP Católica
 
-## Objetivo e fonte de verdade
+## Papel deste documento
 
-Este documento define a fundação de interface do SGP Católica. Ele vale para novas telas,
-ajustes de UI e revisões visuais. O objetivo é manter uma aplicação acadêmica sóbria,
-consistente e acessível, sem criar bibliotecas paralelas de componentes.
+Esta é a fonte normativa de UI da aplicação em `apps/web`. Ela consolida a linguagem
+visual construída na N1 e deve orientar novas telas, revisões e componentes. O código em
+execução é a referência técnica; divergências entre código e documento devem ser
+corrigidas na mesma entrega.
 
-A implementação atual está em `apps/web`; seus componentes instalados e o tema são a
-referência executável. Uma mudança que crie um novo padrão deve atualizar este documento
-na mesma entrega.
+O sistema adota princípios observados no workspace do Typeform — densidade compacta,
+hierarquia por superfícies e navegação clara — sem copiar marca, logotipo, textos ou
+componentes proprietários. A identidade institucional futura deve ser aplicada pelos
+tokens globais, sem reescrever as telas.
+
+## Princípios
+
+1. **A tarefa ocupa o centro.** Navegação e ferramentas permanecem discretas para que o
+   conteúdo seja o elemento dominante.
+2. **Superfície comunica hierarquia.** Branco externo, campo cinza, cartões e papel têm
+   funções distintas; não transformar toda área em cartão.
+3. **Densidade calma.** Texto entre 12 e 14 px na operação cotidiana, controles de 32 ou
+   40 px e espaços regulares evitam a aparência inflada da versão anterior.
+4. **Ação no contexto.** Filtros ficam junto da lista; propriedades ficam junto do bloco;
+   mover, duplicar e excluir aparecem quando o bloco é selecionado.
+5. **Autoria fiel ao resultado.** Na prova, o professor edita enunciado, alternativas e
+   conteúdo sobre a própria folha. Configurações ficam no painel lateral.
+6. **Protótipo honesto.** Ações sem backend são desabilitadas ou explicadas. Persistência
+   local nunca é apresentada como sincronização real.
 
 ## Fundação técnica
 
-| Decisão | Padrão |
+| Tema | Padrão |
 | --- | --- |
-| Componentes | shadcn-vue sobre Reka UI; reutilizar os primitivos existentes em `apps/web/src/components/ui`. |
-| Ícones | `@lucide/vue`; ícones são decorativos com `aria-hidden` ou têm rótulo acessível. |
-| Tipografia | Inter Variable, carregada globalmente em `src/styles/global.css`. |
-| Estilos | Tailwind v4 e tokens CSS semânticos do shadcn. |
-| Temas | claro e escuro; troca direta por botão na barra superior. Não há modo “sistema” na interface. |
-| Notificações | `vue-sonner`, pelo `Toaster` único na raiz. |
+| Framework | Vue 3, Vite e TypeScript. |
+| Estilos | Tailwind CSS v4 e tokens CSS em `src/styles/global.css`. |
+| Componentes | shadcn-vue sobre Reka UI, em `src/components/ui`. |
+| Tipografia | Instrument Sans Variable, com `system-ui` como fallback. |
+| Ícones | `@lucide/vue`; traço simples, normalmente 14 ou 16 px. |
+| Feedback | `vue-sonner`, por um `Toaster` único na raiz. |
+| Tema | Claro é canônico na N1. Tokens escuros são preservados, mas não há troca exposta. |
 
-`apps/web/components.json` é a configuração do shadcn-vue. Ao precisar de um primitivo
-ausente, adicionar o componente pelo CLI do shadcn-vue usando essa configuração; não
-recriar manualmente um equivalente de Button, Card, Input, Select, Dialog, Table ou
-Sidebar.
+Usar os primitivos instalados. Não recriar manualmente Button, Input, Textarea, Select,
+Switch, Dialog, DropdownMenu, Card, Table, Alert, Badge, Tooltip ou Skeleton.
 
-## Tokens e superfícies
+## Cor e superfícies
 
-Usar nomes semânticos — `background`, `foreground`, `card`, `popover`, `primary`,
-`secondary`, `muted`, `accent`, `destructive`, `border`, `input`, `ring` e tokens
-`sidebar`. Não usar hexadecimal, cor arbitrária, sombra manual ou raio manual em telas.
+A paleta atual é provisória: aubergine escuro nas ações, cinza levemente violeta no campo
+de trabalho, branco nas superfícies e texto quase preto. Cores literais não pertencem às
+telas; toda cor deve vir de token semântico.
 
-| Papel | Classe/token | Regra |
+| Papel | Token/classe | Uso |
 | --- | --- | --- |
-| Canvas da página | `bg-background` | No tema escuro é preto. Abriga conteúdo operacional e a área livre da página. |
-| Superfície elevada | `bg-card` | Superfície neutra padrão do shadcn para cartões, filtros e grids. |
-| Sobreposição | `bg-popover` | Somente menus, diálogos, selects e tooltips. |
-| Separação | `border`, `ring-border` | Contorno neutro e discreto em cartões e sobreposições. |
-| Texto secundário | `text-muted-foreground` | Descrições, metadados e conteúdo de apoio. |
+| Margem externa | `background` / `bg-background` | Barra superior, controles e espaço branco ao redor da aplicação. |
+| Campo de trabalho | `field` / `bg-field` | Moldura cinza, canvas do editor e fundo da pré-visualização. |
+| Objeto elevado | `card` / `bg-card` | Linhas de lista, painéis contextuais, estados vazios. |
+| Sobreposição | `popover` / `bg-popover` | Dialog, select, dropdown e tooltip. |
+| Papel | `sheet` / `bg-sheet` | Folha A4, sempre branca inclusive no tema escuro. |
+| Tinta do papel | `sheet-foreground` | Todo texto impresso. |
+| Contorno do papel | `sheet-border` | Linhas de resposta, divisórias e limite da folha. |
+| Ação principal | `primary` | Botão primário, indicador ativo e foco. |
+| Seleção discreta | `accent` e `secondary` | Hover, recorte ativo e ícones auxiliares. |
+| Remoção/erro | `destructive` | Excluir, erro de formulário e falha; nunca ação comum. |
 
-No tema escuro, a diferença entre canvas preto e `card` escuro é intencional: os blocos
-ganham hierarquia sem parecerem um dashboard genérico.
+### Regras de superfície
 
-## Paleta vinho Católica
+- A casca autenticada tem fundo branco e uma única moldura cinza arredondada.
+- Cartões brancos representam objetos ou estados; não envolvem páginas inteiras sem
+  necessidade.
+- Borda fina é o separador padrão. Sombras são discretas e reservadas a papel e barras
+  flutuantes.
+- A folha usa somente tokens `sheet`; o tema da aplicação não muda a aparência impressa.
+- Não usar degradê em cartões, métricas, painéis ou cabeçalhos.
 
-O vermelho institucional é aplicado pelos tokens globais de `src/styles/global.css` e é
-reservado para ações, foco e destaque pontual. Caso o manual institucional forneça um
-valor oficial mais específico, a alteração deve ocorrer somente nesses tokens.
+## Tipografia
 
-| Papel | Tema claro | Tema escuro | Uso |
-| --- | --- | --- | --- |
-| Ação institucional | Vinho profundo | Vinho mais luminoso | `primary`, `sidebar-primary`, ações principais e ícone da marca. |
-| Estrutura | Neutra | Neutra | `background`, `card`, `sidebar`, `border`, `input`, `accent` e `sidebar-accent`. |
-| Destaque de resumo | Gradiente vinho de 5% | Gradiente vinho de 5% | Somente cartões de métrica: `from-primary/5 to-card bg-gradient-to-t`. |
-| Seleção e hover | Neutra | Neutra | `accent` e `sidebar-accent`; o estado não deve colorir a navegação de vermelho. |
-| Foco | Vinho profundo | Vinho luminoso | `ring`; nunca remover o foco visível. |
-
-`destructive` continua reservado para erro ou remoção: ele não é o vermelho institucional
-de ação primária.
-
-O degradê não pertence ao componente `Card`: ele é aplicado no contêiner de um grupo de
-resumos. Por isso não se propaga a tabelas, cards de formulários, grids ou à casca da
-aplicação.
-
-## Estrutura da aplicação
-
-| Região | Composição obrigatória | Local atual |
+| Uso | Tamanho e peso | Regra |
 | --- | --- | --- |
-| Casca | `SidebarProvider` + `AppSidebar` + `SidebarInset` | `src/App.vue` |
-| Barra superior | `SidebarTrigger`, `Separator`, `Breadcrumb` e botão de tema | `src/App.vue` |
-| Navegação | `Sidebar` com `variant="inset"` e `collapsible="icon"` | `src/components/AppSidebar.vue` |
-| Perfil | `Avatar` + `DropdownMenu`; avatar genérico enquanto não houver dados de usuário confiáveis | `src/components/AppSidebar.vue` |
-| Conteúdo | `main` com `min-w-0 flex-1`; cada rota determina o conteúdo | `src/App.vue` |
+| Texto operacional | 14 px, 400 | Padrão de campos, listas e parágrafos curtos. |
+| Controle compacto | 13 px, 500 | Botões `sm`, abas e ações contextuais. |
+| Metadado | 12 px, 400/500 | Datas, contagens, descrições e ajuda. |
+| Rótulo de grupo | 11 px, 500, caixa alta | Seções curtas de painel; usar com parcimônia. |
+| Título de página | 22 px, 500 | Um por tela comum. |
+| Título do login | 24 px, 400 | Convite de entrada no formulário. |
+| Chamada de apresentação | 30–36 px, 500 | Apenas no painel visual do login. |
+| Conteúdo impresso | 12–16 px conforme papel | Priorizar legibilidade e proporção A4. |
 
-A sidebar fechada preserva os ícones e os tooltips; ela não desaparece. Configurações e
-Ajuda são itens visuais já previstos. Não conectar ações fictícias: Ajuda só vira navegação
-quando a rota de documentação existir, e Configurações só recebe comportamento quando o
-requisito for definido.
+Usar peso 500 na maior parte da hierarquia. `font-semibold` e `font-bold` ficam para
+número da questão, total, gabarito e contraste pontual. Evitar `tracking-tight`; reservar
+espaçamento de letras para rótulos curtos em caixa alta.
 
-## Layout e responsividade
+## Espaçamento, borda e densidade
 
-| Caso | Padrão |
+- A escala base é de 4 px; combinações recorrentes são 8, 12, 16, 20, 24 e 32 px.
+- `gap-2` organiza controles próximos; `gap-3` separa itens; `gap-4/5` separa grupos.
+- O raio base é `--radius: 0.625rem` (10 px). Usar os derivados dos primitivos.
+- Painéis e cartões usam `rounded-xl`; controles compactos usam `rounded-md`; campos e
+  botões padrão usam `rounded-lg`.
+- A borda é neutra e fina. Estado de foco usa `ring`, nunca somente mudança de cor.
+- Não ajustar altura, raio, peso ou padding de um primitivo em cada tela para “fazê-lo
+  caber”. Uma exceção só é válida por função específica, como edição invisível no papel.
+
+## Régua de controles
+
+| Elemento | Medida implementada |
 | --- | --- |
-| Página comum | `flex flex-1 flex-col gap-4 p-4`. |
-| Cabeçalho de página | Título, descrição curta e ação principal; em telas pequenas, empilhar antes de comprimir. |
-| Resumo/KPIs | `grid auto-rows-min gap-4 md:grid-cols-3`; cada métrica é um `Card`. |
-| Blocos adjacentes | `gap-4`; não usar espaçamentos ad hoc para “corrigir” uma tela isolada. |
-| Conteúdo largo | `min-w-0` no contêiner e `overflow-x-auto` no trecho que exceder a largura. |
-| Dados tabulares | Manter as colunas relevantes com rolagem horizontal; ocultar ou resumir coluna requer decisão de UX. |
+| Button padrão | 40 px de altura, 14 px, peso 500. |
+| Button `sm` | 32 px, 13 px; barras, filtros, listas e painéis. |
+| Button `xs` | 28 px; ação contextual sobre outro elemento. |
+| Button `lg` | 44 px, 15 px; ação principal do login. |
+| Botão apenas com ícone | 40, 32 ou 28 px conforme contexto; sempre nome acessível. |
+| Input e Select padrão | 40 px, texto de 14 px. |
+| Select `sm` | 32 px. |
+| Textarea | mínimo de 64 px; cresce com o conteúdo. |
+| Badge | 24 px, texto de 12 px, formato de pílula. |
 
-## Grades de dados
+### Barras de rolagem
 
-Neste estágio, uma grade operacional usa a mesma superfície `card` dos cartões. A
-hierarquia vem da moldura, das linhas e do espaçamento nativos da tabela, sem separar
-artificialmente o cabeçalho em outra superfície.
+Áreas de trabalho com rolagem própria usam `scrollbar-sutil`: trilho transparente,
+indicador fino e arredondado, cor derivada de `muted-foreground` e contraste um pouco
+maior no hover. O trilho reserva apenas a largura necessária e não deve criar uma faixa
+cinza competindo com a borda do painel.
 
-| Parte da grade | Padrão |
+- aplicar em canvas, estrutura e painéis contextuais do editor;
+- manter a barra nativa do documento fora dessas regiões;
+- abas horizontais continuam com scrollbar oculto, pois os próprios rótulos indicam o
+  conteúdo rolável;
+- nunca esconder scrollbar vertical de uma área longa nem reduzir sua área de clique a
+  ponto de prejudicar a usabilidade.
+
+### Hierarquia de ações
+
+| Intenção | Variante |
 | --- | --- |
-| Contêiner | `Card` nativo; mantém ring, borda, raio e `overflow` nativos. |
-| Cabeçalho e filtros | `CardHeader` nativo, com título, descrição e filtros organizados por layout. |
-| Cabeçalho da tabela | `TableHeader` nativo. |
-| Corpo, linhas e células | `Table` nativa na superfície do cartão, usando bordas e hover nativos. |
-| Estados | `Skeleton` no carregamento; `TableEmpty` no vazio; mensagem curta e ação de recuperação quando fizer sentido. |
-| Ações por linha | `Button` `ghost`/`sm` ou `DropdownMenu` quando houver várias ações. |
+| Próxima ação principal | `Button` padrão. |
+| Fonte alternativa ou ação secundária | `outline`. |
+| Ação de baixa ênfase | `ghost`. |
+| Remoção | `destructive`, com rótulo ou nome acessível inequívoco. |
+| Ação indisponível | `disabled` e, quando necessário, Tooltip explicando o limite. |
 
-Em uma etapa futura, uma grade pode receber superfície própria se houver uma razão de
-produto e uma validação visual; isso não é o padrão atual.
+Uma região deve ter uma ação primária evidente. No editor, “Nova questão” é primária e
+“Banco de questões” é secundária. No login, “Entrar” ocupa toda a largura do formulário.
 
-## Controles e hierarquia de ações
+## Casca autenticada
 
-| Necessidade | Componente/variante |
+A casca segue a composição “margem branca + workspace cinza”:
+
+| Região | Composição |
 | --- | --- |
-| Ação principal da página | `Button` padrão, com texto e ícone somente quando o ícone acrescentar significado. |
-| Ação secundária | `Button variant="outline"`. |
-| Ação discreta | `Button variant="ghost"`. |
-| Ação só com ícone | `Button size="icon"`, sempre com `aria-label` ou tooltip. |
-| Ação de linha | `Button size="sm"`; não reduzir a altura por CSS próprio. |
-| Busca e texto curto | `Input`; ícone de busca posicionado como elemento decorativo. |
-| Escolha entre opções | `Select`; nunca simular select com um `div`. |
-| Campo multilinha | `Textarea`. |
-| Situação/estado | `Badge`; variantes devem representar semântica, não decoração. |
-| Separação de ações | `Separator`, não bordas ou espaços improvisados. |
+| Barra externa | 56 px, branca; marca à esquerda e Integrações, Ajuda e perfil à direita. |
+| Moldura | Margem de 12–16 px, `rounded-xl`, borda, `bg-field`, `overflow-hidden`. |
+| Abas | 48 px, dentro da moldura; ícone e rótulo sempre visíveis, ativa sobre branco com indicador inferior. |
+| Página | Painel da seção e conteúdo compartilham o mesmo campo cinza, separados por borda. |
 
-Usar os tamanhos, estados de foco, disabled e hover fornecidos pelos componentes shadcn.
-Uma classe de layout pode controlar largura, grid e alinhamento, mas não deve reproduzir a
-aparência de um primitivo existente.
+Regras:
 
-## Mapa de componentes instalados
+- Não usar sidebar global recolhível.
+- Não esconder os nomes das seções atrás de ícones.
+- A barra externa recebe apenas utilidades; navegação de domínio fica nas abas.
+- Abas podem rolar horizontalmente sem exibir barra de rolagem.
+- Seções comuns não usam breadcrumb: aba ativa e título já fornecem contexto.
+- Login e editor usam `meta.telaCheia` e fornecem a própria composição.
 
-| Grupo | Componentes disponíveis | Aplicação esperada |
+## Layout de seção e listas
+
+Em desktop, uma seção pode usar painel esquerdo de 256 px e conteúdo flexível. Em largura
+estreita, o painel vira faixa acima do conteúdo; informação relevante não desaparece em
+um menu lateral.
+
+O painel reúne, nesta ordem: ação principal, busca, workspace/recortes e rodapé de apoio.
+Contagens ficam dentro do recorte correspondente; não usar cartões de KPI para repetir
+os mesmos números.
+
+### Escolher lista ou tabela
+
+- Se a linha **é o objeto que abre**, usar lista de cartões compactos. O cartão inteiro é
+  um alvo e recebe chevron; ações destrutivas pertencem à tela do objeto.
+- Se os registros precisam ser comparados por coluna, usar `Table` em `Card`, com
+  cabeçalho, corpo e estado vazio no mesmo contêiner.
+- Não criar um menu de linha apenas para preencher espaço.
+- Conteúdo largo usa `min-w-0` e rolagem somente no trecho que excede a largura.
+
+## Login
+
+Em desktop, o login divide a janela igualmente:
+
+- painel aubergine de apresentação à esquerda, com marca, chamada curta, ilustração e
+  identificação do ambiente;
+- formulário branco à direita, centralizado em coluna de no máximo 448 px;
+- canto interno arredondado faz o formulário parecer pousado sobre o fundo escuro;
+- ilustração tem movimento vertical lento e respeita `prefers-reduced-motion`;
+- em telas menores, o painel visual é removido e a marca migra para o cabeçalho.
+
+O login não deve carregar métricas, cartões de avaliação ou conteúdo operacional. A
+imagem apoia a promessa do produto sem competir com o formulário.
+
+## Editor de prova
+
+O editor é um modo de trabalho em tela cheia, com barra própria e três zonas. Ele não usa
+a casca autenticada.
+
+| Zona | Largura e função |
+| --- | --- |
+| Estrutura | 240 px (`lg:w-60`); páginas calculadas, cabeçalho na Página 1 e ordem global dos blocos. |
+| Folha | Flexível; canvas rolável contendo a folha A4. |
+| Contexto | 320 px (`lg:w-80`) em todos os estados: propriedades, autoria ou banco. |
+
+Trocar o painel direito não pode mudar sua largura nem deslocar a folha. Em telas menores
+as zonas empilham e permanecem utilizáveis.
+
+Quando a prova não está em rascunho, um `Alert` de aviso aparece no topo da folha, dentro
+do canvas rolável e fora da paginação, explicando a situação (aplicações já geradas ou
+prova encerrada) sem bloquear a edição do conteúdo.
+
+A estrutura espelha a paginação calculada: cada grupo começa com um marcador discreto
+“Página N” e lista apenas os blocos daquela folha. O cabeçalho aparece como primeiro item
+da Página 1. A hierarquia de página orienta sem virar um cartão pesado nem duplicar a
+miniatura completa do papel.
+
+### Folha e papel
+
+- Largura física: 210 mm.
+- Altura fixa por página: 297 mm.
+- Margem interna: 16 mm em todas as larguras.
+- O canvas central ajusta apenas a escala visual da folha para ela caber centralizada na
+  largura disponível, sem rolagem horizontal. A geometria interna continua em 210 × 297 mm,
+  portanto o ajuste não altera paginação, margens nem a saída futura para impressão.
+- O editor mede cabeçalho e blocos na largura real do papel e cria novas folhas
+  automaticamente quando o conteúdo excede a área útil.
+- A quebra ocorre entre blocos para preservar a leitura de cada questão. Um bloco maior
+  que toda a área útil permanece como caso limite a ser tratado na futura geração de PDF.
+- Cabeçalho completo aparece na primeira folha; todas as folhas exibem número discreto na
+  margem inferior.
+- Editor e pré-visualização recebem os mesmos grupos de páginas; nunca manter dois
+  algoritmos de quebra.
+- “Nova questão” e “Banco de questões” ficam em uma barra flutuante compacta, centralizada
+  na base do canvas e independente da rolagem das folhas. A barra usa superfície branca,
+  borda, sombra discreta e mantém a ação primária evidente; ela nunca participa da
+  paginação nem aparece na pré-visualização.
+
+### Autoria de questões
+
+“Nova questão” abre três tipos:
+
+| Tipo | Autoria | Saída no papel |
 | --- | --- | --- |
-| Ações e formulário | `Button`, `Input`, `Textarea`, `Label`, `Select` | Formulários, filtros e ações. |
-| Conteúdo | `Card`, `Badge`, `Tabs`, `Separator`, `Skeleton` | Resumos, agrupamento e estados de carregamento. |
-| Dados | `Table` e subcomponentes | Listagens, grids operacionais e estados vazios. |
-| Navegação | `Sidebar`, `Breadcrumb`, `Sheet`, `Tooltip` | Casca, navegação contextual e experiência mobile. |
-| Sobreposições | `Dialog`, `DropdownMenu`, `Sheet`, `Tooltip` | Confirmações, detalhes, ações adicionais e ajuda contextual. |
-| Identidade e feedback | `Avatar`, `Sonner` | Perfil e retorno de ações. |
+| Múltipla escolha | Enunciado, 2 a 5 alternativas e seleção única da correta. | Alternativas com círculos vazios; o gabarito não é revelado. |
+| Resposta curta | Enunciado e pontuação. | Quatro linhas em área mínima de 28 mm. |
+| Resposta longa | Enunciado e pontuação. | Oito linhas em área mínima de 64 mm. |
 
-Os imports devem vir de `@/components/ui/<nome>`. Componentes de domínio podem compor
-primitivos (por exemplo, uma linha de aplicação), mas não duplicar os primitivos acima.
+O enunciado e as alternativas são editados diretamente na folha. Tipo de resposta,
+pontuação, gabarito resumido, tags e ação “Salvar no banco” ficam no painel direito.
+Radio é usado para o gabarito porque o domínio atual admite uma alternativa correta.
 
-## Acessibilidade e conteúdo
+“Salvar no banco” cria ou atualiza uma questão reutilizável localmente. A autoria da
+prova não exige salvar no banco, e uma questão trazida do banco entra como cópia editável
+para não alterar o acervo silenciosamente.
 
-- Preservar o link “Ir para o conteúdo”, foco visível e estrutura semântica de títulos.
-- Todo controle interativo deve ter texto visível ou nome acessível.
-- Ícones isolados não substituem rótulos em ações críticas.
-- Usar `Dialog` para fluxo modal e `DropdownMenu` para ações compactas; não criar overlays
-  com posicionamento manual.
-- Mensagens de vazio e carregamento devem explicar o estado e oferecer próximo passo
-  apenas quando ele existir de verdade.
+### Conteúdo de apoio
 
-## Checklist para criar ou revisar uma tela
+Título de seção, texto/instrução e imagem podem ser inseridos como apoio e não recebem
+número nem pontuação. Espaço de resposta não é uma opção isolada nova: ele pertence à
+questão discursiva. Blocos antigos de espaço continuam renderizados por compatibilidade.
 
-1. Conferir requisito, rota e dados disponíveis antes de desenhar a interface.
-2. Escolher componentes instalados no mapa; se faltar um primitivo, adicionar pelo shadcn-vue.
-3. Compor a página com o layout, superfícies e grid definidos acima.
-4. Implementar os estados carregando, vazio, erro quando aplicável, e responsividade.
-5. Verificar teclado, foco, nomes acessíveis, tema claro/escuro e largura estreita.
-6. Rodar `npm run typecheck --workspace @sgp/web`, `npm run build --workspace @sgp/web` e
-   `git diff --check`.
-7. Atualizar este documento se a entrega introduzir um padrão reutilizável novo.
+### Seleção e ações do bloco
+
+- Seleção usa ring sobre a folha e sincroniza estrutura, canvas e painel direito.
+- A barra contextual do bloco oferece mover, duplicar e excluir.
+- A estrutura esquerda oferece setas como alternativa de teclado.
+- Excluir oferece “Desfazer” por toast.
+- Duplicar gera novos ids; uma questão duplicada não atualiza a mesma entrada do banco.
+
+### Cabeçalho da prova
+
+O cabeçalho é selecionável e configurado no painel direito:
+
+- instituição, linha complementar, professor, descrição e instruções;
+- campos opcionais de nome, matrícula, turma, data e nota;
+- modelos salvos e aplicáveis a outras provas no mesmo navegador;
+- marcador de QR fixo e sempre visível. Não existe opção para removê-lo; o QR válido só
+  será gerado na aplicação da prova.
+
+### Pré-visualização
+
+A prévia segue o comportamento de apresentação do Figma:
+
+- `Dialog` ocupa toda a janela para conter foco e permitir saída por `Escape`;
+- canvas neutro pontilhado e folha A4 centralizada;
+- controles flutuantes para fechar, zoom de 40% a 140% e ajuste à tela;
+- mesmos renderizadores do editor em modo somente leitura;
+- mesma distribuição automática de blocos entre as folhas;
+- sem rings, ações de bloco, inputs ou indicação da resposta correta.
+
+## Estados, feedback e conteúdo
+
+| Situação | Padrão |
+| --- | --- |
+| Carregamento | Skeleton com geometria próxima do conteúdo final. |
+| Vazio | Mensagem curta, motivo e uma ação recuperável quando existir. |
+| Validação | Mensagem junto do campo, `aria-invalid` e foco preservado. |
+| Sucesso | Toast curto; não interrompe o fluxo. |
+| Remoção reversível | Toast com ação “Desfazer”. |
+| Área futura | Estado vazio honesto; não simular controles conectados. |
+| Erro destrutivo | Token e variante `destructive`. |
+
+## Acessibilidade e movimento
+
+- Manter “Ir para o conteúdo” e região principal focável.
+- Todo controle tem texto visível ou nome acessível.
+- Ícones decorativos usam `aria-hidden="true"`.
+- Aba ativa usa `aria-current`; filtro ativo usa `aria-pressed`.
+- Reordenação nunca depende apenas de arrastar.
+- Dialog, Select, DropdownMenu e Tooltip mantêm o comportamento de Reka UI.
+- Foco visível nunca é removido sem substituição equivalente.
+- Animações respeitam `prefers-reduced-motion`.
+
+## Responsividade
+
+| Faixa | Comportamento |
+| --- | --- |
+| Abaixo de `sm` | Marca textual e utilidades secundárias podem reduzir; formulário ocupa a largura; folha reduz sua escala visual para preservar a proporção A4 sem rolagem horizontal. |
+| Abaixo de `lg` | Painéis de seção e zonas do editor empilham; metadados secundários de listas podem ser ocultados. |
+| `lg` ou maior | Casca completa, painel de seção lateral e editor em três zonas. |
+
+Ocultar texto só é aceitável quando a função continua nomeada de forma acessível. Dados
+essenciais não devem desaparecer; quando necessário, usar rolagem localizada.
+
+## Mapa de implementação
+
+| Padrão | Referência executável |
+| --- | --- |
+| Tokens e fonte | `src/styles/global.css` |
+| Casca | `src/App.vue`, `src/components/casca/` |
+| Login | `src/telas/Login.vue` |
+| Workspace/lista | `src/telas/Provas.vue` |
+| Editor | `src/telas/EditorDeProva.vue`, `src/components/prova/` |
+| Estado local do protótipo | `src/lib/estado-de-provas.ts`, `estado-de-questoes.ts`, `cabecalhos-da-prova.ts` |
+| Primitivos | `src/components/ui/` |
+
+## Checklist de entrega
+
+1. Confirmar requisito, rota, dados e limites da fase.
+2. Reutilizar tokens e primitivos existentes.
+3. Conferir hierarquia de superfícies, densidade e ação primária.
+4. Implementar carregamento, vazio, erro e largura estreita quando aplicável.
+5. Verificar teclado, foco, nomes acessíveis e movimento reduzido.
+6. Atualizar este documento quando houver um padrão novo.
+7. Atualizar `experiencia-web-atual.md` quando o comportamento executável mudar.
+8. Rodar `npm run typecheck --workspace @sgp/web`,
+   `npm run build --workspace @sgp/web` e `git diff --check`.

@@ -1,12 +1,37 @@
-# Design
+# Design web
 
-Fonte oficial para decisões de interface e experiência web.
+Fonte oficial das decisões de interface e experiência da aplicação web do SGP Católica.
+Estes documentos descrevem a base consolidada na N1 e devem acompanhar qualquer mudança
+relevante de UI.
 
-| Documento | Uso |
+## Documentos
+
+| Documento | Responsabilidade |
 | --- | --- |
-| [Design system web](design-system-web.md) | Fundamentos, tokens, layouts, componentes, estados e checklist de tela. |
-| [Experiência web atual](experiencia-web-atual.md) | Mapa de navegação, telas disponíveis, fluxos, estados e limites da implementação atual. |
+| [Design system web](design-system-web.md) | Regras normativas: direção visual, tokens, tipografia, densidade, layouts, componentes, acessibilidade e padrões do editor. |
+| [Experiência web atual](experiencia-web-atual.md) | Estado executável: rotas, fluxos, comportamentos, persistência local e limites conhecidos. |
 
-O design system atual define a fundação técnica e visual do produto. O vinho Católica já
-é uma decisão de tokens: fica restrito a ações, foco e ao degradê sutil dos cartões de
-resumo, conforme descrito no design system.
+O design system responde **como novas interfaces devem ser construídas**. A experiência
+atual responde **o que já funciona hoje**. Requisitos de produto continuam em
+[`docs/produto`](../produto/); estes arquivos não criam requisitos funcionais por conta
+própria.
+
+## Referências adotadas
+
+- [Typeform](https://www.typeform.com/) orienta a densidade, a hierarquia por superfícies,
+  a casca branca ao redor do campo cinza, os controles compactos e a organização do
+  workspace. A marca e os componentes não são copiados literalmente.
+- O modo de apresentação do Figma orienta a pré-visualização imersiva da prova: canvas,
+  folha centralizada e controles flutuantes de zoom.
+- A ilustração do login é uma adaptação rastreada em
+  [`apps/web/src/assets/illustrations/README.md`](../../apps/web/src/assets/illustrations/README.md).
+
+## Regra de manutenção
+
+1. Confirmar requisitos e limites da fase antes de alterar um fluxo.
+2. Atualizar primeiro o design system quando surgir um padrão reutilizável.
+3. Atualizar a experiência atual quando uma tela ou comportamento mudar.
+4. Manter propostas não aprovadas explicitamente marcadas como protótipo ou limite.
+5. Validar links, `git diff --check`, typecheck e build antes de concluir a entrega.
+
+Não registrar aqui anotações pessoais, caminhos locais, credenciais ou dados reais.

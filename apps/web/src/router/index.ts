@@ -8,12 +8,25 @@ import Provas from '@/telas/Provas.vue';
  * navegacao ficar completa e serao preenchidas nas proximas entregas.
  */
 const rotas: RouteRecordRaw[] = [
-  { path: '/', redirect: '/provas' },
+  { path: '/', redirect: '/login' },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/telas/Login.vue'),
+    meta: { titulo: 'Entrar', telaCheia: true },
+  },
   {
     path: '/provas',
     name: 'provas',
     component: Provas,
     meta: { titulo: 'Provas' },
+  },
+  {
+    path: '/provas/:id',
+    name: 'provas-editor',
+    component: () => import('@/telas/EditorDeProva.vue'),
+    // Modo de trabalho: assume a janela inteira, sem faixa nem abas (ver App.vue).
+    meta: { titulo: 'Editor de prova', telaCheia: true },
   },
   {
     path: '/banco-de-questoes',

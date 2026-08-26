@@ -1,104 +1,295 @@
 # Experiência web atual
 
-## Escopo
+## Escopo e situação
 
-Este documento descreve a experiência que existe na aplicação web agora. Ele separa
-comportamentos implementados de marcadores de futuras entregas para que uma tela em
-construção não seja interpretada como funcionalidade concluída.
+Este documento descreve a aplicação web executável na N1. Ele registra o que o docente
+consegue fazer hoje, o que é apenas demonstrativo e o que ainda depende de requisitos ou
+backend. Regras visuais ficam no [design system web](design-system-web.md).
 
-O público atual é o docente. A tela de Provas é a referência de interação para as próximas
-telas do produto.
+Classificação usada:
+
+- **Implementado na N1:** fluxo navegável e estado local suficiente para demonstração.
+- **Marcador:** rota ou controle visível sem funcionalidade de produto.
+- **Protótipo em avaliação:** interação implementada para validar uma proposta que ainda
+  não foi incorporada ao domínio aprovado.
 
 ## Mapa de navegação
 
-| Rota | Situação | Propósito atual |
+| Rota | Situação | Experiência atual |
 | --- | --- | --- |
-| `/` | Implementada | Redireciona para `/provas`. |
-| `/provas` | Implementada | Consultar, filtrar, criar rascunho e abrir detalhes de provas. |
-| `/banco-de-questoes` | Marcador | Reserva o lugar da seção; ainda não contém o fluxo de questões. |
-| `/turmas` | Marcador | Reserva o lugar da seção; ainda não contém gestão de turmas. |
-| `/correcoes` | Marcador | Reserva o lugar da seção; ainda não contém o fluxo de correção. |
-| `/relatorios` | Marcador | Reserva o lugar da seção; ainda não contém relatórios. |
-| Rota inexistente | Implementada | Redireciona para `/provas`. |
+| `/` | Implementado | Redireciona para `/login`. |
+| `/login` | Implementado na N1 | Valida localmente e abre `/provas`; não autentica. |
+| `/provas` | Implementado na N1 | Workspace para buscar, filtrar, ordenar, abrir e criar provas. |
+| `/provas/:id` | Protótipo em avaliação | Editor A4 em tela cheia, autoria por blocos e pré-visualização. |
+| `/banco-de-questoes` | Marcador | Estado em construção; o banco utilizável hoje existe dentro do editor. |
+| `/turmas` | Marcador | Estado em construção. |
+| `/correcoes` | Marcador | Estado em construção. |
+| `/relatorios` | Marcador | Estado em construção. |
+| Rota desconhecida | Implementado | Redireciona para `/provas`. |
 
-As cinco seções ficam na sidebar para apresentar a arquitetura do produto sem fingir que
-as áreas futuras estão prontas. As quatro seções marcadas exibem uma mensagem honesta e
-uma ação para retornar a Provas.
+As cinco seções aparecem nas abas para tornar a arquitetura do produto visível sem
+simular funções prontas. Login e editor usam `meta.telaCheia`; as demais rotas usam a
+casca autenticada.
 
-## Casca de navegação
+## Login
 
-| Elemento | Comportamento | Limite atual |
+### Composição
+
+Em desktop, a janela é dividida em dois painéis:
+
+- à esquerda, fundo aubergine, marca, chamada “Provas mais simples de criar, aplicar e
+  acompanhar”, ilustração de preparação de prova e identificação de ambiente
+  demonstrativo;
+- à direita, superfície branca com seletor de idioma visual e formulário centralizado.
+
+A ilustração possui movimento vertical discreto e é estática quando o sistema solicita
+redução de movimento. Em largura inferior a `lg`, o painel visual é removido e a marca
+aparece no cabeçalho do formulário.
+
+### Comportamento
+
+1. O docente informa e-mail e senha.
+2. O navegador exige `@` no e-mail e pelo menos oito caracteres na senha.
+3. Em erro, a mensagem aparece com `role="alert"` e o campo recebe `aria-invalid`.
+4. Com dados formalmente válidos, a navegação segue para `/provas`.
+
+Não há sessão, JWT, consulta à API, recuperação de senha ou validação real de credenciais.
+O próprio formulário informa esse limite.
+
+## Casca autenticada
+
+A casca tem uma barra branca externa e uma moldura cinza arredondada:
+
+| Região | Conteúdo | Situação |
 | --- | --- | --- |
-| Sidebar | É `inset`, mostra a seção ativa e pode ser recolhida para ícones; tooltips preservam o significado no modo recolhido. | Não há permissões nem itens por perfil. |
-| Barra superior | Reúne gatilho da sidebar, breadcrumb `SGP Católica > tela atual` e troca direta de tema. | Não há busca global. |
-| Tema | Um clique alterna entre claro e escuro; a escolha usa o estado de cor do navegador. | Não há opção “seguir sistema”. |
-| Perfil | Abre menu com identificação genérica e “Sair”. | Não há autenticação; Sair apenas informa que a conexão será implementada. |
-| Configurações e Ajuda | Estão visíveis como destinos previstos. | Não executam ação nem possuem rota nesta fase. |
+| Marca | Ícone e “SGP Católica”, com link para Provas. | Funcional. |
+| Integrações | Botão na barra externa. | Marcador sem ação. |
+| Ajuda | Botão apenas com ícone. | Marcador sem ação. |
+| Perfil | Nome/e-mail do mock e ação “Sair”. | Menu funciona; sair apenas informa que falta autenticação. |
+| Abas | Provas, Banco de questões, Turmas, Correções e Relatórios. | Navegação funcional; quatro destinos ainda são marcadores. |
+| Moldura | Abas e página sobre o mesmo campo cinza. | Funcional e responsiva. |
 
-## Fluxo de Provas
+As abas rolam horizontalmente em tela estreita sem mostrar uma barra de rolagem. A
+aplicação mantém o atalho “Ir para o conteúdo”.
 
-### Consultar e encontrar uma prova
+## Workspace de Provas
 
-1. Ao abrir a página, os dados de demonstração exibem `Skeleton` por aproximadamente
-   350 ms.
-2. A página mostra três cartões de resumo: total no acervo, prontas para aplicar e
-   aplicações registradas.
-3. O docente pode buscar por título ou descrição e filtrar por situação.
-4. A contagem do acervo acompanha os filtros ativos. Quando há filtros, a ação Limpar
-   os remove sem sair da página.
-5. Sem resultado, a tabela mostra estado vazio e oferece Limpar filtros.
+### Entrada e carregamento
 
-### Criar rascunho
+Ao abrir `/provas`, o conteúdo mostra skeletons por aproximadamente 350 ms e depois lê o
+acervo local, inicialmente semeado pelos mocks.
 
-1. O docente seleciona **Nova prova**.
-2. O diálogo pede título e aceita descrição opcional.
-3. O título precisa ter ao menos três caracteres. Em erro, a mensagem aparece junto ao
-   campo e o foco retorna a ele.
-4. Ao criar, o rascunho entra no início da tabela, o diálogo fecha e uma notificação
-   confirma a ação.
+### Painel esquerdo
 
-O endereço `/provas?nova=1` abre esse diálogo diretamente. Fechá-lo remove o parâmetro da
-URL; isso permite compartilhar a intenção sem manter o diálogo aberto indevidamente.
+O painel reúne:
 
-### Consultar detalhes
+1. botão **Nova prova**;
+2. busca por título ou descrição;
+3. identificação “Meu espaço” com total;
+4. filtros Todas, Rascunho, Pronta e Encerrada, cada um com sua contagem;
+5. total de aplicações registradas no rodapé em desktop.
 
-1. O docente seleciona **Abrir** em uma linha.
-2. Um diálogo mostra total de questões, pontos, aplicações e a lista de turmas vinculadas.
-3. Caso não existam aplicações, o diálogo informa a ausência em vez de exibir uma lista
-   vazia.
+Os números pertencem aos filtros; não existem cartões de métrica separados.
+
+### Lista
+
+- O cabeçalho do conteúdo mostra “Meu espaço”, descrição e ordenação por data ou título.
+- Cada prova é um cartão compacto com título, descrição, situação, questões, pontos,
+  aplicações e data em desktop.
+- O cartão inteiro é o link para o editor; não há menu concorrente dentro da linha.
+- Em largura inferior a `lg`, metadados secundários são ocultados e o título permanece.
+- Sem resultado, o estado vazio oferece limpar filtros ou criar a primeira prova.
+
+### Criar e abrir
+
+**Nova prova** cria um rascunho sem título e navega diretamente para `/provas/:id`. Não
+existe diálogo intermediário. Abrir um cartão leva ao mesmo editor, onde consulta e edição
+acontecem juntas.
+
+## Editor de prova
+
+O editor ocupa a janela inteira e substitui a casca. É um protótipo em avaliação porque
+os blocos de apoio e modelos de cabeçalho ampliam o formato mínimo de `Prova` definido em
+RF04. A projeção das questões para `Prova.questions` continua preservada.
+
+### Barra do editor
+
+Da esquerda para a direita:
+
+- breadcrumb `Provas › título`, com link para o acervo;
+- título editável no lugar;
+- situação da prova;
+- contador de até 20 questões, total de pontos e indicação de salvamento local;
+- **Pré-visualizar**;
+- **Aplicar a uma turma**, desabilitado com explicação porque RF05 não está conectado.
+
+### Três zonas
+
+| Zona | Comportamento |
+| --- | --- |
+| Estrutura | Grupos “Página N” espelham as folhas calculadas. Página 1 contém o cabeçalho; cada grupo lista seus blocos. Selecionar rola a folha e setas movem o bloco. |
+| Folha | Sequência centralizada de páginas A4 de 210 × 297 mm e margem de 16 mm. A escala visual se ajusta à largura do canvas, sem barra horizontal; o conteúdo continua medido na geometria real e distribuído automaticamente sem partir blocos. |
+| Contexto | Painel de 320 px que alterna entre propriedades, criação de conteúdo e banco sem mudar a largura da folha. |
+
+Em tela menor que `lg`, as zonas passam para disposição vertical.
+
+Quando a prova está pronta ou encerrada, um aviso aparece no topo da folha: para uma prova
+pronta, informa que já há aplicações geradas e que mudar as questões não altera PDFs já
+emitidos; para uma prova encerrada, informa que ela não aceita novas aplicações, mas o
+conteúdo continua editável normalmente. Nos dois casos, a edição não é bloqueada.
+
+## Autoria de questões
+
+### Criar diretamente na prova
+
+**Nova questão** abre o painel “Adicionar à prova”. As opções principais são:
+
+| Tipo | Estado inicial | Edição |
+| --- | --- | --- |
+| Múltipla escolha | Enunciado vazio, quatro alternativas e 1 ponto. | Enunciado e alternativas na folha; resposta correta por radio; 2 a 5 alternativas. |
+| Resposta curta | Enunciado vazio, 1 ponto e quatro linhas. | Enunciado na folha; tipo e pontuação no painel. |
+| Resposta longa | Enunciado vazio, 1 ponto e oito linhas. | Enunciado na folha; tipo e pontuação no painel. |
+
+O bloco entra depois do selecionado; sem seleção, entra no fim. A numeração considera
+somente questões e é recalculada pela ordem da folha.
+
+Após cada mudança de enunciado, alternativa, tipo, imagem ou ordem, o editor mede os
+blocos na largura real do A4. Quando o próximo bloco não cabe na área útil, ele começa na
+folha seguinte. O cabeçalho completo fica na primeira página e cada folha recebe sua
+numeração na margem inferior. Quando as sidebars reduzem o espaço central, o papel é
+apenas escalado visualmente e permanece centralizado; a medida usada para quebrar páginas
+não muda.
+
+Os botões **Nova questão** e **Banco de questões** permanecem em uma barra flutuante na
+base do canvas, sempre acessível enquanto as folhas rolam. A barra fica fora do papel,
+não cria página vazia e não aparece no preview. Quando a paginação muda, os mesmos grupos
+“Página N” são atualizados na estrutura.
+
+O tipo pode ser trocado no painel de propriedades. Múltipla escolha exige resposta única,
+coerente com `correctAlternativeId` no domínio atual. A alternativa correta aparece
+durante a autoria e no resumo do painel, mas não aparece na pré-visualização do aluno.
+
+### Salvar no banco
+
+O painel da questão oferece **Salvar no banco** ou **Atualizar no banco**.
+
+- discursiva exige enunciado;
+- objetiva exige enunciado, pelo menos duas alternativas preenchidas e uma correta;
+- a questão continua na prova após salvar;
+- salvar o mesmo id atualiza a entrada local em vez de criar duplicata;
+- o banco é local ao navegador nesta fase.
+
+### Usar o banco
+
+**Banco de questões** abre um painel independente com busca, filtro por objetiva ou
+discursiva, tags e ação de adicionar. Questões locais aparecem junto dos mocks.
+
+Ao entrar na prova, a questão do banco vira uma cópia editável. Alterações feitas na folha
+não atualizam o acervo automaticamente; o professor precisa escolher **Atualizar no
+banco**. Uma questão já presente na prova não pode ser adicionada novamente pelo painel.
+
+## Conteúdo de apoio
+
+O mesmo painel de inserção apresenta uma seção secundária de apoios:
+
+| Apoio | Edição | Impressão |
+| --- | --- | --- |
+| Título de seção | Título e descrição diretamente na folha. | Organiza partes; não altera embaralhamento. |
+| Texto ou instrução | Texto na folha; estilo no painel. | Parágrafo, instrução lateral ou destaque. |
+| Imagem | Arquivo local e legenda na folha. | Imagem e legenda, sem upload para servidor. |
+
+Esses blocos não recebem número nem pontuação. O antigo bloco isolado de espaço para
+resposta ainda é lido de estados locais anteriores, mas não pode ser criado pelo fluxo
+novo; áreas de resposta pertencem às questões discursivas.
+
+## Seleção e ações de bloco
+
+- Clicar ou focar um bloco seleciona-o e abre suas propriedades.
+- O selecionado recebe ring e barra contextual com mover, duplicar e excluir.
+- Mover preserva a seleção por id.
+- Duplicar cria um novo id; em questões também cria nova identidade de banco.
+- Excluir mostra toast com **Desfazer** e restaura o bloco na posição anterior.
+- A estrutura esquerda mantém mover para cima/baixo como alternativa acessível.
+
+## Cabeçalho da prova
+
+Selecionar o cabeçalho abre suas propriedades:
+
+- instituição;
+- curso, disciplina ou período;
+- professor;
+- descrição da prova;
+- instruções;
+- campos opcionais Nome, Matrícula, Turma, Data e Nota;
+- seleção e criação de modelos reutilizáveis.
+
+O marcador de QR é padrão e sempre aparece. Não há configuração para escondê-lo. Ele é
+apenas uma reserva visual; o QR válido com dados de aplicação só existe quando RF06 for
+implementado.
+
+Modelos de cabeçalho são salvos localmente e podem ser aplicados a outras provas no mesmo
+navegador.
+
+## Pré-visualização
+
+**Pré-visualizar** abre um modo imersivo inspirado na apresentação do Figma:
+
+1. o editor sai de cena e um canvas pontilhado ocupa a janela;
+2. a mesma folha A4 aparece centralizada e somente leitura;
+3. enunciados, alternativas, áreas de resposta, cabeçalho e apoios usam os mesmos
+   renderizadores do editor;
+4. as quebras de página são exatamente as calculadas no editor;
+5. seleção, inputs, ações de bloco e gabarito são removidos;
+6. a barra inferior oferece zoom de 40% a 140% e **Ajustar**;
+7. o modo fecha pelo botão superior ou por `Escape`.
+
+A prévia não gera PDF nem cria uma aplicação.
+
+## Estado e persistência da N1
+
+Não há backend. O navegador usa três chaves independentes:
+
+| Chave | Conteúdo |
+| --- | --- |
+| `sgp:estado-de-provas:v1` | Provas e blocos de autoria. |
+| `sgp:cabecalhos-da-prova:v1` | Cabeçalhos por prova e modelos reutilizáveis. |
+| `sgp:questoes-locais:v1` | Questões salvas ou atualizadas pelo editor. |
+
+Os mocks semeiam provas, questões, aplicações e turmas. Recarregar a página preserva o
+estado local, mas outro dispositivo ou navegador não recebe essas alterações. O tooltip
+de salvamento no editor informa esse limite.
 
 ## Estados e feedback
 
-| Situação | Padrão adotado |
+| Situação | Implementação |
 | --- | --- |
-| Carregando | `Skeleton` no espaço da tabela; evita saltos grandes de layout. |
-| Sem resultado | `TableEmpty`, explicação curta e ação de recuperação quando há filtros. |
-| Validação | Texto próximo ao campo, `aria-invalid` e foco no campo com problema. |
-| Ação concluída | `Sonner` no canto superior direito. |
-| Área futura | Card de “próxima entrega”, sem controles que simulem uma funcionalidade. |
+| Carregando | Skeleton no workspace e no editor. |
+| Prova inexistente | Mensagem e link para o acervo. |
+| Lista sem resultado | Explicação e limpar filtros ou criar prova. |
+| Limite de 20 questões | Ações de questão desabilitadas e mensagem na folha/painel. |
+| Bloco removido | Toast com Desfazer. |
+| Salvamento de modelo/questão | Toast de sucesso. |
+| Aplicar, Integrações, Ajuda e logout | Desabilitado ou feedback que explicita a fase. |
 
-## Diretrizes de UI aplicadas à experiência
+## Acessibilidade implementada
 
-- Estrutura, sidebar, tabelas e cartões comuns usam as superfícies neutras do shadcn-vue.
-- O vinho Católica é usado em ações primárias, foco e no degradê de 5% dos cartões de
-  resumo. Ele não colore a sidebar, a tabela ou a casca inteira.
-- A página usa `gap-4`; o resumo passa a três colunas a partir de `md`.
-- A tabela mantém as colunas e pode rolar horizontalmente quando não couber na largura.
-- Diálogos, selects, menus, estados vazios e tooltips usam os primitivos shadcn-vue;
-  não há overlays ou controles equivalentes construídos à mão.
+- atalho “Ir para o conteúdo”;
+- regiões principais e navegações nomeadas;
+- `aria-current` nas abas e `aria-pressed` em filtros/seleções;
+- labels para campos e nomes acessíveis para botões apenas com ícone;
+- ícones decorativos ocultos de leitores de tela;
+- ações de reordenação por botão, sem depender de arrastar;
+- foco contido e saída por `Escape` na pré-visualização;
+- movimento do login desativado por `prefers-reduced-motion`.
 
-## Acessibilidade
+## Limites e próximos passos
 
-- Há atalho de teclado “Ir para o conteúdo”, foco visível e região principal identificada.
-- Ícones decorativos são ocultos de leitores de tela; controles só com ícone têm nome
-  acessível.
-- A navegação recolhida continua disponível por ícones e tooltips.
-- A alternância de tema, filtros, diálogos e menus usam os comportamentos acessíveis dos
-  componentes baseados em Reka UI.
-
-## Próximos pontos de UX
-
-Antes de implementar Banco de questões, Turmas, Correções ou Relatórios, registrar neste
-arquivo o fluxo principal, estados vazios/erro e a relação com Provas. Quando Ajuda ou
-Configurações ganharem uma ação real, remover o limite correspondente da tabela de casca
-de navegação e documentar a rota ou comportamento.
+- autenticação, logout, Integrações e Ajuda não estão conectados;
+- Banco de questões, Turmas, Correções e Relatórios ainda não têm telas completas;
+- Aplicar a uma turma, geração de versões, QR válido e PDF dependem de RF05/RF06;
+- blocos excepcionalmente maiores que uma área útil de A4 ainda precisam de tratamento
+  específico na futura geração de PDF;
+- o modelo de blocos precisa de decisão da
+  [issue #12](https://github.com/LeoAnders/sgp-catolica/issues/12) antes de migrar para
+  `@sgp/shared-types` e para o dicionário de entidades;
+- persistência local deve ser substituída pelas APIs correspondentes nas próximas fases.
