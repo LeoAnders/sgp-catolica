@@ -12,6 +12,8 @@ correspondente perde o historico de "por que" para quem le depois.
   que foi combinado la.
 - Ajuste minimo e obviamente correto (typo, formatacao, correcao de link) nao precisa de
   issue.
+- Estrutura da issue (secoes, checklist) segue `.claude/rules/45-padrao-de-issue.md`, que
+  tambem cobre como registrar quando uma issue depende de outra existir primeiro.
 
 ## PRs referenciam issues, nao as reescrevem
 

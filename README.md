@@ -102,6 +102,8 @@ npm ci
 npm run web        # aplicação web em http://localhost:5173
 npm run mobile     # aplicativo do professor com Expo
 npm run typecheck  # valida todos os workspaces
+npm run lint       # ESLint em web e mobile
+npm run format     # aplica a formatação do Prettier
 ```
 
 O sistema hospedado será disponibilizado durante a entrega da N1.

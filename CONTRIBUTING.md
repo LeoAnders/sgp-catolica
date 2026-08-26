@@ -25,12 +25,15 @@ npm run mobile
 
 ## Fluxo de trabalho
 
-1. Escolha ou crie uma Issue com objetivo e critério de aceite claros.
+1. Escolha ou crie uma Issue com objetivo e critério de aceite claros, seguindo o
+   [template padrão](.github/ISSUE_TEMPLATE/nova-tarefa.md) e
+   `.claude/rules/45-padrao-de-issue.md`.
 2. Crie uma branch pequena a partir de `main`.
 3. Faça commits coesos seguindo Conventional Commits.
 4. Abra um Pull Request vinculado à Issue.
 5. Inclua evidências visuais quando alterar uma interface.
-6. Solicite revisão de outro integrante da equipe.
+6. Solicite aprovação do code owner (`.github/CODEOWNERS`) — a proteção de `main`
+   exige essa revisão antes do merge, que é sempre por squash.
 7. Corrija os apontamentos e faça merge somente após a aprovação.
 
 Exemplos de branches:

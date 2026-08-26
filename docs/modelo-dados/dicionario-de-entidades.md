@@ -147,3 +147,9 @@ identificador gerado no dispositivo e situacao de sincronizacao (`pending`, `syn
 estudante: estatisticas por aplicacao, estatisticas por questao e nota do estudante.
 Sao dados derivados, calculados a partir das entidades acima, e por isso nao aparecem
 neste dicionario.
+
+`correcao.ts` tambem define tipos auxiliares que nao sao entidades proprias:
+`GabaritoObjetivo`, `GabaritoDiscursivo` e `GabaritoVersaoSnapshot` sao copias do
+gabarito de uma versao, usadas pelo aplicativo do professor para corrigir offline
+(RF08); `ItemFilaCorrecao` e o item da fila local de correcao antes da sincronizacao.
+Nenhum dos quatro tem identidade propria fora desse papel auxiliar.
