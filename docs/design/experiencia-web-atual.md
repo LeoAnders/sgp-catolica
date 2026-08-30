@@ -22,7 +22,8 @@ Classificação usada:
 | `/provas`            | Implementado na N1     | Workspace para buscar, filtrar, ordenar, abrir e criar provas.         |
 | `/provas/:id`        | Protótipo em avaliação | Editor A4 em tela cheia, autoria por blocos e pré-visualização.        |
 | `/banco-de-questoes` | Marcador               | Estado em construção; o banco utilizável hoje existe dentro do editor. |
-| `/turmas`            | Marcador               | Estado em construção.                                                  |
+| `/turmas`            | Implementado na N1     | Workspace para buscar, filtrar e criar turmas.                         |
+| `/turmas/:id`        | Implementado na N1     | Detalhe da turma: editar, arquivar, código de convite e matrículas.    |
 | `/correcoes`         | Marcador               | Estado em construção.                                                  |
 | `/relatorios`        | Marcador               | Estado em construção.                                                  |
 | Rota desconhecida    | Implementado           | Redireciona para `/provas`.                                            |
@@ -66,7 +67,7 @@ A casca tem uma barra branca externa e uma moldura cinza arredondada:
 | Integrações | Botão na barra externa.                                    | Marcador sem ação.                                         |
 | Ajuda       | Botão apenas com ícone.                                    | Marcador sem ação.                                         |
 | Perfil      | Nome/e-mail do mock e ação “Sair”.                         | Menu funciona; sair apenas informa que falta autenticação. |
-| Abas        | Provas, Banco de questões, Turmas, Correções e Relatórios. | Navegação funcional; quatro destinos ainda são marcadores. |
+| Abas        | Provas, Banco de questões, Turmas, Correções e Relatórios. | Navegação funcional; três destinos ainda são marcadores.   |
 | Moldura     | Abas e página sobre o mesmo campo cinza.                   | Funcional e responsiva.                                    |
 
 As abas rolam horizontalmente em tela estreita sem mostrar uma barra de rolagem. A
@@ -105,6 +106,51 @@ Os números pertencem aos filtros; não existem cartões de métrica separados.
 **Nova prova** cria um rascunho sem título e navega diretamente para `/provas/:id`. Não
 existe diálogo intermediário. Abrir um cartão leva ao mesmo editor, onde consulta e edição
 acontecem juntas.
+
+## Turmas
+
+### Listagem (`/turmas`)
+
+Mesmo padrão de seção do workspace de provas: skeletons por aproximadamente 350 ms e
+depois o acervo local, semeado pelos mocks.
+
+O painel esquerdo reúne:
+
+1. botão **Nova turma**;
+2. busca por nome ou disciplina;
+3. filtros Todas, Ativa e Arquivada, cada um com sua contagem;
+4. total de alunos matriculados no rodapé em desktop.
+
+Cada turma é um cartão compacto com nome, disciplina, período, código de convite,
+situação e total de alunos matriculados em desktop; em largura inferior a `lg`, os
+metadados secundários são ocultados e o cartão inteiro continua sendo o link para o
+detalhe. Sem resultado, o estado vazio oferece limpar filtros ou criar a primeira turma.
+
+**Nova turma** cria a turma sem nome, disciplina ou período e navega direto para
+`/turmas/:id`, mesmo padrão de `Provas.vue`: não existe diálogo intermediário, o
+preenchimento acontece no detalhe.
+
+### Detalhe (`/turmas/:id`)
+
+A tela fica dentro da casca autenticada, com a aba "Turmas" ativa — por isso usa um
+link "Turmas" para voltar em vez de breadcrumb.
+
+O cabeçalho mostra nome, disciplina, período e situação (`Badge`), com as ações:
+
+- **Editar**: abre um `Dialog` com nome, disciplina e período; valida os três campos
+  antes de salvar;
+- **Arquivar**: muda a situação para arquivada sem apagar as aplicações existentes;
+  desabilitada quando a turma já está arquivada. Não há ação para reverter.
+
+O código de convite aparece em destaque, com **Regenerar**: gera um novo código local,
+invalida o anterior e confirma por toast.
+
+A lista de alunos matriculados usa `Table` em `Card`, porque os registros são
+comparados por coluna (nome, e-mail, matrícula, data de matrícula) — não lista de
+cartões. Cada linha tem uma ação **Remover** que tira o aluno da turma sem apagar seu
+histórico de notas; a remoção é reversível por toast com **Desfazer**. Sem alunos, o
+estado vazio explica que a entrada acontece pelo código de convite, sem oferecer ação
+de matricular — esse fluxo depende de autenticação real de estudante, fora da N1 web.
 
 ## Editor de prova
 
@@ -254,6 +300,7 @@ Não há backend. O navegador usa três chaves independentes:
 | `sgp:estado-de-provas:v1`    | Provas e blocos de autoria.                   |
 | `sgp:cabecalhos-da-prova:v1` | Cabeçalhos por prova e modelos reutilizáveis. |
 | `sgp:questoes-locais:v1`     | Questões salvas ou atualizadas pelo editor.   |
+| `sgp:estado-de-turmas:v1`    | Turmas e matrículas.                          |
 
 Os mocks semeiam provas, questões, aplicações e turmas. Recarregar a página preserva o
 estado local, mas outro dispositivo ou navegador não recebe essas alterações. O tooltip
@@ -269,6 +316,11 @@ de salvamento no editor informa esse limite.
 | Limite de 20 questões                | Ações de questão desabilitadas e mensagem na folha/painel. |
 | Bloco removido                       | Toast com Desfazer.                                        |
 | Salvamento de modelo/questão         | Toast de sucesso.                                          |
+| Turma sem resultado na busca         | Explicação e limpar filtros ou criar turma.                |
+| Turma inexistente                    | Mensagem e link para o acervo.                             |
+| Turma sem alunos matriculados        | Explicação; sem ação, matricular é fora de escopo.         |
+| Matrícula removida                   | Toast com Desfazer.                                        |
+| Código de convite regenerado         | Toast de sucesso.                                          |
 | Aplicar, Integrações, Ajuda e logout | Desabilitado ou feedback que explicita a fase.             |
 
 ## Acessibilidade implementada
@@ -285,7 +337,12 @@ de salvamento no editor informa esse limite.
 ## Limites e próximos passos
 
 - autenticação, logout, Integrações e Ajuda não estão conectados;
-- Banco de questões, Turmas, Correções e Relatórios ainda não têm telas completas;
+- Banco de questões, Correções e Relatórios ainda não têm telas completas;
+- matricular aluno por e-mail ou por código de convite (fluxo de entrada do estudante)
+  fica fora de Turmas: não há autenticação nem sessão de estudante na N1 web;
+- importar lista de alunos por planilha em Turmas depende de um pedido do cliente
+  ainda não incorporado como critério de aceite — ver
+  [pendências](../pendencias.md), item 12;
 - Aplicar a uma turma, geração de versões, QR válido e PDF dependem de RF05/RF06;
 - blocos excepcionalmente maiores que uma área útil de A4 ainda precisam de tratamento
   específico na futura geração de PDF;

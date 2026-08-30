@@ -326,15 +326,16 @@ essenciais não devem desaparecer; quando necessário, usar rolagem localizada.
 
 ## Mapa de implementação
 
-| Padrão                    | Referência executável                                                            |
-| ------------------------- | -------------------------------------------------------------------------------- |
-| Tokens e fonte            | `src/styles/global.css`                                                          |
-| Casca                     | `src/App.vue`, `src/components/casca/`                                           |
-| Login                     | `src/telas/Login.vue`                                                            |
-| Workspace/lista           | `src/telas/Provas.vue`                                                           |
-| Editor                    | `src/telas/EditorDeProva.vue`, `src/components/prova/`                           |
-| Estado local do protótipo | `src/lib/estado-de-provas.ts`, `estado-de-questoes.ts`, `cabecalhos-da-prova.ts` |
-| Primitivos                | `src/components/ui/`                                                             |
+| Padrão                                                   | Referência executável                                                                                   |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Tokens e fonte                                           | `src/styles/global.css`                                                                                 |
+| Casca                                                    | `src/App.vue`, `src/components/casca/`                                                                  |
+| Login                                                    | `src/telas/Login.vue`                                                                                   |
+| Workspace/lista                                          | `src/telas/Provas.vue`, `src/telas/Turmas.vue`                                                          |
+| Detalhe com tabela em Card, Dialog de formulário simples | `src/telas/DetalheDaTurma.vue`                                                                          |
+| Editor                                                   | `src/telas/EditorDeProva.vue`, `src/components/prova/`                                                  |
+| Estado local do protótipo                                | `src/lib/estado-de-provas.ts`, `estado-de-questoes.ts`, `cabecalhos-da-prova.ts`, `estado-de-turmas.ts` |
+| Primitivos                                               | `src/components/ui/`                                                                                    |
 
 ## Checklist de entrega
 
