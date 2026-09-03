@@ -43,3 +43,6 @@ Thumbs.db
 # Arquivos de workspace pessoais de cada integrante
 *.code-workspace
 .claude/settings.local.json
+
+# Saída temporária do MCP playwright ao capturar prints (docs/telas/ é o destino final)
+.playwright-mcp/

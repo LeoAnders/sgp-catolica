@@ -36,3 +36,10 @@ nome, mesmo lugar no `docs/README.md`), não entra como arquivo adicional.
 Toda issue que implementa ou altera visualmente uma tela inclui, no critério de
 conclusão, o print correspondente aqui (novo ou atualizado) — ver
 [`.claude/rules/45-padrao-de-issue.md`](../../.claude/rules/45-padrao-de-issue.md).
+
+## Capturas atuais
+
+| Tela               | Rota          | Print                                    |
+| ------------------ | ------------- | ---------------------------------------- |
+| Listagem de turmas | `/turmas`     | [turmas.png](turmas.png)                 |
+| Detalhe da turma   | `/turmas/:id` | [turmas-detalhe.png](turmas-detalhe.png) |

@@ -37,8 +37,14 @@ const rotas: RouteRecordRaw[] = [
   {
     path: '/turmas',
     name: 'turmas',
-    component: () => import('@/telas/EmConstrucao.vue'),
+    component: () => import('@/telas/Turmas.vue'),
     meta: { titulo: 'Turmas' },
+  },
+  {
+    path: '/turmas/:id',
+    name: 'turmas-detalhe',
+    component: () => import('@/telas/DetalheDaTurma.vue'),
+    meta: { titulo: 'Detalhe da turma' },
   },
   {
     path: '/correcoes',

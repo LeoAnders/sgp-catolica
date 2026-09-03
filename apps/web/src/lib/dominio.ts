@@ -4,7 +4,7 @@
  * Os tipos vem de `@sgp/shared-types` em ingles; a interface fala portugues.
  * Este arquivo concentra essa traducao para nenhuma tela inventar rotulo proprio.
  */
-import type { StatusAplicacao, StatusProva } from '@sgp/shared-types';
+import type { StatusAplicacao, StatusProva, StatusTurma } from '@sgp/shared-types';
 
 export type Tom = 'neutro' | 'positivo' | 'atencao' | 'encerrado';
 
@@ -36,6 +36,23 @@ export function varianteDoStatusDaProva(status: StatusProva): 'default' | 'secon
   if (status === 'ready') return 'default';
   if (status === 'draft') return 'secondary';
   return 'outline';
+}
+
+export const statusDaTurma: Record<StatusTurma, { rotulo: string; tom: Tom; ajuda: string }> = {
+  active: {
+    rotulo: 'Ativa',
+    tom: 'positivo',
+    ajuda: 'Aceita matrículas e pode receber novas aplicações.',
+  },
+  archived: {
+    rotulo: 'Arquivada',
+    tom: 'encerrado',
+    ajuda: 'Não aparece para novas matrículas. As aplicações existentes seguem valendo.',
+  },
+};
+
+export function varianteDoStatusDaTurma(status: StatusTurma): 'default' | 'outline' {
+  return status === 'active' ? 'default' : 'outline';
 }
 
 const formatadorDeData = new Intl.DateTimeFormat('pt-BR', {
